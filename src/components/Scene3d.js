@@ -16,21 +16,21 @@ export default function Scene3d(props) {
     const [hoveredCV, setHoverCV] = useState(false)
     const cvPosition = new THREE.Vector3(-0.1, -0.204, -1.253)
     const camera = useThree((state) => state.camera)
-    const [isMobile, setIsMobile] = useState(false);
+    const [isMobile, setIsMobile] = useState(true);
 
     useFrame(() => {
         // Ajoutez une boucle infinie ici pour empêcher le composant de se charger complètement
         // while (true) {
         //     console.log('Loading...');
         // }
-        if (hoveredCV && isMobile) {
+        if (hoveredCV) {
             camera.position.x += ( -0.1 - camera.position.x)  * 0.01
-            camera.position.y += (-0.1  - camera.position.y ) * 0.01;
+            camera.position.y += (-0.18  - camera.position.y ) * 0.01;
         } else {
             camera.position.x += (mouseX / 2 - camera.position.x) * 0.01
             camera.position.y += (-mouseY / 2 - camera.position.y) * 0.01;
         }
-        camera.position.z += hoveredCV ? (-0.9 - camera.position.z) * 0.008 : (0 - camera.position.z) * 0.008
+        camera.position.z += hoveredCV ? (-0.92 - camera.position.z) * 0.008 : (0 - camera.position.z) * 0.008
         camera.lookAt(cvPosition)
 
     });
@@ -92,7 +92,7 @@ export default function Scene3d(props) {
         {/*<Box position={lightPos2} />*/}
         {isMobile ?
             <ImageMesh src="CV.png" width={4.5/9} height={4.5/16} position={cvPosition} onClick={_ => setHoverCV(!hoveredCV)}/>
-        :    <ImageMesh src="CV.png" width={4.5/9} height={4.5/16} position={cvPosition} onPointerOver={_ => setHoverCV(true)} onPointerOut={_ => setHoverCV(false)}/>
+        :    <ImageMesh src="CV.png" width={4.5/9} height={4.5/16} position={cvPosition} onClick={_ => setHoverCV(!hoveredCV)}/>
         }
         <LoadModel position={[0.15, -0.9, -0.4]}/>
         <PerspectiveCamera
