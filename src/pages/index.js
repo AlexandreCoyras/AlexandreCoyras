@@ -1,5 +1,6 @@
 
 
+
 export {};
 import Head from 'next/head'
 import {lazy, Suspense, useEffect, useRef, useState} from 'react'
@@ -14,8 +15,12 @@ const PerspectiveCamera = dynamic(import('@react-three/drei').then((module) => m
 // import { useHelper } from '@react-three/drei';
 import { BiCode } from 'react-icons/bi'
 import { AiFillGithub } from 'react-icons/ai'
+import {FiExternalLink} from "react-icons/fi";
 
 export default function Home() {
+
+    const buttonCvRef = useRef()
+    const [showButtonCv, setShowButtonCv] = useState(false)
 
     const Loading = () => {
         return <>
@@ -40,6 +45,8 @@ export default function Home() {
     useEffect(()=> {
     }, [])
 
+    const cvLinkRef = useRef()
+
   return (
     <>
       <Head>
@@ -51,10 +58,19 @@ export default function Home() {
         <div className={"w-screen h-screen"}>
             <Suspense fallback={<Loading/>}>
             <Canvas>
-                <Scene3d/>
+                <Scene3d cvLinkRef={cvLinkRef}/>
             </Canvas>
             </Suspense>
         </div>
+
+        <div className={`flex items-center justify-center duration-1000 opacity-0 ease-in-out`} ref={cvLinkRef}>
+            <a href="/AlexandreCoyrasCV.pdf" target="_blank" rel="noopener noreferrer">
+                <div className="bg-white text-black border-black rounded-full h-12 w-12 flex items-center justify-center hover:bg-black hover:text-white transition-colors duration-200 ease-in-out cursor-pointer absolute bottom-16 button-fade-in">
+                    <FiExternalLink size={25} />
+                </div>
+            </a>
+        </div>
+
         <a href={"https://github.com/AlexandreCoyras/AlexandreCoyras"} target="_blank" rel="noopener noreferrer">
             <div className="fixed bottom-8 right-24 bg-white text-black border-black rounded-full h-12 w-12 flex items-center justify-center hover:bg-black hover:text-white transition-colors duration-200 ease-in-out cursor-pointer">
                 <BiCode size={30}/>
@@ -65,8 +81,6 @@ export default function Home() {
                 <AiFillGithub size={30}/>
             </div>
         </a>
-
-
     </>
   )
 }

@@ -9,6 +9,7 @@ import ImageMesh from "./ImageMesh";
 import {PerspectiveCamera} from "@react-three/drei";
 import { Object3D } from "three";
 import UAParser from 'ua-parser-js';
+import gsap from 'gsap'
 
 export default function Scene3d(props) {
     const [mouseX, setMouseX] = useState(0)
@@ -63,6 +64,7 @@ export default function Scene3d(props) {
         const parser = new UAParser();
         const deviceType = parser.getDevice().type;
         setIsMobile(deviceType === 'mobile');
+        console.log(props.cvLinkRef.current)
 
     }, [])
     const LoadModel = (props) => {
@@ -83,6 +85,12 @@ export default function Scene3d(props) {
 
     const texture = useLoader(THREE.TextureLoader, "CV.png");
 
+    const clickOnScreen = () => {
+        setHoverCV(!hoveredCV);
+        props.cvLinkRef.current.style.opacity = hoveredCV ? 0 : 1
+        props.cvLinkRef.current.style.visibility = hoveredCV ? "hidden" : "visible";
+    }
+
 
     return <>
         <ambientLight intensity={0.02}/>
@@ -91,9 +99,10 @@ export default function Scene3d(props) {
         <pointLight position={lightPos2}  intensity={0.15} castShadow={true}/>
         {/*<Box position={lightPos2} />*/}
         {isMobile ?
-            <ImageMesh src="CV.png" width={4.5/9} height={4.5/16} position={cvPosition} onClick={_ => setHoverCV(!hoveredCV)}/>
-        :    <ImageMesh src="CV.png" width={4.5/9} height={4.5/16} position={cvPosition} onClick={_ => setHoverCV(!hoveredCV)}/>
+            <ImageMesh src="CV.png" width={4.5/9} height={4.5/16} position={cvPosition} onClick={_ => clickOnScreen()}/>
+        :    <ImageMesh src="CV.png" width={4.5/9} height={4.5/16} position={cvPosition} onClick={_ => clickOnScreen()}/>
         }
+        <ImageMesh src="code.png" width={4.1/9} height={4.1/16} position={[-0.575, -0.188, -1.155]} rotation={[0, 0.5, 0]}/>
         <LoadModel position={[0.15, -0.9, -0.4]}/>
         <PerspectiveCamera
             // position={[0, 0, 0.5]}
