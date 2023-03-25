@@ -7,9 +7,9 @@ function ImageMesh(props) {
     const texture = useLoader(THREE.TextureLoader, props.src);
 
     return (
-        <mesh ref={meshRef} position={props.position}>
+        <mesh ref={meshRef} position={props.position} onPointerOver={props.onPointerOver} onPointerOut={props.onPointerOut}>
             <planeBufferGeometry args={[props.width, props.height]}/>
-            <meshBasicMaterial map={texture} />
+            <meshBasicMaterial map={texture} color={""} ref={props.ref}/>
         </mesh>
     );
 }
