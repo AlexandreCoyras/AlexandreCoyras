@@ -8,6 +8,7 @@ const { useHelper } = dynamic(() => import('@react-three/drei'), { ssr: false })
 import ImageMesh from "./ImageMesh";
 import {PerspectiveCamera} from "@react-three/drei";
 import { Object3D } from "three";
+import UAParser from 'ua-parser-js';
 
 export default function Scene3d(props) {
     const [mouseX, setMouseX] = useState(0)
@@ -15,17 +16,21 @@ export default function Scene3d(props) {
     const [hoveredCV, setHoverCV] = useState(false)
     const cvPosition = new THREE.Vector3(-0.1, -0.204, -1.253)
     const camera = useThree((state) => state.camera)
+    const [isMobile, setIsMobile] = useState(false);
 
     useFrame(() => {
         // Ajoutez une boucle infinie ici pour empêcher le composant de se charger complètement
         // while (true) {
         //     console.log('Loading...');
         // }
-        camera.position.x += ( mouseX  / 2- camera.position.x)  * 0.01
-        camera.position.y += (-mouseY / 2  - camera.position.y ) * 0.01;
-        camera.position.z += hoveredCV ? (-0.8 - camera.position.z) * 0.005 : (0 - camera.position.z) * 0.005
-        if (hoveredCV)
-            console.log(CVRef.current)
+        if (hoveredCV && isMobile) {
+            camera.position.x += ( -0.1 - camera.position.x)  * 0.01
+            camera.position.y += (-0.1  - camera.position.y ) * 0.01;
+        } else {
+            camera.position.x += (mouseX / 2 - camera.position.x) * 0.01
+            camera.position.y += (-mouseY / 2 - camera.position.y) * 0.01;
+        }
+        camera.position.z += hoveredCV ? (-0.9 - camera.position.z) * 0.008 : (0 - camera.position.z) * 0.008
         camera.lookAt(cvPosition)
 
     });
@@ -55,8 +60,11 @@ export default function Scene3d(props) {
             setMouseX((event.clientX - window.innerWidth / 2) / window.innerWidth * 2)
             setMouseY((event.clientY - window.innerHeight / 2) / window.innerHeight * 2)
         })
+        const parser = new UAParser();
+        const deviceType = parser.getDevice().type;
+        setIsMobile(deviceType === 'mobile');
 
-    }, [camera])
+    }, [])
     const LoadModel = (props) => {
         const { scene } = useLoader(GLTFLoader, "3d_models/room2.glb")
         return <primitive object={scene} position={props.position} scale={0.5} receiveShadow={true}/>
@@ -70,15 +78,10 @@ export default function Scene3d(props) {
         )
 
     }
-
-    const cameraRef = useRef();
-
-
     const lightPos = [-0.3, -0.3, -0.8]
     const lightPos2 = [-0.7, -0.3, -0.70]
 
     const texture = useLoader(THREE.TextureLoader, "CV.png");
-    const CVRef = useRef()
 
 
     return <>
@@ -87,7 +90,10 @@ export default function Scene3d(props) {
         {/*<Box position={lightPos} />*/}
         <pointLight position={lightPos2}  intensity={0.15} castShadow={true}/>
         {/*<Box position={lightPos2} />*/}
-        <ImageMesh src="CV.png" width={4.5/9} height={4.5/16} position={cvPosition} onPointerOver={_ => setHoverCV(true)} onPointerOut={_ => setHoverCV(false)} ref={CVRef}/>
+        {isMobile ?
+            <ImageMesh src="CV.png" width={4.5/9} height={4.5/16} position={cvPosition} onClick={_ => setHoverCV(!hoveredCV)}/>
+        :    <ImageMesh src="CV.png" width={4.5/9} height={4.5/16} position={cvPosition} onPointerOver={_ => setHoverCV(true)} onPointerOut={_ => setHoverCV(false)}/>
+        }
         <LoadModel position={[0.15, -0.9, -0.4]}/>
         <PerspectiveCamera
             // position={[0, 0, 0.5]}
