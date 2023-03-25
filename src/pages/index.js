@@ -13,6 +13,7 @@ const OrbitControls = dynamic(import('@react-three/drei').then((module) => modul
 const PerspectiveCamera = dynamic(import('@react-three/drei').then((module) => module.PerspectiveCamera ) , { ssr: false })
 // import { useHelper } from '@react-three/drei';
 import { BiCode } from 'react-icons/bi'
+import { AiFillGithub } from 'react-icons/ai'
 
 export default function Home() {
 
@@ -54,9 +55,14 @@ export default function Home() {
             </Canvas>
             </Suspense>
         </div>
+        <a href={"https://github.com/AlexandreCoyras/AlexandreCoyras"} target="_blank" rel="noopener noreferrer">
+            <div className="fixed bottom-8 right-24 bg-white text-black border-black rounded-full h-12 w-12 flex items-center justify-center hover:bg-black hover:text-white transition-colors duration-200 ease-in-out cursor-pointer">
+                <BiCode size={30}/>
+            </div>
+        </a>
         <a href={"https://github.com/AlexandreCoyras"} target="_blank" rel="noopener noreferrer">
             <div className="fixed bottom-8 right-8 bg-white text-black border-black rounded-full h-12 w-12 flex items-center justify-center hover:bg-black hover:text-white transition-colors duration-200 ease-in-out cursor-pointer">
-                <BiCode size={28}/>
+                <AiFillGithub size={30}/>
             </div>
         </a>
 
