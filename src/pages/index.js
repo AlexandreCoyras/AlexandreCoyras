@@ -1,3 +1,5 @@
+
+
 export {};
 import Head from 'next/head'
 import {lazy, Suspense, useEffect, useRef, useState} from 'react'
@@ -8,7 +10,9 @@ const Scene3d = lazy(() => import('../components/Scene3d'));
 // import Scene3d from "../components/Scene3d";
 import dynamic from 'next/dynamic'
 const OrbitControls = dynamic(import('@react-three/drei').then((module) => module.OrbitControls ) , { ssr: false })
+const PerspectiveCamera = dynamic(import('@react-three/drei').then((module) => module.PerspectiveCamera ) , { ssr: false })
 // import { useHelper } from '@react-three/drei';
+import { BiCode } from 'react-icons/bi'
 
 function Box(props) {
     // This reference will give us direct access to the mesh
@@ -55,6 +59,8 @@ export default function Home() {
             </div>
         </>
     }
+    useEffect(()=> {
+    }, [])
 
   return (
     <>
@@ -66,13 +72,16 @@ export default function Home() {
       </Head>
         <div className={"w-screen h-screen"}>
             <Suspense fallback={<Loading/>}>
-            <Canvas camera={{
-                position:[0, 0, 0.5]
-            }}>
+            <Canvas>
                 <Scene3d/>
             </Canvas>
             </Suspense>
         </div>
+        <a href={"https://github.com/AlexandreCoyras"} target="_blank" rel="noopener noreferrer">
+            <div className="fixed bottom-8 right-8 bg-white text-black border-black rounded-full h-12 w-12 flex items-center justify-center hover:bg-black hover:text-white transition-colors duration-200 ease-in-out cursor-pointer">
+                <BiCode size={28}/>
+            </div>
+        </a>
 
 
     </>
