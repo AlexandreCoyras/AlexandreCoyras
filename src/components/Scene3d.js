@@ -9,28 +9,27 @@ import {PerspectiveCamera} from "@react-three/drei";
 import UAParser from 'ua-parser-js';
 
 export default function Scene3d( { cvLinkRef }) {
-    const [mouseX, setMouseX] = useState(0)
-    const [mouseY, setMouseY] = useState(0)
     const [hoveredCV, setHoverCV] = useState(false)
     const [lightIntensity, setLightIntensity] = useState(1)
     const cvPosition = new THREE.Vector3(-0.1, -0.204, -1.253)
     const camera = useThree((state) => state.camera)
     const [isMobile, setIsMobile] = useState(true);
 
-    useFrame(() => {
+    useFrame((state, delta) => {
         // Ajoutez une boucle infinie ici pour empêcher le composant de se charger complètement
         // while (true) {
         //     console.log('Loading...');
         // }
+        console.log(state)
         if (hoveredCV) {
-            camera.position.x += ( -0.1 - camera.position.x)  * 0.015
-            camera.position.y += (-0.18  - camera.position.y ) * 0.015
+            state.camera.position.x += ( -0.1 - state.camera.position.x)  * 0.015
+            state.camera.position.y += (-0.18  - state.camera.position.y ) * 0.015
         } else {
-            camera.position.x += (mouseX / 2 - camera.position.x) * 0.015
-            camera.position.y += (-mouseY / 2 - camera.position.y) * 0.015
+            state.camera.position.x += (state.mouse.x / 2 - state.camera.position.x) * 0.015
+            state.camera.position.y += (state.mouse.y / 2 - state.camera.position.y) * 0.015
         }
-        camera.position.z += hoveredCV ? (-0.92 - camera.position.z) * 0.008 : (0 - camera.position.z) * 0.008
-        camera.lookAt(cvPosition)
+        state.camera.position.z += hoveredCV ? (-0.92 - state.camera.position.z) * 0.008 : (0 - state.camera.position.z) * 0.008
+        state.camera.lookAt(cvPosition)
 
     });
 
@@ -54,11 +53,6 @@ export default function Scene3d( { cvLinkRef }) {
     }
 
     useEffect(() => {
-
-        addEventListener("mousemove", (event) => {
-            setMouseX((event.clientX - window.innerWidth / 2) / window.innerWidth * 2)
-            setMouseY((event.clientY - window.innerHeight / 2) / window.innerHeight * 2)
-        })
         addEventListener('scroll', _ => {
             const newIntensity = 1 + (-window.scrollY * 1.3) / window.innerHeight
             setLightIntensity( newIntensity < 0 ? 0 : newIntensity)

@@ -66,12 +66,12 @@ export default function Home() {
         </div>
 
         <a href={"https://github.com/AlexandreCoyras/AlexandreCoyras"} target="_blank" rel="noopener noreferrer">
-            <div className="fixed bottom-8 right-24 bg-white text-black border-black rounded-full h-12 w-12 flex items-center justify-center hover:bg-black hover:text-white transition-colors duration-200 ease-in-out cursor-pointer">
+            <div className="fixed bottom-8 right-20 md:right-24 bg-white text-black border-black rounded-full h-12 w-12 flex items-center justify-center hover:bg-black hover:text-white transition-colors duration-200 ease-in-out cursor-pointer">
                 <BiCode size={30}/>
             </div>
         </a>
         <a href={"https://github.com/AlexandreCoyras"} target="_blank" rel="noopener noreferrer">
-            <div className="fixed bottom-8 right-8 bg-white text-black border-black rounded-full h-12 w-12 flex items-center justify-center hover:bg-black hover:text-white transition-colors duration-200 ease-in-out cursor-pointer">
+            <div className="fixed bottom-8 right-6 md:right-8 bg-white text-black border-black rounded-full h-12 w-12 flex items-center justify-center hover:bg-black hover:text-white transition-colors duration-200 ease-in-out cursor-pointer">
                 <AiFillGithub size={30}/>
             </div>
         </a>

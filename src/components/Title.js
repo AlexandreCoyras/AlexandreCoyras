@@ -12,15 +12,15 @@ export default function Title () {
     }
 
     return <>
-        <Link href={"/"} className={"top-4 left-8 absolute title"}>
+        <Link href={"/"} className={"top-4 left-6 md:left-8 title fixed text-2xl md:text-3xl"}>
             <span className={"text-teal-400"}>A</span>
             lexandre Coyra
             <span className={"text-teal-400"}>s</span>
             <br/>
-            <span className={"sub-title text-teal-400 block"}>Developer</span>
+            <span className={"sub-title text-teal-400 block text-xl md:text-xl"}>Developer</span>
         </Link>
 
-        <button onClick={scrollTo} className={"top-5 right-8 absolute text-2xl font-bold"}>
+        <button onClick={scrollTo} className={"top-5 right-6 md:right-8 fixed text-2xl md:text-3xl"}>
             <span className={"mori"}>Contact</span>
         </button>
     </>

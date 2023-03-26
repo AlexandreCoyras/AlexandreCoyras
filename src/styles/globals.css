@@ -19,6 +19,14 @@
 }
 
 @font-face {
+  font-display:swap;
+  font-family:Poppins;
+  font-style:normal;
+  font-weight:600;
+  src: url(/fonts/Poppins-SemiBold.ttf)format("truetype")
+}
+
+@font-face {
   font-family:PP Mori;
   src:url(/fonts/PPMori.woff2) format("woff2");
   font-weight:400;
@@ -135,7 +143,6 @@ body {
 
 .title {
   font-family:var(--fontFamily-serif-0),var(--fontFamily-serif-2);
-  font-size:1.75rem;
   font-weight:900;
   margin-bottom:0;
 }
@@ -143,12 +150,15 @@ body {
 .sub-title {
   font-family:var(--fontFamily-sans-0),var(--fontFamily-sans-2);
   font-weight:800;
-  font-size:1.25rem;
   line-height:1.5rem;
-  margin-top:-1rem;
+  margin-top:-0.75rem;
   text-transform:capitalize;
 }
 
 .mori {
   font-family: PP Mori, serif;
+}
+
+.pop {
+  font-family: Poppins, sans-serif;
 }
