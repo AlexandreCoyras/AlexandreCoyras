@@ -20,7 +20,7 @@ export default function Title () {
             <span className={"sub-title text-teal-400 block"}>Developer</span>
         </Link>
 
-        <button onClick={scrollTo} className={"top-4 right-8 absolute text-2xl  font-bold"}>
+        <button onClick={scrollTo} className={"top-5 right-8 absolute text-2xl font-bold"}>
             <span className={"mori"}>Contact</span>
         </button>
     </>
