@@ -1,6 +1,3 @@
-
-
-
 export {};
 import Head from 'next/head'
 import {lazy, Suspense, useEffect, useRef, useState} from 'react'
@@ -8,14 +5,11 @@ import { Canvas, useFrame, useLoader } from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import * as THREE from 'three';
 const Scene3d = lazy(() => import('../components/Scene3d'));
-// import Scene3d from "../components/Scene3d";
 import dynamic from 'next/dynamic'
-const OrbitControls = dynamic(import('@react-three/drei').then((module) => module.OrbitControls ) , { ssr: false })
-const PerspectiveCamera = dynamic(import('@react-three/drei').then((module) => module.PerspectiveCamera ) , { ssr: false })
-// import { useHelper } from '@react-three/drei';
 import { BiCode } from 'react-icons/bi'
 import { AiFillGithub } from 'react-icons/ai'
 import {FiExternalLink} from "react-icons/fi";
+import Contact from "@/components/Contact";
 
 export default function Home() {
 
@@ -81,6 +75,7 @@ export default function Home() {
                 <AiFillGithub size={30}/>
             </div>
         </a>
+        <Contact/>
     </>
   )
 }

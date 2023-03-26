@@ -5,15 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d2b7bcec-a162-41fb-9197-7f47d61a76d3" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/alexandrecoyras.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/ImageMesh.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ImageMesh.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Scene3d.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Scene3d.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/_app.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/_app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/globals.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,6 +56,8 @@
       <recent name="C:\Users\alexa\Documents\code\alexandrecoyras\public" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\alexa\Documents\code\alexandrecoyras\public\fonts" />
+      <recent name="C:\Users\alexa\Documents\code\alexandrecoyras\public\font" />
       <recent name="C:\Users\alexa\Documents\code\alexandrecoyras\public\3d_models" />
       <recent name="C:\Users\alexa\Documents\code\alexandrecoyras\public" />
     </key>
@@ -92,7 +91,8 @@
       <workItem from="1679674189278" duration="13696000" />
       <workItem from="1679694527457" duration="5303000" />
       <workItem from="1679734534462" duration="17523000" />
-      <workItem from="1679767501972" duration="3085000" />
+      <workItem from="1679767501972" duration="7945000" />
+      <workItem from="1679828942536" duration="12907000" />
     </task>
     <servers />
   </component>

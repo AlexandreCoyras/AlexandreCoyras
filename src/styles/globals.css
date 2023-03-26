@@ -2,6 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-display:swap;
+  font-family:PP Migra;
+  font-style:normal;
+  font-weight:500;
+  src: url(/fonts/PPMigra.ttf)format("truetype");
+}
+
+@font-face {
+  font-display:swap;
+  font-family:PP Pangram Sans;
+  font-style:normal;
+  font-weight:800;
+  src: url(/fonts/PPPangramSans-Extrabold.ttf)format("truetype")
+}
+
+@font-face {
+  font-family:PP Mori;
+  src:url(/fonts/PPMori.woff2) format("woff2");
+  font-weight:400;
+  font-style:normal;
+  font-display:swap;
+}
+
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
@@ -12,6 +36,10 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --fontFamily-sans-0:PP Pangram Sans;
+  --fontFamily-sans-2:sans-serif;
+  --fontFamily-serif-0:PP Migra;
+  --fontFamily-serif-2:serif;
 
   --primary-glow: conic-gradient(
     from 180deg at 50% 50%,
@@ -103,4 +131,24 @@ body {
   html {
     color-scheme: dark;
   }
+}
+
+.title {
+  font-family:var(--fontFamily-serif-0),var(--fontFamily-serif-2);
+  font-size:1.75rem;
+  font-weight:900;
+  margin-bottom:0;
+}
+
+.sub-title {
+  font-family:var(--fontFamily-sans-0),var(--fontFamily-sans-2);
+  font-weight:800;
+  font-size:1.25rem;
+  line-height:1.5rem;
+  margin-top:-1rem;
+  text-transform:capitalize;
+}
+
+.mori {
+  font-family: PP Mori, serif;
 }
