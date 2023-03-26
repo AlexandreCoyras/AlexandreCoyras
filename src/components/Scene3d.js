@@ -9,26 +9,30 @@ import {PerspectiveCamera} from "@react-three/drei";
 import UAParser from 'ua-parser-js';
 
 export default function Scene3d( { cvLinkRef }) {
-    const [hoveredCV, setHoverCV] = useState(false)
+    const [clickedCV, setClickedCV] = useState(false)
+    const [hoveredCV, setHoveredCV] = useState(false)
     const [lightIntensity, setLightIntensity] = useState(1)
-    const cvPosition = new THREE.Vector3(-0.1, -0.204, -1.253)
+    const cvPosition = new THREE.Vector3(-0.104, -0.204, -1.253)
     const camera = useThree((state) => state.camera)
     const [isMobile, setIsMobile] = useState(true);
 
     useFrame((state, delta) => {
-        // Ajoutez une boucle infinie ici pour empêcher le composant de se charger complètement
-        // while (true) {
-        //     console.log('Loading...');
-        // }
-        console.log(state)
-        if (hoveredCV) {
+
+        if (clickedCV) {
             state.camera.position.x += ( -0.1 - state.camera.position.x)  * 0.015
             state.camera.position.y += (-0.18  - state.camera.position.y ) * 0.015
         } else {
             state.camera.position.x += (state.mouse.x / 2 - state.camera.position.x) * 0.015
             state.camera.position.y += (state.mouse.y / 2 - state.camera.position.y) * 0.015
         }
-        state.camera.position.z += hoveredCV ? (-0.92 - state.camera.position.z) * 0.008 : (0 - state.camera.position.z) * 0.008
+
+        // Camera distance from CV screen
+        if (clickedCV)
+            state.camera.position.z += (-0.92 - state.camera.position.z) * 0.01
+        else if (hoveredCV && !isMobile)
+            state.camera.position.z += (-0.2 - state.camera.position.z) * 0.01
+        else
+            state.camera.position.z += (0 - state.camera.position.z) * 0.01
         state.camera.lookAt(cvPosition)
 
     });
@@ -82,9 +86,9 @@ export default function Scene3d( { cvLinkRef }) {
 
     const clickOnScreen = () => {
         // when the user clicks on CV screen
-        setHoverCV(!hoveredCV);
-        cvLinkRef.current.style.opacity = hoveredCV ? 0 : 1
-        cvLinkRef.current.style.visibility = hoveredCV ? "hidden" : "visible";
+        setClickedCV(!clickedCV);
+        cvLinkRef.current.style.opacity = clickedCV ? 0 : 1
+        cvLinkRef.current.style.visibility = clickedCV ? "hidden" : "visible";
     }
 
 
@@ -94,10 +98,10 @@ export default function Scene3d( { cvLinkRef }) {
         {/*<Box position={lightPos} />*/}
         <pointLight position={lightPos2}  intensity={lightIntensity * 0.15} castShadow={true}/>
         {/*<Box position={lightPos2} />*/}
-        {isMobile ?
-            <ImageMesh src="CV.png" width={4.5/9} height={4.5/16} position={cvPosition} onClick={_ => clickOnScreen()}/>
-        :    <ImageMesh src="CV.png" width={4.5/9} height={4.5/16} position={cvPosition} onClick={_ => clickOnScreen()}/>
-        }
+        <ImageMesh src="CV.png" width={4.5/9} height={4.5/16} position={cvPosition}
+                        onClick={_ => clickOnScreen()}
+                        onPointerOver={_ => {document.querySelector("body").style.cursor = "pointer"; setHoveredCV(true); }}
+                        onPointerOut={_ => {document.querySelector("body").style.cursor = "auto"; setHoveredCV(false);}}/>
         <ImageMesh src="code.png" width={4.1/9} height={4.1/16} position={[-0.575, -0.188, -1.155]} rotation={[0, 0.5, 0]}/>
         <LoadModel position={[0.15, -0.9, -0.4]}/>
         <PerspectiveCamera makeDefault />
