@@ -57,9 +57,9 @@ export default function Home() {
             </Suspense>
         </div>
 
-        <div className={`flex items-center justify-center duration-1000 opacity-0 ease-in-out`} ref={cvLinkRef}>
-            <a href="/AlexandreCoyrasCV.pdf" target="_blank" rel="noopener noreferrer">
-                <div className="bg-white text-black border-black rounded-full h-12 w-12 flex items-center justify-center hover:bg-black hover:text-white transition-colors duration-200 ease-in-out cursor-pointer absolute bottom-16 button-fade-in">
+        <div className={`flex justify-center duration-1000 opacity-0 ease-in-out items-center`} ref={cvLinkRef}>
+            <a href="/AlexandreCoyrasCV.pdf" target="_blank" rel="noopener noreferrer" className={"items-center justify-center flex"}>
+                <div className="bg-white bottom-16 text-black border-black rounded-full h-12 w-12 items-center justify-center flex hover:bg-black hover:text-white transition-colors duration-200 ease-in-out cursor-pointer absolute button-fade-in">
                     <FiExternalLink size={25} />
                 </div>
             </a>
