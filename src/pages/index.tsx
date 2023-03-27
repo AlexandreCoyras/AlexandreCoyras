@@ -1,3 +1,5 @@
+
+
 export {};
 import Head from 'next/head'
 import {lazy, Suspense, useEffect, useRef, useState} from 'react'
@@ -11,12 +13,12 @@ import {BiCode} from 'react-icons/bi'
 import {AiFillGithub} from 'react-icons/ai'
 import {FiExternalLink} from "react-icons/fi";
 import Contact from "../components/Contact";
+import Title from "../components/Title";
 
 export default function Home() {
 
-    const buttonCvRef = useRef()
+    const buttonCvRef = useRef(null)
     const [showButtonCv, setShowButtonCv] = useState(false)
-
     const Loading = () => {
         return <>
             <div className={"flex justify-center items-center h-screen"}>
@@ -40,7 +42,7 @@ export default function Home() {
     useEffect(() => {
     }, [])
 
-    const cvLinkRef = useRef()
+    const cvLinkRef = useRef(null)
 
     return (
         <>
@@ -50,12 +52,13 @@ export default function Home() {
                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
+            <Suspense fallback={<Loading/>}>
             <div className={"w-screen h-screen"}>
-                <Suspense fallback={<Loading/>}>
+
                     <Canvas>
                         <Scene3d cvLinkRef={cvLinkRef}/>
                     </Canvas>
-                </Suspense>
+
             </div>
 
             <div className={`flex justify-center duration-1000 opacity-0 ease-in-out items-center`} ref={cvLinkRef}>
@@ -81,6 +84,8 @@ export default function Home() {
                 </div>
             </a>
             <Contact/>
+                <Title/>
+            </Suspense>
         </>
     )
 }

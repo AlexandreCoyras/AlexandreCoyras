@@ -1,14 +1,14 @@
 import {useFrame, useLoader, useThree} from "@react-three/fiber";
 import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
 import * as THREE from "three";
-import React, {Suspense, useEffect, useRef, useState} from 'react'
+import React, {MutableRefObject, Suspense, useEffect, useRef, useState} from 'react'
 import dynamic from 'next/dynamic'
 // const OrbitControls = dynamic(import('@react-three/drei').then((module) => module.OrbitControls ) , { ssr: false })
 import ImageMesh from "./ImageMesh";
 import {PerspectiveCamera} from "@react-three/drei";
 import UAParser from 'ua-parser-js';
 
-export default function Scene3d({cvLinkRef}) {
+export default function Scene3d({cvLinkRef}: { cvLinkRef: MutableRefObject<any> }) {
     const [clickedCV, setClickedCV] = useState(false)
     const [hoveredCV, setHoveredCV] = useState(false)
     const [lightIntensity, setLightIntensity] = useState(1)
@@ -48,27 +48,7 @@ export default function Scene3d({cvLinkRef}) {
         setIsMobile(deviceType === 'mobile');
     }, [])
 
-    function Box(props) {
-        const mesh = useRef()
-        const [hovered, setHover] = useState(false)
-        const [active, setActive] = useState(false)
-        useFrame((state, delta) => (mesh.current.rotation.x += delta))
-
-        return (
-            <mesh
-                {...props}
-                ref={mesh}
-                scale={active ? 1.5 : 0.1}
-                onClick={(event) => setActive(!active)}
-                onPointerOver={(event) => setHover(true)}
-                onPointerOut={(event) => setHover(false)}>
-                <boxGeometry args={[1, 1, 1]}/>
-                <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'}/>
-            </mesh>
-        )
-    }
-
-    const LoadModel = (props) => {
+    const LoadModel = (props: any) => {
         const {scene} = useLoader(GLTFLoader, "3d_models/room2.glb")
         return <primitive object={scene} position={props.position} scale={0.5} receiveShadow={true}/>
     }
@@ -81,14 +61,15 @@ export default function Scene3d({cvLinkRef}) {
         )
 
     }
-    const lightPos = [-0.3, -0.3, -0.8]
-    const lightPos2 = [-0.7, -0.3, -0.70]
+    const lightPos: any = [-0.3, -0.3, -0.8]
+    const lightPos2: any = [-0.7, -0.3, -0.70]
 
     const texture = useLoader(THREE.TextureLoader, "CV.png");
 
     const clickOnScreen = () => {
         // when the user clicks on CV screen
         setClickedCV(!clickedCV);
+        if (!cvLinkRef.current) return
         cvLinkRef.current.style.opacity = clickedCV ? 0 : 1
         cvLinkRef.current.style.visibility = clickedCV ? "hidden" : "visible";
     }
@@ -101,13 +82,17 @@ export default function Scene3d({cvLinkRef}) {
         <pointLight position={lightPos2} intensity={lightIntensity * 0.15} castShadow={true}/>
         {/*<Box position={lightPos2} />*/}
         <ImageMesh src="CV.png" width={4.5 / 9} height={4.5 / 16} position={cvPosition}
-                   onClick={_ => clickOnScreen()}
-                   onPointerOver={_ => {
-                       document.querySelector("body").style.cursor = "pointer";
+                   onClick={() => clickOnScreen()}
+                   onPointerOver={() => {
+                       const body = document.querySelector("body");
+                       if (body !== null)
+                           body.style.cursor = "pointer";
                        setHoveredCV(true);
                    }}
-                   onPointerOut={_ => {
-                       document.querySelector("body").style.cursor = "auto";
+                   onPointerOut={() => {
+                       const body = document.querySelector("body");
+                       if (body  !== null)
+                           body.style.cursor = "auto";
                        setHoveredCV(false);
                    }}/>
         <ImageMesh src="code.png" width={4.1 / 9} height={4.1 / 16} position={[-0.575, -0.188, -1.155]}

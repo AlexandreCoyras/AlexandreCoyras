@@ -165,3 +165,7 @@ body {
 
 .contact {
 }
+
+.block-hitbox:hover .highlight{
+  height:100%
+}
