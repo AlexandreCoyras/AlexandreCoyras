@@ -58,13 +58,13 @@ export default function Contact() {
         <div className={"h-screen  w-screen relative pop"}>
             <div className={"flex"}>
                 <div className={"ml-10 lg:ml-40 mt-28 "}>
-                    <div className={"text-4xl md:text-8xl lg:text-9xl overflow-hidden"}>
+                    <div className={"text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl overflow-hidden"}>
                     <span className={"inline-block contact"}
                           style={{transform: "translateY(100%)"}}>
                         CONTACT
                     </span>
                     </div>
-                    <div className={"text-4xl md:text-8xl lg:text-9xl overflow-hidden"}>
+                    <div className={"text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl overflow-hidden"}>
                     <span className={"inline-block contact"}
                           style={{transform: "translateY(100%)"}}>
                         ME
@@ -74,7 +74,7 @@ export default function Contact() {
             </div>
             <div className={"flex justify-center items-center"}>
                 <div
-                    className={"text-2xl md:text-4xl font-bold translate-x-10 md:translate-x-1/3 lg:translate-x-3/4 mt-32 md:mt-16"}
+                    className={"text-2xl sm:text-3xl md:text-4xl font-bold translate-x-10 md:translate-x-1/3 lg:translate-x-3/4 mt-32 md:mt-16"}
                     ref={wantToRef}>
                     Want to work with me?
                 </div>
@@ -84,11 +84,11 @@ export default function Contact() {
                 <div
                     className={"highlight absolute h-0 w-3 left-0 top-0 bg-teal-400 transition-all duration-500 ease-in-out"}/>
                 <div className={"ml-6 mt-12 mb-12"}>
-                    <div className={" text-2xl"}>
+                    <div className={"text-xl sm:text-2xl"}>
                         Send me a message
                     </div>
                     <Link href={"mailto:alexandrecoyras@gmail.com"}>
-                    <div className={"text-4xl md:text-6xl lg:text-8xl ml-4 mt-8"}>
+                    <div className={"text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl ml-4 mt-8"}>
                         <div>
                             ALEXANDRECOYRAS
                         </div>
@@ -104,7 +104,7 @@ export default function Contact() {
                     </Link>
                 </div>
                 </div>
-                <div className={"hidden xl:flex right-20 block absolute h-auto text-teal-400 "}>
+                <div className={"hidden lg:flex right-20 block absolute h-auto text-teal-400 "}>
                     <FiArrowLeft size={120} />
                 </div>
             </div>
