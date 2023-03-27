@@ -12,6 +12,7 @@ export default function Contact() {
     const wantToRef = useRef(null)
 
     const mailRef = useRef(null)
+    const arrowRef = useRef(null)
 
     useEffect(() => {
         gsap.to(".contact", {
@@ -45,6 +46,19 @@ export default function Contact() {
             scrollTrigger: {
                 trigger: mailRef.current,
                 start: "top 70%"
+            },
+            duration: 2,
+            opacity: 1,
+            ease: "power1.out",
+            x: 0,
+        });
+        gsap.fromTo(arrowRef.current, {
+            opacity: 0,
+            x: 300
+        }, {
+            scrollTrigger: {
+                trigger: arrowRef.current,
+                start: "top 80%"
             },
             duration: 2,
             opacity: 1,
@@ -104,7 +118,7 @@ export default function Contact() {
                     </Link>
                 </div>
                 </div>
-                <div className={"hidden lg:flex right-20 block absolute h-auto text-teal-400 "}>
+                <div className={"hidden lg:flex right-20 block absolute h-auto text-teal-400 "} ref={arrowRef}>
                     <FiArrowLeft size={120} />
                 </div>
             </div>
