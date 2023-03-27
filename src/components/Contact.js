@@ -11,11 +11,11 @@ export default function Contact() {
         gsap.to(".contact", {
             scrollTrigger: {
                 trigger: ".contact",
-                start: "top center"
+                start: "top 70%"
             },
             duration: 2,
             translateY: 0,
-            ease: "back.out(1.4)",
+            ease: "back.out(1.5)",
         });
     }, [])
 

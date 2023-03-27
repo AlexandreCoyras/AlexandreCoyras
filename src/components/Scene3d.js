@@ -37,6 +37,16 @@ export default function Scene3d( { cvLinkRef }) {
 
     });
 
+    useEffect(() => {
+        addEventListener('scroll', _ => {
+            const newIntensity = 1 + (-window.scrollY * 1.3) / window.innerHeight
+            setLightIntensity( newIntensity < 0 ? 0 : newIntensity)
+        })
+        const parser = new UAParser();
+        const deviceType = parser.getDevice().type;
+        setIsMobile(deviceType === 'mobile');
+    }, [])
+
     function Box(props) {
         const mesh = useRef()
         const [hovered, setHover] = useState(false)
@@ -55,16 +65,6 @@ export default function Scene3d( { cvLinkRef }) {
             </mesh>
         )
     }
-
-    useEffect(() => {
-        addEventListener('scroll', _ => {
-            const newIntensity = 1 + (-window.scrollY * 1.3) / window.innerHeight
-            setLightIntensity( newIntensity < 0 ? 0 : newIntensity)
-        })
-        const parser = new UAParser();
-        const deviceType = parser.getDevice().type;
-        setIsMobile(deviceType === 'mobile');
-    }, [])
 
     const LoadModel = (props) => {
         const { scene } = useLoader(GLTFLoader, "3d_models/room2.glb")
