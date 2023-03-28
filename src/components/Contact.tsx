@@ -45,7 +45,7 @@ export default function Contact() {
         }, {
             scrollTrigger: {
                 trigger: mailRef.current,
-                start: "top 70%"
+                start: "top 80%"
             },
             duration: 2,
             opacity: 1,
@@ -58,7 +58,7 @@ export default function Contact() {
         }, {
             scrollTrigger: {
                 trigger: arrowRef.current,
-                start: "top 80%"
+                start: "top 90%"
             },
             duration: 2,
             opacity: 1,
@@ -95,28 +95,28 @@ export default function Contact() {
             </div>
             <div className={"flex flex-col h-1/2 md:h-96 absolute bottom-0 w-full block-hitbox justify-center"}>
                 <div ref={mailRef}>
-                <div
-                    className={"highlight absolute h-0 w-3 left-0 top-0 bg-teal-400 transition-all duration-500 ease-in-out"}/>
-                <div className={"ml-6 mt-12 mb-12"}>
-                    <div className={"text-xl sm:text-2xl"}>
-                        Send me a message
-                    </div>
-                    <Link href={"mailto:alexandrecoyras@gmail.com"}>
-                    <div className={"text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl ml-4 mt-8"}>
-                        <div>
-                            ALEXANDRECOYRAS
+                    <div
+                        className={"highlight absolute h-0 w-3 left-0 top-0 bg-teal-400 transition-all duration-500 ease-in-out"}/>
+                    <div className={"ml-6 mt-12 mb-12"}>
+                        <div className={"text-xl sm:text-2xl"}>
+                            Send me a message
                         </div>
-                        <div className={"flex flex-row"}>
-                            <div className={"text-teal-400"}>
-                                @
+                        <Link href={"mailto:alexandrecoyras@gmail.com"}>
+                            <div className={"text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl ml-4 mt-8"}>
+                                <div>
+                                    ALEXANDRECOYRAS
+                                </div>
+                                <div className={"flex flex-row"}>
+                                    <div className={"text-teal-400"}>
+                                        @
+                                    </div>
+                                    <div>
+                                        GMAIL.COM
+                                    </div>
+                                </div>
                             </div>
-                            <div>
-                                GMAIL.COM
-                            </div>
-                        </div>
+                        </Link>
                     </div>
-                    </Link>
-                </div>
                 </div>
                 <div className={"hidden lg:flex right-20 block absolute h-auto text-teal-400 "} ref={arrowRef}>
                     <FiArrowLeft size={120} />
