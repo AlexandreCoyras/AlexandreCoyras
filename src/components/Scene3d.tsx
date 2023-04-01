@@ -165,7 +165,7 @@ export default function Scene3d({cvLinkRef}: { cvLinkRef: MutableRefObject<any> 
             {/*<TestBox pos={firstScreenPos}/>*/}
         <Html center transform  occlude="blending" position={firstScreenPos} scale={0.0104}>
             <div className={"pointer-events-auto justify-center items-center"} onPointerEnter={() => setClickedFirstScreen(true)}  onPointerOut={() => setClickedFirstScreen(false)} onClick={() => {}}>
-                <iframe ref={iFrame} src={"/"} width="1920px" height="1080px" allow="fullscreen" className={"inline-block pointer-events-auto"}/>
+                <iframe ref={iFrame} src={"/"} width="1920px" height="1080px" className={"inline-block pointer-events-auto"}/>
             </div>
         </Html>
         <LoadModel position={modelPos}/>
