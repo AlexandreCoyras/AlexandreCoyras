@@ -23,6 +23,7 @@ export default function Contact() {
             duration: 2,
             translateY: 0,
             ease: "back.out(1.4)",
+            overwrite: "auto",
         });
 
         gsap.fromTo(wantToRef.current, {
@@ -72,13 +73,13 @@ export default function Contact() {
         <div className={"h-screen  w-screen relative pop"}>
             <div className={"flex"}>
                 <div className={"ml-10 lg:ml-40 mt-28 "}>
-                    <div className={"text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl overflow-hidden"}>
+                    <div className={"text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl overflow-hidden"}>
                     <span className={"inline-block contact"}
                           style={{transform: "translateY(100%)"}}>
                         CONTACT
                     </span>
                     </div>
-                    <div className={"text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl overflow-hidden"}>
+                    <div className={"text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl overflow-hidden"}>
                     <span className={"inline-block contact"}
                           style={{transform: "translateY(100%)"}}>
                         ME

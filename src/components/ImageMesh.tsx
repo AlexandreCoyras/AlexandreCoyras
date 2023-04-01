@@ -11,7 +11,7 @@ function ImageMesh(props: any) {
         <mesh ref={meshRef} position={props.position} onPointerOver={props.onPointerOver} rotation={props.rotation}
               onPointerOut={props.onPointerOut} onClick={props.onClick}>
             <planeGeometry args={[props.width, props.height]}/>
-            <meshBasicMaterial map={texture} color={""}/>
+            <meshBasicMaterial map={texture} color={"white"}/>
         </mesh>
 }
         </>

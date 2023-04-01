@@ -55,7 +55,7 @@ export default function Home() {
             <Suspense fallback={<Loading/>}>
             <div className={"w-screen h-screen"}>
 
-                    <Canvas>
+                    <Canvas className={"z-0"}>
                         <Scene3d cvLinkRef={cvLinkRef}/>
                     </Canvas>
 
