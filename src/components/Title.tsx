@@ -15,10 +15,13 @@ export default function Title () {
     }
 
     useEffect(() => {
-        gsap.to(titleRef.current, {
-            duration: 2,
-            translateY: 0,
-            delay: 1,
+        gsap.fromTo(titleRef.current, {
+                opacity: 0
+            }
+            ,{
+                duration: 2,
+                opacity: 1,
+                delay: 1.5,
         });
 
         // gsap.to(contactRef.current, {
@@ -29,7 +32,7 @@ export default function Title () {
     }, [])
 
     return <>
-        <Link href={"/"} className={"top-4 left-6 md:left-8 title fixed text-2xl md:text-3xl -translate-y-40"} ref={titleRef}>
+        <Link href={"/"} className={"top-4 left-6 md:left-8 title fixed text-2xl md:text-3xl"} ref={titleRef}>
             <span className={"text-teal-400"}>A</span>
             lexandre Coyra
             <span className={"text-teal-400"}>s</span>

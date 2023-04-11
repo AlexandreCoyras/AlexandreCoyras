@@ -3,7 +3,7 @@ import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
 import * as THREE from "three";
 import React, {MutableRefObject, Suspense, useEffect, useRef, useState} from 'react'
 import dynamic from 'next/dynamic'
-import { Html } from '@react-three/drei'
+import {Html, Stats} from '@react-three/drei'
 // const OrbitControls = dynamic(import('@react-three/drei').then((module) => module.OrbitControls ) , { ssr: false })
 import ImageMesh from "./ImageMesh";
 import {PerspectiveCamera} from "@react-three/drei";
@@ -162,14 +162,14 @@ export default function Scene3d({cvLinkRef}: { cvLinkRef: MutableRefObject<any> 
                            body.style.cursor = "auto";
                        setHoveredCV(false);
                    }}/>
-            {/*<TestBox pos={firstScreenPos}/>*/}
         <Html center transform  occlude="blending" position={firstScreenPos} scale={0.0104}>
-            <div className={"pointer-events-auto justify-center items-center"} onPointerEnter={() => setClickedFirstScreen(true)}  onPointerOut={() => setClickedFirstScreen(false)} onClick={() => {}}>
-                <iframe ref={iFrame} src={"/"} width="1920px" height="1080px" className={"inline-block pointer-events-auto"}/>
+            <div className={"pointer-events-auto justify-center items-center"}  onPointerEnter={() => setClickedFirstScreen(true)}  onPointerOut={() => setClickedFirstScreen(false)} onClick = {() => {}}>
+                <iframe ref={iFrame} src={"/pc"} width="1920px" height="1080px" className={"inline-block pointer-events-auto p-3"}/>
             </div>
         </Html>
         <LoadModel position={modelPos}/>
         <PerspectiveCamera makeDefault/>
+        {/*<Stats/>*/}
         {/*<OrbitControls/>*/}
     </>
 }

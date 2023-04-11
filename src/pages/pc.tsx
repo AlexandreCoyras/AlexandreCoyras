@@ -4,7 +4,7 @@ export default function PcHome() {
     const [counter, setCounter] = useState(0)
 
     return (<>
-            <div className={"w-full h-full m-3"}>
+            <div className={"w-full h-full"}>
         <div className={"text-center mt-10"}>
             Site under construction, comeback later please
         </div>
