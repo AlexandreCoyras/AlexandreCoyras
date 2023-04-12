@@ -5,6 +5,9 @@ import {FiArrowLeft} from 'react-icons/fi'
 import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
+ScrollTrigger.defaults({
+    toggleActions: "play pause resume reset"
+});
 
 
 export default function Contact() {
@@ -15,13 +18,17 @@ export default function Contact() {
     const arrowRef = useRef(null)
 
     useEffect(() => {
-        gsap.to(".contact", {
+        gsap.fromTo(".contact", {
+            y: 200
+            },
+            {
             scrollTrigger: {
                 trigger: ".contact",
-                start: "top 70%"
+                start: "top 115%",
+                markers: true,
             },
             duration: 2,
-            translateY: 0,
+            y: 0,
             ease: "back.out(1.4)",
             overwrite: "auto",
         });
@@ -32,7 +39,7 @@ export default function Contact() {
         }, {
             scrollTrigger: {
                 trigger: wantToRef.current,
-                start: "top 70%"
+                start: "top 110%",
             },
             duration: 2,
             opacity: 1,
@@ -46,7 +53,9 @@ export default function Contact() {
         }, {
             scrollTrigger: {
                 trigger: mailRef.current,
-                start: "top 80%"
+                start: "top 100%",
+                end: "top 100px",
+
             },
             duration: 2,
             opacity: 1,
@@ -59,7 +68,7 @@ export default function Contact() {
         }, {
             scrollTrigger: {
                 trigger: arrowRef.current,
-                start: "top 90%"
+                start: "top 110%"
             },
             duration: 2,
             opacity: 1,
@@ -75,13 +84,13 @@ export default function Contact() {
                 <div className={"ml-10 lg:ml-40 mt-28 "}>
                     <div className={"text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl overflow-hidden"}>
                     <span className={"inline-block contact"}
-                          style={{transform: "translateY(100%)"}}>
+                          style={{}}>
                         CONTACT
                     </span>
                     </div>
                     <div className={"text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl overflow-hidden"}>
                     <span className={"inline-block contact"}
-                          style={{transform: "translateY(100%)"}}>
+                          style={{}}>
                         ME
                     </span>
                     </div>
