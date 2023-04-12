@@ -24,8 +24,7 @@ export default function Contact() {
             {
             scrollTrigger: {
                 trigger: ".contact",
-                start: "top 115%",
-                markers: true,
+                start: "top 115%"
             },
             duration: 2,
             y: 0,
