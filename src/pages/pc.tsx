@@ -6,10 +6,11 @@ export default function PcHome() {
     return (<>
             <div className={"w-full h-full"}>
         <div className={"text-center mt-10"}>
-            Site under construction, comeback later please
+            My projects
         </div>
-                <div className={"text-center"}>
-                    <button className={"text-3xl mt-32"} onClick={() => setCounter((c) => c+1) }>{counter}</button>
+                <div className={"text-center mt-20"}>
+                    <span>You will find my projects here soon, comeback later please</span>
+                    {/*<button className={"text-3xl mt-32"} onClick={() => setCounter((c) => c+1) }>{counter}</button>*/}
                 </div>
             </div>
         </>
