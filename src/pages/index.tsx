@@ -65,7 +65,7 @@ export default function Home() {
                 <a href="/AlexandreCoyrasCV.pdf" target="_blank" rel="noopener noreferrer"
                    className={"items-center justify-center flex"}>
                     <div
-                        className="bg-white bottom-16 text-black border-black rounded-full h-12 w-12 items-center justify-center flex hover:bg-black hover:text-white transition-colors duration-200 ease-in-out cursor-pointer absolute button-fade-in">
+                        className="z-50 bg-white bottom-16 text-black border-black rounded-full h-12 w-12 items-center justify-center flex hover:bg-black hover:text-white transition-colors duration-200 ease-in-out cursor-pointer absolute button-fade-in">
                         <FiExternalLink size={25}/>
                     </div>
                 </a>
@@ -73,13 +73,13 @@ export default function Home() {
 
             <a href={"https://github.com/AlexandreCoyras/AlexandreCoyras"} target="_blank" rel="noopener noreferrer" className={""}>
                 <div
-                    className="fixed bottom-8 right-20 md:right-24 bg-white text-black border-black rounded-full h-12 w-12 flex items-center justify-center hover:bg-black hover:text-white transition-colors duration-200 ease-in-out cursor-pointer">
+                    className="z-50 fixed bottom-8 right-20 md:right-24 bg-white text-black border-black rounded-full h-12 w-12 flex items-center justify-center hover:bg-black hover:text-white transition-colors duration-200 ease-in-out cursor-pointer">
                     <BiCode size={30}/>
                 </div>
             </a>
             <a href={"https://github.com/AlexandreCoyras"} target="_blank" rel="noopener noreferrer">
                 <div
-                    className="fixed bottom-8 right-6 md:right-8 bg-white text-black border-black rounded-full h-12 w-12 flex items-center justify-center hover:bg-black hover:text-white transition-colors duration-200 ease-in-out cursor-pointer">
+                    className="z-50 fixed bottom-8 right-6 md:right-8 bg-white text-black border-black rounded-full h-12 w-12 flex items-center justify-center hover:bg-black hover:text-white transition-colors duration-200 ease-in-out cursor-pointer">
                     <AiFillGithub size={30}/>
                 </div>
             </a>

@@ -40,7 +40,7 @@ export default function Title () {
             <span className={"sub-title text-teal-400 block text-xl md:text-xl"}>Developer</span>
         </Link>
 
-        <button onClick={scrollTo} className={"top-5 right-6 md:right-8 fixed text-2xl md:text-3xl"} ref={contactRef}>
+        <button onClick={scrollTo} className={"top-5 right-6 md:right-8 fixed text-2xl md:text-3xl hover:text-teal-400 transition-colors duration-300"} ref={contactRef}>
             <span className={"mori"}>Contact</span>
         </button>
     </>
