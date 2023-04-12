@@ -95,7 +95,7 @@ export default function Scene3d({cvLinkRef}: { cvLinkRef: MutableRefObject<any> 
         }
         camera.position.z += (0 - camera.position.z) * 0.015
     }
-    const TestBox = ({pos}: any) => {
+    const TestBox = ({pos}: {pos: THREE.Vector3}) => {
         return (
         <mesh
         position={pos}
@@ -123,9 +123,9 @@ export default function Scene3d({cvLinkRef}: { cvLinkRef: MutableRefObject<any> 
         setIsMobile(deviceType === 'mobile');
     }, [])
 
-    const LoadModel = (props: any) => {
+    const LoadModel = ({position}: {position: THREE.Vector3}) => {
         const {scene} = useLoader(GLTFLoader, "3d_models/room2.glb")
-        return <primitive object={scene} position={props.position} scale={0.5} receiveShadow={true}/>
+        return <primitive object={scene} position={position} scale={0.5} receiveShadow={true}/>
     }
 
     const texture = useLoader(THREE.TextureLoader, "CV.png");
