@@ -1,33 +1,22 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import pages from 'vite-plugin-pages';
-import path from 'path';
-import fs from 'fs';
+import { resolve } from 'path';
+import reactRefresh from '@vitejs/plugin-react-refresh';
+
+const root = resolve(__dirname, 'src');
+const outDir = resolve(__dirname, 'dist');
 
 // https://vitejs.dev/config/
 export default defineConfig({
+    plugins: [react(), pages(), reactRefresh()],
     build: {
+        outDir,
         rollupOptions: {
             input: {
-                main: './src/main.tsx',
-                ...getPagesInput('./src/pages'),
+                main: resolve('index.html'),
+                pc: resolve(root, 'pages', 'pc.html'),
             },
         },
     },
-    plugins: [react(), pages()],
 });
-
-function getPagesInput(pagesDir) {
-    const pages = {};
-
-    if (fs.existsSync(pagesDir)) {
-        const files = fs.readdirSync(pagesDir);
-
-        files.forEach((file) => {
-            const name = path.basename(file, path.extname(file));
-            pages[name] = `${pagesDir}/${file}`;
-        });
-    }
-
-    return pages;
-}

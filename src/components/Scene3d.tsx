@@ -5,7 +5,6 @@ import { Html, PerspectiveCamera, useCursor, useGLTF } from '@react-three/drei';
 // const OrbitControls = dynamic(import('@react-three/drei').then((module) => module.OrbitControls ) , { ssr: false })
 import ImageMesh from './ImageMesh';
 import UAParser from 'ua-parser-js';
-import PcHome from '../components/PcHome';
 
 export default function Scene3d({
     cvLinkRef,
