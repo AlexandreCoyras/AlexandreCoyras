@@ -2,6 +2,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import viteTsConfigPaths from 'vite-tsconfig-paths';
+import pages from 'vite-plugin-pages';
 
 export default defineConfig({
   cacheDir: './node_modules/.vite/.',
@@ -18,6 +19,7 @@ export default defineConfig({
 
   plugins: [
     react(),
+    pages(),
     viteTsConfigPaths({
       root: './',
     }),

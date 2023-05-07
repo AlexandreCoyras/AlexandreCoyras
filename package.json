@@ -20,7 +20,8 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.8.0",
     "react-router-dom": "^6.11.1",
-    "ua-parser-js": "^1.0.35"
+    "ua-parser-js": "^1.0.35",
+    "vite-plugin-pages": "^0.29.0"
   },
   "devDependencies": {
     "@nx/cypress": "16.1.1",
