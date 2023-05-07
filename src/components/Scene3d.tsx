@@ -1,15 +1,16 @@
-import {useFrame, useLoader, useThree} from "@react-three/fiber";
+import {useFrame, useLoader} from "@react-three/fiber";
 import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
 import * as THREE from "three";
-import React, {MutableRefObject, Suspense, useEffect, useRef, useState} from 'react'
-import dynamic from 'next/dynamic'
-import {Html, Stats} from '@react-three/drei'
+import React, {MutableRefObject, useEffect, useRef, useState} from 'react'
+import {Html, PerspectiveCamera, useCursor} from '@react-three/drei'
 // const OrbitControls = dynamic(import('@react-three/drei').then((module) => module.OrbitControls ) , { ssr: false })
 import ImageMesh from "./ImageMesh";
-import {PerspectiveCamera} from "@react-three/drei";
 import UAParser from 'ua-parser-js';
 
-export default function Scene3d({cvLinkRef}: { cvLinkRef: MutableRefObject<any> }) {
+export default function Scene3d({
+                                    cvLinkRef,
+                                    dofRef
+                                }: { cvLinkRef: MutableRefObject<any>, dofRef: MutableRefObject<null> }) {
     const [clickedCV, setClickedCV] = useState(false)
     const [hoveredCV, setHoveredCV] = useState(false)
     const [clickedFirstScreen, setClickedFirstScreen] = useState(false)
@@ -17,14 +18,15 @@ export default function Scene3d({cvLinkRef}: { cvLinkRef: MutableRefObject<any> 
     const [lightIntensity, setLightIntensity] = useState(1)
     const [mouseX, setMouseX] = useState(0)
     const [mouseY, setMouseY] = useState(0)
+    useCursor(hoveredCV)
     const [isMobile, setIsMobile] = useState(true);
     const iFrame = useRef(null)
-
     const lightPos: any = [-0.3, -0.3, -0.8]
     const lightPos2: any = [-0.7, -0.3, -0.70]
     const cvPosition = new THREE.Vector3(-0.575, -0.138, -0.955)
     const firstScreenPos = new THREE.Vector3(-0.104, -0.154, -1.0535)
     const modelPos = new THREE.Vector3(0.15, -0.85, -0.2)
+    const [focusVector] = useState(() => new THREE.Vector3())
 
     useFrame((state, delta) => {
         updateXYPos(state.camera)
@@ -36,8 +38,9 @@ export default function Scene3d({cvLinkRef}: { cvLinkRef: MutableRefObject<any> 
     });
 
     const updateLookAt = (camera: (THREE.OrthographicCamera & {manual?: boolean}) | (THREE.PerspectiveCamera & {manual?: boolean})) => {
+        const tempCam = camera.clone()
+
         if (clickedCV && !hoveredFirstScreen) {
-            const tempCam = camera.clone()
             tempCam.lookAt(cvPosition)
             camera.quaternion.slerp(tempCam.quaternion, 0.01)
             return
@@ -45,18 +48,17 @@ export default function Scene3d({cvLinkRef}: { cvLinkRef: MutableRefObject<any> 
         if (hoveredCV && !hoveredFirstScreen && !clickedFirstScreen) {
             const posToLook = cvPosition.clone()
             posToLook.x += 0.3
-            const tempCam = camera.clone()
             tempCam.lookAt(posToLook)
             camera.quaternion.slerp(tempCam.quaternion, 0.01)
             return
         }
 
-        const tempCam = camera.clone()
         tempCam.lookAt(firstScreenPos)
         camera.quaternion.slerp(tempCam.quaternion, 0.03)
     }
 
     const updateXYPos = (camera: (THREE.OrthographicCamera & {manual?: boolean}) | (THREE.PerspectiveCamera & {manual?: boolean})) => {
+        // dofRef.current.blur = camera.position.x
         if (clickedFirstScreen) {
             camera.position.x += (firstScreenPos.x + - camera.position.x) * 0.015
             camera.position.y += (firstScreenPos.y - camera.position.y) * 0.015
@@ -150,21 +152,15 @@ export default function Scene3d({cvLinkRef}: { cvLinkRef: MutableRefObject<any> 
         <ImageMesh src="CV.png" width={4.1 / 9} height={4.1 / 16} position={cvPosition}
                    rotation={[0, 0.5, 0]}
                    onClick={() => clickOnCV()}
-                   onPointerOver={() => {
-                       const body = document.querySelector("body");
-                       if (body !== null)
-                           body.style.cursor = "pointer";
-                       setHoveredCV(true);
-                   }}
-                   onPointerOut={() => {
-                       const body = document.querySelector("body");
-                       if (body  !== null)
-                           body.style.cursor = "auto";
-                       setHoveredCV(false);
-                   }}/>
-        <Html center transform  occlude="blending" position={firstScreenPos} scale={0.0104}>
-            <div className={"pointer-events-auto justify-center items-center"}  onPointerEnter={() => setClickedFirstScreen(true)}  onPointerOut={() => setClickedFirstScreen(false)} onClick = {() => {}}>
-                <iframe ref={iFrame} src={"/pc"} width="1920px" height="1080px" className={"inline-block pointer-events-auto p-3"}/>
+                   onPointerOver={() => setHoveredCV(true)}
+                   onPointerOut={() => setHoveredCV(false)}/>
+        <Html center transform occlude="blending" position={firstScreenPos} scale={0.0104}>
+            <div className={"pointer-events-auto justify-center items-center"}
+                 onPointerEnter={() => setClickedFirstScreen(true)} onPointerOut={() => setClickedFirstScreen(false)}
+                 onClick={() => {
+                 }}>
+                <iframe ref={iFrame} src={"/pc"} width="1920px" height="1080px"
+                        className={"inline-block pointer-events-auto p-3"}/>
             </div>
         </Html>
         <LoadModel position={modelPos}/>

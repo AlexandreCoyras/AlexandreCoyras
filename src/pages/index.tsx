@@ -1,28 +1,32 @@
-
-
-export {};
+import Effect from "../components/Effect";
 import Head from 'next/head'
-import {lazy, Suspense, useEffect, useRef, useState} from 'react'
-import {Canvas, useFrame, useLoader} from '@react-three/fiber'
-import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader'
-import * as THREE from 'three';
-
-const Scene3d = lazy(() => import('../components/Scene3d'));
-import dynamic from 'next/dynamic'
+import React, {lazy, Suspense, useRef, useState} from 'react'
+import {Canvas} from '@react-three/fiber'
 import {BiCode} from 'react-icons/bi'
 import {AiFillGithub} from 'react-icons/ai'
 import {FiExternalLink} from "react-icons/fi";
 import Contact from "../components/Contact";
 import Title from "../components/Title";
+import dynamic from "next/dynamic";
+
+
+export {};
+
+const Scene3d = lazy(() => import('../components/Scene3d'));
 
 export default function Home() {
 
     const buttonCvRef = useRef(null)
     const [showButtonCv, setShowButtonCv] = useState(false)
+    const DepthOfFieldRef = useRef(null)
+    const cvLinkRef = useRef(null)
+    console.log("DepthOfFieldRef", DepthOfFieldRef)
+
     const Loading = () => {
+
         return <>
             <div className={"flex justify-center items-center h-screen"}>
-                <h1 className={"mr-2"}>Loading</h1>
+                <h1 className={"mr-2"}>Loading...</h1>
                 <div role="status">
                     <svg aria-hidden="true"
                          className="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
@@ -39,10 +43,6 @@ export default function Home() {
             </div>
         </>
     }
-    useEffect(() => {
-    }, [])
-
-    const cvLinkRef = useRef(null)
 
     return (
         <>
@@ -53,37 +53,38 @@ export default function Home() {
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
             <Suspense fallback={<Loading/>}>
-            <div className={"w-screen h-screen"}>
+                <div className={"w-screen h-screen"}>
 
                     <Canvas className={"z-0"}>
-                        <Scene3d cvLinkRef={cvLinkRef}/>
+                        <Scene3d cvLinkRef={cvLinkRef} dofRef={DepthOfFieldRef}/>
+                        {/*<Effect ref={DepthOfFieldRef}/>*/}
                     </Canvas>
 
-            </div>
+                </div>
 
-            <div className={`flex justify-center duration-1000 opacity-0 ease-in-out items-center`} ref={cvLinkRef}>
-                <a href="/AlexandreCoyrasCV.pdf" target="_blank" rel="noopener noreferrer"
-                   className={"items-center justify-center flex"}>
+                <div className={`flex justify-center duration-1000 opacity-0 ease-in-out items-center`} ref={cvLinkRef}>
+                    <a href="/AlexandreCoyrasCV.pdf" target="_blank" rel="noopener noreferrer"
+                       className={"items-center justify-center flex"}>
+                        <div
+                            className="z-50 bg-white bottom-16 text-black border-black rounded-full h-12 w-12 items-center justify-center flex hover:bg-black hover:text-white transition-colors duration-200 ease-in-out cursor-pointer absolute button-fade-in">
+                            <FiExternalLink size={25}/>
+                        </div>
+                    </a>
+                </div>
+
+                <a href={"https://github.com/AlexandreCoyras/AlexandreCoyras"} target="_blank" rel="noopener noreferrer" className={""}>
                     <div
-                        className="z-50 bg-white bottom-16 text-black border-black rounded-full h-12 w-12 items-center justify-center flex hover:bg-black hover:text-white transition-colors duration-200 ease-in-out cursor-pointer absolute button-fade-in">
-                        <FiExternalLink size={25}/>
+                        className="z-50 fixed bottom-8 right-20 md:right-24 bg-white text-black border-black rounded-full h-12 w-12 flex items-center justify-center hover:bg-black hover:text-white transition-colors duration-200 ease-in-out cursor-pointer">
+                        <BiCode size={30}/>
                     </div>
                 </a>
-            </div>
-
-            <a href={"https://github.com/AlexandreCoyras/AlexandreCoyras"} target="_blank" rel="noopener noreferrer" className={""}>
-                <div
-                    className="z-50 fixed bottom-8 right-20 md:right-24 bg-white text-black border-black rounded-full h-12 w-12 flex items-center justify-center hover:bg-black hover:text-white transition-colors duration-200 ease-in-out cursor-pointer">
-                    <BiCode size={30}/>
-                </div>
-            </a>
-            <a href={"https://github.com/AlexandreCoyras"} target="_blank" rel="noopener noreferrer">
-                <div
-                    className="z-50 fixed bottom-8 right-6 md:right-8 bg-white text-black border-black rounded-full h-12 w-12 flex items-center justify-center hover:bg-black hover:text-white transition-colors duration-200 ease-in-out cursor-pointer">
-                    <AiFillGithub size={30}/>
-                </div>
-            </a>
-            <Contact/>
+                <a href={"https://github.com/AlexandreCoyras"} target="_blank" rel="noopener noreferrer">
+                    <div
+                        className="z-50 fixed bottom-8 right-6 md:right-8 bg-white text-black border-black rounded-full h-12 w-12 flex items-center justify-center hover:bg-black hover:text-white transition-colors duration-200 ease-in-out cursor-pointer">
+                        <AiFillGithub size={30}/>
+                    </div>
+                </a>
+                <Contact/>
                 <Title/>
             </Suspense>
         </>
