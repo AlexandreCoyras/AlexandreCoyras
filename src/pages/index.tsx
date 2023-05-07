@@ -65,7 +65,7 @@ export default function Home() {
                             cvLinkRef={cvLinkRef}
                             dofRef={DepthOfFieldRef}
                         />
-                        {/*<Effect ref={DepthOfFieldRef}/>*/}
+                        <Effect ref={DepthOfFieldRef}/>
                     </Canvas>
                 </div>
 
