@@ -1,31 +1,35 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
     "moduleResolution": "node",
-    "jsx": "preserve",
-    "strict": true,
-    "esModuleInterop": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2020", "dom"],
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
-    "incremental": true
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "jsx": "react-jsx",
+    "allowJs": false,
+    "esModuleInterop": false,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "types": ["vite/client", "vitest"]
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "**/*.css"
+  "files": [],
+  "include": [],
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
+    }
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "compileOnSave": false,
+  "exclude": ["node_modules", "tmp"]
 }
