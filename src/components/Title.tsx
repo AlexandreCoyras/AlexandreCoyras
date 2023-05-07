@@ -34,7 +34,7 @@ export default function Title() {
     return (
         <>
             <a
-                href={'/'}
+                href={'/pc'}
                 className={
                     'top-4 left-6 md:left-8 title fixed text-2xl md:text-3xl'
                 }

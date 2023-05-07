@@ -1,170 +1,221 @@
-import {useFrame, useLoader} from "@react-three/fiber";
-import * as THREE from "three";
-import React, {MutableRefObject, useEffect, useRef, useState} from 'react'
-import {Html, PerspectiveCamera, useCursor, useGLTF} from '@react-three/drei'
+import { useFrame, useLoader } from '@react-three/fiber';
+import * as THREE from 'three';
+import React, { MutableRefObject, useEffect, useRef, useState } from 'react';
+import { Html, PerspectiveCamera, useCursor, useGLTF } from '@react-three/drei';
 // const OrbitControls = dynamic(import('@react-three/drei').then((module) => module.OrbitControls ) , { ssr: false })
-import ImageMesh from "./ImageMesh";
+import ImageMesh from './ImageMesh';
 import UAParser from 'ua-parser-js';
+import PcHome from '../components/PcHome';
 
 export default function Scene3d({
-                                    cvLinkRef,
-                                    dofRef
-                                }: { cvLinkRef: MutableRefObject<any>, dofRef: MutableRefObject<null> }) {
-    const [clickedCV, setClickedCV] = useState(false)
-    const [hoveredCV, setHoveredCV] = useState(false)
-    const [clickedFirstScreen, setClickedFirstScreen] = useState(false)
-    const [hoveredFirstScreen, setHoveredFirstScreen] = useState(false)
-    const [lightIntensity, setLightIntensity] = useState(1)
-    const [mouseX, setMouseX] = useState(0)
-    const [mouseY, setMouseY] = useState(0)
-    useCursor(hoveredCV)
+    cvLinkRef,
+    dofRef,
+}: {
+    cvLinkRef: MutableRefObject<any>;
+    dofRef: MutableRefObject<null>;
+}) {
+    const [clickedCV, setClickedCV] = useState(false);
+    const [hoveredCV, setHoveredCV] = useState(false);
+    const [clickedFirstScreen, setClickedFirstScreen] = useState(false);
+    const [hoveredFirstScreen, setHoveredFirstScreen] = useState(false);
+    const [lightIntensity, setLightIntensity] = useState(1);
+    const [mouseX, setMouseX] = useState(0);
+    const [mouseY, setMouseY] = useState(0);
+    useCursor(hoveredCV);
     const [isMobile, setIsMobile] = useState(true);
-    const iFrame = useRef(null)
-    const lightPos: any = [-0.3, -0.3, -0.8]
-    const lightPos2: any = [-0.7, -0.3, -0.70]
-    const cvPosition = new THREE.Vector3(-0.575, -0.138, -0.955)
-    const firstScreenPos = new THREE.Vector3(-0.104, -0.154, -1.0535)
-    const modelPos = new THREE.Vector3(0.15, -0.85, -0.2)
-    const [focusVector] = useState(() => new THREE.Vector3())
+    const lightPos: any = [-0.3, -0.3, -0.8];
+    const lightPos2: any = [-0.7, -0.3, -0.7];
+    const cvPosition = new THREE.Vector3(-0.575, -0.138, -0.955);
+    const firstScreenPos = new THREE.Vector3(-0.104, -0.154, -1.0535);
+    const modelPos = new THREE.Vector3(0.15, -0.85, -0.2);
+    const [focusVector] = useState(() => new THREE.Vector3());
 
     useFrame((state, delta) => {
-        updateXYPos(state.camera)
+        updateXYPos(state.camera);
 
         // Camera distance from CV screen
-        updateZPos(state.camera)
+        updateZPos(state.camera);
 
-        updateLookAt(state.camera)
+        updateLookAt(state.camera);
     });
 
-    const updateLookAt = (camera: (THREE.OrthographicCamera & {manual?: boolean}) | (THREE.PerspectiveCamera & {manual?: boolean})) => {
-        const tempCam = camera.clone()
+    const updateLookAt = (
+        camera:
+            | (THREE.OrthographicCamera & { manual?: boolean })
+            | (THREE.PerspectiveCamera & { manual?: boolean })
+    ) => {
+        const tempCam = camera.clone();
 
         if (clickedCV && !hoveredFirstScreen) {
-            tempCam.lookAt(cvPosition)
-            camera.quaternion.slerp(tempCam.quaternion, 0.01)
-            return
+            tempCam.lookAt(cvPosition);
+            camera.quaternion.slerp(tempCam.quaternion, 0.01);
+            return;
         }
         if (hoveredCV && !hoveredFirstScreen && !clickedFirstScreen) {
-            const posToLook = cvPosition.clone()
-            posToLook.x += 0.3
-            tempCam.lookAt(posToLook)
-            camera.quaternion.slerp(tempCam.quaternion, 0.01)
-            return
+            const posToLook = cvPosition.clone();
+            posToLook.x += 0.3;
+            tempCam.lookAt(posToLook);
+            camera.quaternion.slerp(tempCam.quaternion, 0.01);
+            return;
         }
 
-        tempCam.lookAt(firstScreenPos)
-        camera.quaternion.slerp(tempCam.quaternion, 0.03)
-    }
+        tempCam.lookAt(firstScreenPos);
+        camera.quaternion.slerp(tempCam.quaternion, 0.03);
+    };
 
-    const updateXYPos = (camera: (THREE.OrthographicCamera & {manual?: boolean}) | (THREE.PerspectiveCamera & {manual?: boolean})) => {
+    const updateXYPos = (
+        camera:
+            | (THREE.OrthographicCamera & { manual?: boolean })
+            | (THREE.PerspectiveCamera & { manual?: boolean })
+    ) => {
         // dofRef.current.blur = camera.position.x
         if (clickedFirstScreen) {
-            camera.position.x += (firstScreenPos.x + - camera.position.x) * 0.015
-            camera.position.y += (firstScreenPos.y - camera.position.y) * 0.015
-            return
+            camera.position.x +=
+                (firstScreenPos.x + -camera.position.x) * 0.015;
+            camera.position.y += (firstScreenPos.y - camera.position.y) * 0.015;
+            return;
         }
         if (clickedCV) {
-            camera.position.x += (cvPosition.x + 0.14 - camera.position.x) * 0.015
-            camera.position.y += (cvPosition.y - camera.position.y) * 0.015
-            return
+            camera.position.x +=
+                (cvPosition.x + 0.14 - camera.position.x) * 0.015;
+            camera.position.y += (cvPosition.y - camera.position.y) * 0.015;
+            return;
         }
         if (hoveredCV && !hoveredFirstScreen) {
-            camera.position.x += (mouseX / 4 - camera.position.x) * 0.015
-            camera.position.y += (mouseY / 4 - camera.position.y) * 0.015
-            return
+            camera.position.x += (mouseX / 4 - camera.position.x) * 0.015;
+            camera.position.y += (mouseY / 4 - camera.position.y) * 0.015;
+            return;
         }
-        camera.position.x += (mouseX / 4 - camera.position.x) * 0.015
-        camera.position.y += (mouseY / 4 - camera.position.y) * 0.015
-    }
+        camera.position.x += (mouseX / 4 - camera.position.x) * 0.015;
+        camera.position.y += (mouseY / 4 - camera.position.y) * 0.015;
+    };
 
-    const updateZPos = (camera: (THREE.OrthographicCamera & {manual?: boolean}) | (THREE.PerspectiveCamera & {manual?: boolean})) => {
+    const updateZPos = (
+        camera:
+            | (THREE.OrthographicCamera & { manual?: boolean })
+            | (THREE.PerspectiveCamera & { manual?: boolean })
+    ) => {
         if (clickedFirstScreen) {
-            camera.position.z += (cvPosition.z + 0.23 - camera.position.z) * 0.015
-            return
+            camera.position.z +=
+                (cvPosition.z + 0.23 - camera.position.z) * 0.015;
+            return;
         }
         if (clickedCV) {
-            camera.position.z += (cvPosition.z + 0.25 - camera.position.z) * 0.015
-            return
+            camera.position.z +=
+                (cvPosition.z + 0.25 - camera.position.z) * 0.015;
+            return;
         }
         if (hoveredFirstScreen && !isMobile) {
-            camera.position.z += (-0.2 - camera.position.z) * 0.015
-            return
+            camera.position.z += (-0.2 - camera.position.z) * 0.015;
+            return;
         }
         if (hoveredCV && !isMobile) {
-            camera.position.z += (-0.2 - camera.position.z) * 0.015
-            return
+            camera.position.z += (-0.2 - camera.position.z) * 0.015;
+            return;
         }
-        camera.position.z += (0 - camera.position.z) * 0.015
-    }
-    const TestBox = ({pos}: {pos: THREE.Vector3}) => {
+        camera.position.z += (0 - camera.position.z) * 0.015;
+    };
+    const TestBox = ({ pos }: { pos: THREE.Vector3 }) => {
         return (
-        <mesh
-        position={pos}
-        scale={0.03}
-        >
-            <boxGeometry args={[1, 1, 1]} />
-            <meshStandardMaterial color={'orange'} />
-        </mesh>
-        )
-    }
+            <mesh position={pos} scale={0.03}>
+                <boxGeometry args={[1, 1, 1]} />
+                <meshStandardMaterial color={'orange'} />
+            </mesh>
+        );
+    };
 
     useEffect(() => {
-        addEventListener('scroll', _ => {
-            const newIntensity = 1 + (-window.scrollY * 1.3) / window.innerHeight
-            setLightIntensity(newIntensity < 0 ? 0 : newIntensity)
-        })
+        addEventListener('scroll', (_) => {
+            const newIntensity =
+                1 + (-window.scrollY * 1.3) / window.innerHeight;
+            setLightIntensity(newIntensity < 0 ? 0 : newIntensity);
+        });
 
         addEventListener('mousemove', (e) => {
-            setMouseX((e.clientX / window.innerWidth - 0.5) * 2)
-            setMouseY(-(e.clientY / window.innerHeight - 0.5) * 2)
-        })
+            setMouseX((e.clientX / window.innerWidth - 0.5) * 2);
+            setMouseY(-(e.clientY / window.innerHeight - 0.5) * 2);
+        });
 
         const parser = new UAParser();
         const deviceType = parser.getDevice().type;
         setIsMobile(deviceType === 'mobile');
-    }, [])
+    }, []);
 
-    const LoadModel = ({position}: {position: THREE.Vector3}) => {
-        const {scene} = useGLTF("3d_models/room2.glb")
-        return <primitive object={scene} position={position} scale={0.5} receiveShadow={true}/>
-    }
+    const LoadModel = ({ position }: { position: THREE.Vector3 }) => {
+        const { scene } = useGLTF('3d_models/room2.glb');
+        return (
+            <primitive
+                object={scene}
+                position={position}
+                scale={0.5}
+                receiveShadow={true}
+            />
+        );
+    };
 
-    const texture = useLoader(THREE.TextureLoader, "CV.png");
+    const texture = useLoader(THREE.TextureLoader, 'CV.png');
 
     const clickOnCV = () => {
         // when the user clicks on CV screen
         setClickedCV(!clickedCV);
-        if (!cvLinkRef.current) return
-        cvLinkRef.current.style.opacity = clickedCV ? 0 : 1
-        cvLinkRef.current.style.visibility = clickedCV ? "hidden" : "visible";
-    }
+        if (!cvLinkRef.current) return;
+        cvLinkRef.current.style.opacity = clickedCV ? 0 : 1;
+        cvLinkRef.current.style.visibility = clickedCV ? 'hidden' : 'visible';
+    };
 
     const Loading = () => {
-        return <div className={"bg-black"}>
-        </div>
-    }
+        return <div className={'bg-black'}></div>;
+    };
 
-    return <>
-        <ambientLight intensity={lightIntensity * 0.02}/>
-        <pointLight position={lightPos} intensity={lightIntensity * 0.15} castShadow={true}/>
-        <pointLight position={lightPos2} intensity={lightIntensity * 0.15} castShadow={true}/>
-        <ImageMesh src="CV.png" width={4.1 / 9} height={4.1 / 16} position={cvPosition}
-                   rotation={[0, 0.5, 0]}
-                   onClick={() => clickOnCV()}
-                   onPointerOver={() => setHoveredCV(true)}
-                   onPointerOut={() => setHoveredCV(false)}/>
-        <Html center transform occlude="blending" position={firstScreenPos} scale={0.0104}>
-            <div className={"pointer-events-auto justify-center items-center"}
-                 onPointerEnter={() => setClickedFirstScreen(true)} onPointerOut={() => setClickedFirstScreen(false)}
-                 onClick={() => {
-                 }}>
-                <iframe ref={iFrame} src={"/pc"} width="1920px" height="1080px"
-                        className={"inline-block pointer-events-auto p-3"}/>
-            </div>
-        </Html>
-        <LoadModel position={modelPos}/>
-        <PerspectiveCamera makeDefault/>
-        {/*<Stats/>*/}
-        {/*<OrbitControls/>*/}
-    </>
+    return (
+        <>
+            <ambientLight intensity={lightIntensity * 0.02} />
+            <pointLight
+                position={lightPos}
+                intensity={lightIntensity * 0.15}
+                castShadow={true}
+            />
+            <pointLight
+                position={lightPos2}
+                intensity={lightIntensity * 0.15}
+                castShadow={true}
+            />
+            <ImageMesh
+                src="CV.png"
+                width={4.1 / 9}
+                height={4.1 / 16}
+                position={cvPosition}
+                rotation={[0, 0.5, 0]}
+                onClick={() => clickOnCV()}
+                onPointerOver={() => setHoveredCV(true)}
+                onPointerOut={() => setHoveredCV(false)}
+            />
+            <Html
+                center
+                transform
+                occlude="blending"
+                position={firstScreenPos}
+                scale={0.0104}
+            >
+                <div
+                    className={
+                        'pointer-events-auto justify-center items-center'
+                    }
+                    onPointerEnter={() => setClickedFirstScreen(true)}
+                    onPointerOut={() => setClickedFirstScreen(false)}
+                >
+                    <iframe
+                        src={'/pc'}
+                        width="1920px"
+                        height="1080px"
+                        className={'inline-block pointer-events-auto p-3'}
+                    />
+                </div>
+            </Html>
+            <LoadModel position={modelPos} />
+            <PerspectiveCamera makeDefault />
+            {/*<Stats/>*/}
+            {/*<OrbitControls/>*/}
+        </>
+    );
 }
