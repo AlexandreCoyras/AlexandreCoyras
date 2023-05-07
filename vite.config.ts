@@ -7,8 +7,8 @@ export default defineConfig({
     build: {
         rollupOptions: {
             input: {
-                main: 'src/pages/index.tsx',
-                pc: 'src/pages/pc.tsx',
+                main: 'index.html',
+                pc: 'index.html',
             },
         },
     },
