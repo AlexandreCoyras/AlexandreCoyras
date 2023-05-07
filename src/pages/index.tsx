@@ -6,6 +6,7 @@ import { AiFillGithub } from 'react-icons/ai';
 import { FiExternalLink } from 'react-icons/fi';
 import Contact from '../components/Contact';
 import Title from '../components/Title';
+import { useProgress } from '@react-three/drei';
 
 export {};
 
@@ -22,7 +23,9 @@ export default function Home() {
         return (
             <>
                 <div className={'flex justify-center items-center h-screen'}>
-                    <h1 className={'mr-2'}>Loading...</h1>
+                    <h1 className={'mr-2'}>
+                        Loading: {useProgress().progress}%...
+                    </h1>
                     <div role="status">
                         <svg
                             aria-hidden="true"
@@ -49,15 +52,6 @@ export default function Home() {
 
     return (
         <>
-            <head>
-                <title>Alexandre Coyras</title>
-                <meta name="description" content="Alexandre Coyras portfolio" />
-                <meta
-                    name="viewport"
-                    content="width=device-width, initial-scale=1"
-                />
-                <link rel="icon" href="/favicon.ico" />
-            </head>
             <Suspense fallback={<Loading />}>
                 <div className={'w-screen h-screen'}>
                     <Canvas className={'z-0'}>
@@ -65,7 +59,7 @@ export default function Home() {
                             cvLinkRef={cvLinkRef}
                             dofRef={DepthOfFieldRef}
                         />
-                        <Effect ref={DepthOfFieldRef}/>
+                        <Effect ref={DepthOfFieldRef} />
                     </Canvas>
                 </div>
 

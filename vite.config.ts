@@ -10,13 +10,9 @@ const outDir = resolve(__dirname, 'dist');
 // https://vitejs.dev/config/
 export default defineConfig({
     plugins: [react(), pages(), reactRefresh()],
-    build: {
-        outDir,
-        rollupOptions: {
-            input: {
-                main: resolve('index.html'),
-                pc: resolve(root, 'pages', 'pc.html'),
-            },
+    server: {
+        rewrite: {
+            '^/.*$': '/index.html',
         },
     },
 });
