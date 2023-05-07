@@ -1,8 +1,7 @@
 import {useFrame, useLoader} from "@react-three/fiber";
-import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
 import * as THREE from "three";
 import React, {MutableRefObject, useEffect, useRef, useState} from 'react'
-import {Html, PerspectiveCamera, useCursor} from '@react-three/drei'
+import {Html, PerspectiveCamera, useCursor, useGLTF} from '@react-three/drei'
 // const OrbitControls = dynamic(import('@react-three/drei').then((module) => module.OrbitControls ) , { ssr: false })
 import ImageMesh from "./ImageMesh";
 import UAParser from 'ua-parser-js';
@@ -126,7 +125,7 @@ export default function Scene3d({
     }, [])
 
     const LoadModel = ({position}: {position: THREE.Vector3}) => {
-        const {scene} = useLoader(GLTFLoader, "3d_models/room2.glb")
+        const {scene} = useGLTF("3d_models/room2.glb")
         return <primitive object={scene} position={position} scale={0.5} receiveShadow={true}/>
     }
 
