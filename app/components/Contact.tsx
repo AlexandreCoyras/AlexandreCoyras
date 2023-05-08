@@ -2,6 +2,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { useEffect, useRef } from 'react';
 import { FiArrowLeft } from 'react-icons/fi';
+import { Link } from '@remix-run/react';
 
 gsap.registerPlugin(ScrollTrigger);
 ScrollTrigger.defaults({
@@ -137,7 +138,7 @@ export default function Contact() {
                             <div className={'text-xl sm:text-2xl'}>
                                 Send me a message
                             </div>
-                            <a href={'mailto:alexandrecoyras@gmail.com'}>
+                            <Link to={'mailto:alexandrecoyras@gmail.com'}>
                                 <div
                                     className={
                                         'text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl ml-4 mt-8'
@@ -149,7 +150,7 @@ export default function Contact() {
                                         <div>GMAIL.COM</div>
                                     </div>
                                 </div>
-                            </a>
+                            </Link>
                         </div>
                     </div>
                     <div
