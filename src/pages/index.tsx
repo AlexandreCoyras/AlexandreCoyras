@@ -9,11 +9,8 @@ import Title from '../components/Title';
 import { useProgress } from '@react-three/drei';
 const Scene3d = lazy(() => import('../components/Scene3d'));
 export default function Home() {
-    const buttonCvRef = useRef(null);
-    const [showButtonCv, setShowButtonCv] = useState(false);
     const DepthOfFieldRef = useRef(null);
     const cvLinkRef = useRef(null);
-    console.log('DepthOfFieldRef', DepthOfFieldRef);
 
     const Loading = () => {
         return (

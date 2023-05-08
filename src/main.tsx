@@ -1,9 +1,8 @@
 import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './style.css';
-
 import App from './app';
-import { BrowserRouter } from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/react';
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -11,8 +10,7 @@ const root = ReactDOM.createRoot(
 
 root.render(
     <StrictMode>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
+        <App />
+        <Analytics />
     </StrictMode>
 );
