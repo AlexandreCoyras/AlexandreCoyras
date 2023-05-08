@@ -1,12 +1,22 @@
+node_modules
+
+.cache
+.env
+.vercel
+.output
+
+/build/
+/public/build
+/api/index.js
+/api/index.js.map
+
+
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
 dist
 tmp
 /out-tsc
-
-# dependencies
-node_modules
 
 # IDEs and editors
 /.idea
