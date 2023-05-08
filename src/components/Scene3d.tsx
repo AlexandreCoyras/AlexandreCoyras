@@ -31,8 +31,8 @@ export default function Scene3d({
     const lightPos: any = [-0.3, -0.3, -0.8];
     const lightPos2: any = [-0.7, -0.3, -0.7];
     const cvPosition = new THREE.Vector3(-0.575, -0.138, -0.955);
-    const firstScreenPos = new THREE.Vector3(-0.104, -0.154, -1.0535);
-    const modelPos = new THREE.Vector3(0.15, -0.85, -0.202);
+    const firstScreenPos = new THREE.Vector3(-0.104, -0.156, -1.0535);
+    const modelPos = new THREE.Vector3(0.15, -0.85, -0.2025);
     const [focusVector] = useState(() => new THREE.Vector3());
     const camera = useThree((state) => state.camera);
 

@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@heroicons/react": "^2.0.17",
+    "@material-tailwind/react": "^2.0.0",
     "@react-three/drei": "^9.66.6",
     "@types/node": "20.1.0",
     "@types/react": "18.2.6",
@@ -17,7 +19,9 @@
     "eslint": "8.40.0",
     "eslint-config-next": "13.4.1",
     "gsap": "^3.11.5",
+    "i": "^0.3.7",
     "next": "13.4.1",
+    "npm": "^9.6.6",
     "postcss": "8.4.23",
     "react": "18.2.0",
     "react-dom": "18.2.0",
