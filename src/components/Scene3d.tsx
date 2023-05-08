@@ -1,10 +1,17 @@
-import { useFrame, useLoader } from '@react-three/fiber';
+import { useFrame, useLoader, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 import React, { MutableRefObject, useEffect, useRef, useState } from 'react';
-import { Html, PerspectiveCamera, useCursor, useGLTF } from '@react-three/drei';
+import {
+    Html,
+    OrbitControls,
+    PerspectiveCamera,
+    useCursor,
+    useGLTF,
+} from '@react-three/drei';
 // const OrbitControls = dynamic(import('@react-three/drei').then((module) => module.OrbitControls ) , { ssr: false })
 import ImageMesh from './ImageMesh';
 import UAParser from 'ua-parser-js';
+import Model from './RoomLoad';
 
 export default function Scene3d({
     cvLinkRef,
@@ -20,21 +27,22 @@ export default function Scene3d({
     const [lightIntensity, setLightIntensity] = useState(1);
     const [mouseX, setMouseX] = useState(0);
     const [mouseY, setMouseY] = useState(0);
-    useCursor(hoveredCV);
     const [isMobile, setIsMobile] = useState(true);
     const lightPos: any = [-0.3, -0.3, -0.8];
     const lightPos2: any = [-0.7, -0.3, -0.7];
     const cvPosition = new THREE.Vector3(-0.575, -0.138, -0.955);
     const firstScreenPos = new THREE.Vector3(-0.104, -0.154, -1.0535);
-    const modelPos = new THREE.Vector3(0.15, -0.85, -0.2);
+    const modelPos = new THREE.Vector3(0.15, -0.85, -0.202);
     const [focusVector] = useState(() => new THREE.Vector3());
+    const camera = useThree((state) => state.camera);
+
+    useCursor(hoveredCV);
 
     useFrame((state, delta) => {
         updateXYPos(state.camera);
 
         // Camera distance from CV screen
         updateZPos(state.camera);
-
         updateLookAt(state.camera);
     });
 
@@ -140,19 +148,17 @@ export default function Scene3d({
         setIsMobile(deviceType === 'mobile');
     }, []);
 
-    const LoadModel = ({ position }: { position: THREE.Vector3 }) => {
-        const { scene } = useGLTF('3d_models/room2.glb');
-        return (
-            <primitive
-                object={scene}
-                position={position}
-                scale={0.5}
-                receiveShadow={true}
-            />
-        );
-    };
-
-    const texture = useLoader(THREE.TextureLoader, 'CV.png');
+    // const LoadModel = ({ position }: { position: THREE.Vector3 }) => {
+    //     const { scene } = useGLTF('3d_models/room.glb');
+    //     return (
+    //         <primitive
+    //             object={scene}
+    //             position={position}
+    //             scale={0.5}
+    //             receiveShadow={true}
+    //         />
+    //     );
+    // };
 
     const clickOnCV = () => {
         // when the user clicks on CV screen
@@ -211,10 +217,10 @@ export default function Scene3d({
                     />
                 </div>
             </Html>
-            <LoadModel position={modelPos} />
+            <Model position={modelPos} scale={0.5} />
             <PerspectiveCamera makeDefault />
             {/*<Stats/>*/}
-            {/*<OrbitControls/>*/}
+            {/*<OrbitControls camera={camera} />*/}
         </>
     );
 }

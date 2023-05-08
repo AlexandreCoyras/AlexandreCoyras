@@ -1,7 +1,7 @@
 import gsap from 'gsap';
 import { ScrollToPlugin } from 'gsap/dist/ScrollToPlugin';
 import { useEffect, useRef } from 'react';
-import { Link } from '@remix-run/react';
+import Link from 'next/link';
 gsap.registerPlugin(ScrollToPlugin);
 
 export default function Title() {
@@ -39,7 +39,7 @@ export default function Title() {
                     'top-4 left-6 md:left-8 title fixed text-2xl md:text-3xl'
                 }
                 ref={titleRef}
-                to={'/'}
+                href={'/'}
             >
                 <span className={'text-teal-400'}>A</span>
                 lexandre Coyra
