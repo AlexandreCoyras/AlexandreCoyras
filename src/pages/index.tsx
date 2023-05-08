@@ -1,5 +1,5 @@
 import Effect from '../components/Effect';
-import React, { lazy, Suspense, useRef, useState } from 'react';
+import { lazy, Suspense, useRef, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { BiCode } from 'react-icons/bi';
 import { AiFillGithub } from 'react-icons/ai';
@@ -7,11 +7,7 @@ import { FiExternalLink } from 'react-icons/fi';
 import Contact from '../components/Contact';
 import Title from '../components/Title';
 import { useProgress } from '@react-three/drei';
-
-export {};
-
 const Scene3d = lazy(() => import('../components/Scene3d'));
-
 export default function Home() {
     const buttonCvRef = useRef(null);
     const [showButtonCv, setShowButtonCv] = useState(false);
