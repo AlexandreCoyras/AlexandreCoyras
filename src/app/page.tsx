@@ -20,7 +20,7 @@ export default function Home() {
             <>
                 <div className={'flex justify-center items-center h-screen'}>
                     <h1 className={'mr-2'}>
-                        Loading: {useProgress().progress}%...
+                        Loading: {Math.round(useProgress().progress)}%...
                     </h1>
                     <div role="status">
                         <svg
