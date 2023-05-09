@@ -147,19 +147,6 @@ export default function Scene3d({
         const deviceType = parser.getDevice().type;
         setIsMobile(deviceType === 'mobile');
     }, []);
-
-    // const LoadModel = ({ position }: { position: THREE.Vector3 }) => {
-    //     const { scene } = useGLTF('3d_models/room.glb');
-    //     return (
-    //         <primitive
-    //             object={scene}
-    //             position={position}
-    //             scale={0.5}
-    //             receiveShadow={true}
-    //         />
-    //     );
-    // };
-
     const clickOnCV = () => {
         // when the user clicks on CV screen
         setClickedCV(!clickedCV);
