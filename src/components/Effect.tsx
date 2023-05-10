@@ -10,7 +10,7 @@ const Effects = forwardRef((props, ref: ForwardedRef<any>) => {
     return (
         <>
             {/*<EffectComposer multisampling={0}>*/}
-            {/*<DepthOfField ref={ref} bokehScale={4} focalLength={0.1} />*/}
+            {/*    /!*<DepthOfField ref={ref} bokehScale={4} focalLength={0.1} />*!/*/}
             {/*    <Vignette />*/}
             {/*</EffectComposer>*/}
         </>

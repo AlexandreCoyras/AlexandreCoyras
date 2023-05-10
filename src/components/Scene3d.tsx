@@ -1,14 +1,12 @@
 import { useFrame, useLoader, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
-import React, { MutableRefObject, useEffect, useRef, useState } from 'react';
+import React, { MutableRefObject, useEffect, useState } from 'react';
 import {
     Html,
     OrbitControls,
     PerspectiveCamera,
     useCursor,
-    useGLTF,
 } from '@react-three/drei';
-// const OrbitControls = dynamic(import('@react-three/drei').then((module) => module.OrbitControls ) , { ssr: false })
 import ImageMesh from './ImageMesh';
 import UAParser from 'ua-parser-js';
 import Model from './RoomLoad';
@@ -36,9 +34,15 @@ export default function Scene3d({
     const [focusVector] = useState(() => new THREE.Vector3());
     const camera = useThree((state) => state.camera);
 
+    if (process.env.NODE_ENV === 'development') {
+        const leva = require('leva');
+        var { orbitActive } = leva.useControls({ orbitActive: false });
+    }
+
     useCursor(hoveredCV);
 
     useFrame((state, delta) => {
+        if (orbitActive) return;
         updateXYPos(state.camera);
 
         // Camera distance from CV screen
@@ -207,7 +211,7 @@ export default function Scene3d({
             <Model position={modelPos} scale={0.5} />
             <PerspectiveCamera makeDefault />
             {/*<Stats/>*/}
-            {/*<OrbitControls camera={camera} />*/}
+            {orbitActive && <OrbitControls camera={camera} zoomSpeed={3} />}
         </>
     );
 }
