@@ -371,82 +371,122 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
         <group {...props} dispose={null}>
             <group position={[0.47, 0.9, -1.74]} scale={0.08}>
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_4.geometry}
                     material={materials.Pen_Blue_Blue}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_5.geometry}
                     material={materials.Pen_Blue}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_6.geometry}
                     material={materials['Material.005']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_7.geometry}
                     material={materials['Material.013']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_8.geometry}
                     material={materials.Pen_Greens}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_9.geometry}
                     material={materials['Pen_Pink.002']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_10.geometry}
                     material={materials.Pen_Pink}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_11.geometry}
                     material={materials['Pen_Pink.001']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_12.geometry}
                     material={materials['Pen_Pink.007']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_13.geometry}
                     material={materials['Pen_Pink.006']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_14.geometry}
                     material={materials.Pen_Purple}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_15.geometry}
                     material={materials.Pen_Red}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_16.geometry}
                     material={materials['Pen_Green.002']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_17.geometry}
                     material={materials['Pen_Pink.008']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_18.geometry}
                     material={materials['Pen_Pink.004']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_19.geometry}
                     material={materials['Pen_Pink.005']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_20.geometry}
                     material={materials.Pen_Gree}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_21.geometry}
                     material={materials['Pen_Pink.003']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_22.geometry}
                     material={materials.Pen_Vyan}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_23.geometry}
                     material={materials.Pen_Wood}
                 />
@@ -457,88 +497,128 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={[0.12, 0.1, 0.12]}
             >
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_25.geometry}
                     material={materials['Material.014']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_26.geometry}
                     material={materials['Material.015']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_27.geometry}
                     material={materials.Coffee}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_28.geometry}
                     material={materials['Glass.001']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_29.geometry}
                     material={materials['Board.001']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_30.geometry}
                     material={materials['Material.019']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_31.geometry}
                     material={materials.Paper_White}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_32.geometry}
                     material={materials['Material.020']}
                 />
             </group>
             <group position={[0.38, 0.9, -0.81]} rotation={[0, -0.19, 0]}>
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_34.geometry}
                     material={materials.Metal}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_35.geometry}
                     material={materials.Cubik_white}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_36.geometry}
                     material={materials['Material.018']}
                 />
             </group>
             <group position={[-1.54, 0.95, -1.5]} rotation={[-0.13, 0.01, 0]}>
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_41.geometry}
                     material={materials.Cubik_white}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_42.geometry}
                     material={materials.Keyboard_glossGLOSS}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_43.geometry}
                     material={materials.Cat_grey}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_44.geometry}
                     material={materials['Keyboard_glossGLOSS.002']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_45.geometry}
                     material={materials['Keyboard_glossGLOSS.001']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_46.geometry}
                     material={materials['Keyboard_glossGLOSS.003']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_47.geometry}
                     material={materials['Keyboard_glossGLOSS.004']}
                 />
             </group>
             <group position={[0.29, 1.14, -1.71]} rotation={[0.01, 0.02, 0.09]}>
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_49.geometry}
                     material={materials.Paper_White}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_50.geometry}
                     material={materials['Material.019']}
                 />
@@ -549,10 +629,14 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={[0.01, 0, 0.01]}
             >
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_56.geometry}
                     material={materials['Material.022']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_57.geometry}
                     material={materials['Material.013']}
                 />
@@ -563,20 +647,28 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={[1.07, 1.07, 1.59]}
             >
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_59.geometry}
                     material={materials.Metal}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_60.geometry}
                     material={materials.Keyboard_rough}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_61.geometry}
                     material={materials['Material.025']}
                 />
             </group>
             <group rotation={[Math.PI / 2, 0, 1.55]} scale={0.19}>
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_80.geometry}
                     material={materials.Plant_01}
                     position={[-6.15, 10.46, -13.93]}
@@ -584,6 +676,8 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                     scale={0.38}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_82.geometry}
                     material={materials.Plant_01}
                     position={[-5.99, 10.58, -13.93]}
@@ -597,98 +691,146 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={0.08}
             >
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_86.geometry}
                     material={materials.Pen_Blue_Blue}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_87.geometry}
                     material={materials.Pen_Blue}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_88.geometry}
                     material={materials['Material.005']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_89.geometry}
                     material={materials['Material.013']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_91.geometry}
                     material={materials.Pen_Greens}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_92.geometry}
                     material={materials['Pen_Pink.002']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_93.geometry}
                     material={materials.Pen_Pink}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_94.geometry}
                     material={materials['Pen_Pink.001']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_95.geometry}
                     material={materials['Pen_Pink.007']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_96.geometry}
                     material={materials['Pen_Pink.006']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_97.geometry}
                     material={materials.Pen_Purple}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_99.geometry}
                     material={materials['Pen_Green.002']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_100.geometry}
                     material={materials['Pen_Pink.008']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_101.geometry}
                     material={materials['Pen_Pink.004']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_102.geometry}
                     material={materials['Pen_Pink.005']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_103.geometry}
                     material={materials.Pen_Gree}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_109.geometry}
                     material={materials.Pen_Wood}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_90.geometry}
                     material={materials['Pen_Pink.009']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_98.geometry}
                     material={materials.Pen_Red}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_104.geometry}
                     material={materials['Pen_Pink.003']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_105.geometry}
                     material={materials.Pen_White}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_106.geometry}
                     material={materials.Pen_Black}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_107.geometry}
                     material={materials.Pen_Yellow}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_108.geometry}
                     material={materials.Pen_Vyan}
                 />
@@ -699,14 +841,20 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={[1.62, 1.62, 1.91]}
             >
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_111.geometry}
                     material={materials.Keyboard_rough}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_112.geometry}
                     material={materials.Keyboard_glossGLOSS}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_113.geometry}
                     material={materials['Material.004']}
                 />
@@ -717,42 +865,62 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={1.27}
             >
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_115.geometry}
                     material={materials.Pen_Wood}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_116.geometry}
                     material={materials.Material}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_117.geometry}
                     material={materials['Material.010']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_118.geometry}
                     material={materials['Pen_Green.001']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_119.geometry}
                     material={materials['Material.007']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_120.geometry}
                     material={materials['Material.009']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_121.geometry}
                     material={materials.Cubik_white}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_122.geometry}
                     material={materials.Keyboard_gloss}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_123.geometry}
                     material={materials.Paper_White}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_124.geometry}
                     material={materials['Material.008']}
                 />
@@ -763,10 +931,14 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={[0.47, 0.3, 0.03]}
             >
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_128.geometry}
                     material={materials.Keyboard_rough}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_129.geometry}
                     material={materials.Silver_plastic}
                 />
@@ -777,36 +949,52 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={0.07}
             >
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_131.geometry}
                     material={materials.Board_green}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_132.geometry}
                     material={materials['Material.032']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_133.geometry}
                     material={materials['Material.033']}
                 />
             </group>
             <group position={[-0.05, 0, 0]}>
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_139.geometry}
                     material={materials.Keyboard_rough}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_140.geometry}
                     material={materials['Screen.002']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_141.geometry}
                     material={materials['Screen.001']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_142.geometry}
                     material={materials['Screen.003']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_143.geometry}
                     material={materials['Screen.007']}
                 />
@@ -817,26 +1005,38 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={0.05}
             >
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_147.geometry}
                     material={materials.Cubik_blue}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_148.geometry}
                     material={materials.Cubik_yellow}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_149.geometry}
                     material={materials.Cubik_rose}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_150.geometry}
                     material={materials.Cubik_orange}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_151.geometry}
                     material={materials.Cubik_green}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_152.geometry}
                     material={materials.Cubik_white}
                 />
@@ -847,14 +1047,20 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={1.33}
             >
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_154.geometry}
                     material={materials.Keyboard_glossGLOSS}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_155.geometry}
                     material={materials.Keyboard_gloss}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_156.geometry}
                     material={materials.Keyboard_rough}
                 />
@@ -865,20 +1071,28 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={1.24}
             >
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_160.geometry}
                     material={materials.Keyboard_rough}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_161.geometry}
                     material={materials.Keyboard_gloss}
                 />
             </group>
             <group position={[-2.09, 0.78, -0.39]} scale={1.23}>
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_163.geometry}
                     material={materials.Keyboard_gloss}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_164.geometry}
                     material={materials.Keyboard_glossGLOSS}
                 />
@@ -889,30 +1103,44 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={[0.47, 0.3, 0.03]}
             >
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_168.geometry}
                     material={materials.Screen}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_169.geometry}
                     material={materials['Screen.005']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_170.geometry}
                     material={materials['Screen.001']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_171.geometry}
                     material={materials.Material}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_172.geometry}
                     material={materials['Material.012']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_173.geometry}
                     material={materials['Material.021']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_174.geometry}
                     material={materials['Material.024']}
                 />
@@ -923,14 +1151,20 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={2.13}
             >
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_176.geometry}
                     material={materials.Plant_02}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_177.geometry}
                     material={materials.lambert37}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_178.geometry}
                     material={materials['Material.017']}
                 />
@@ -941,18 +1175,26 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={0.23}
             >
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_182.geometry}
                     material={materials['Screen.004']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_183.geometry}
                     material={materials['Material.001']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_184.geometry}
                     material={materials['Material.002']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_185.geometry}
                     material={materials['Screen.002']}
                 />
@@ -963,28 +1205,40 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={[0.6, 0.09, 0.03]}
             >
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_193.geometry}
                     material={materials.Paper_Yellow}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_194.geometry}
                     material={materials['Material.003']}
                 />
             </group>
             <group position={[-0.79, 1.87, -1.88]} scale={[1.34, 1.18, 1.18]}>
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_218.geometry}
                     material={materials.Paper_White}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_219.geometry}
                     material={materials['Screen.006']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_220.geometry}
                     material={materials['Material.027']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_221.geometry}
                     material={materials['Material.028']}
                 />
@@ -995,14 +1249,20 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={[-2.54, 2.34, 1.83]}
             >
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_223.geometry}
                     material={materials.Paper_White}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_224.geometry}
                     material={materials.Board_green}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_225.geometry}
                     material={materials['Screen.007']}
                 />
@@ -1013,10 +1273,14 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={[-2.54, 2.34, 1.83]}
             >
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_227.geometry}
                     material={materials.Paper_White}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_228.geometry}
                     material={materials.Board_green}
                 />
@@ -1027,10 +1291,14 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={[-3.09, 2.84, 2.22]}
             >
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_230.geometry}
                     material={materials.Paper_White}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_231.geometry}
                     material={materials.Board_green}
                 />
@@ -1041,10 +1309,14 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={[-2.08, 2.4, 1.88]}
             >
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_233.geometry}
                     material={materials.Paper_White}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_234.geometry}
                     material={materials.Board_green}
                 />
@@ -1055,10 +1327,14 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={[-0.72, 0.84, 0.66]}
             >
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_236.geometry}
                     material={materials.Paper_White}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_237.geometry}
                     material={materials.Board_green}
                 />
@@ -1069,10 +1345,14 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={[-0.64, 1.3, 0.66]}
             >
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_239.geometry}
                     material={materials.Paper_White}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_240.geometry}
                     material={materials.Board_green}
                 />
@@ -1083,10 +1363,14 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={[1, 0.87, 0.87]}
             >
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_242.geometry}
                     material={materials.Paper_White}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_243.geometry}
                     material={materials.Board_green}
                 />
@@ -1097,10 +1381,14 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={[1, 0.87, 0.87]}
             >
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_245.geometry}
                     material={materials.Paper_White}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_246.geometry}
                     material={materials.Board_green}
                 />
@@ -1111,10 +1399,14 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={[-1.53, 2.34, 1.83]}
             >
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_248.geometry}
                     material={materials.Paper_White}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_249.geometry}
                     material={materials.Board_green}
                 />
@@ -1125,10 +1417,14 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={[-1.25, 2.73, 1.83]}
             >
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_251.geometry}
                     material={materials.Paper_White}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_252.geometry}
                     material={materials.Board_green}
                 />
@@ -1139,28 +1435,40 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={[-0.14, 0.08, 0.08]}
             >
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_262.geometry}
                     material={materials.lENTA}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_263.geometry}
                     material={materials.Paper_White}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_264.geometry}
                     material={materials['Screen.002']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_265.geometry}
                     material={materials['Material.031']}
                 />
             </group>
             <group position={[0.14, 1, -1.5]} scale={[0.79, 0.77, 0.77]}>
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_293.geometry}
                     material={materials['Material.016']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_294.geometry}
                     material={materials['Material.008']}
                 />
@@ -1171,14 +1479,20 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={[0.36, 0.77, 0.77]}
             >
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_296.geometry}
                     material={materials['Material.011']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_297.geometry}
                     material={materials.Silver_plastic}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_298.geometry}
                     material={materials.Paper_White}
                 />
@@ -1189,36 +1503,52 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={0.43}
             >
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_302.geometry}
                     material={materials.Keyboard_gloss}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_303.geometry}
                     material={materials.Metal}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_304.geometry}
                     material={materials.Yellow}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_305.geometry}
                     material={materials.material}
                 />
             </group>
             <group position={[-0.39, 0.93, -1.68]} scale={0.43}>
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_307.geometry}
                     material={materials.White}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_308.geometry}
                     material={materials.Metal}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_309.geometry}
                     material={materials.Yellow}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_310.geometry}
                     material={materials.material}
                 />
@@ -1229,14 +1559,20 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={[0.63, 0.61, 0.61]}
             >
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_312.geometry}
                     material={materials.Paper_White}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_313.geometry}
                     material={materials.Metal}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_314.geometry}
                     material={materials['Material.003']}
                 />
@@ -1247,10 +1583,14 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={[-0.01, 0.13, 0.01]}
             >
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_316.geometry}
                     material={materials.Pen_Pink}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_317.geometry}
                     material={materials.Pen_Wood}
                 />
@@ -1261,14 +1601,20 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={1.06}
             >
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_319.geometry}
                     material={materials['Material.028']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_320.geometry}
                     material={materials.Paper_White}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_321.geometry}
                     material={materials['Material.030']}
                 />
@@ -1279,14 +1625,20 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={[0.71, 0.71, 0.63]}
             >
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_323.geometry}
                     material={materials.Board}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_324.geometry}
                     material={materials.material_97}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_325.geometry}
                     material={materials.Scotch}
                 />
@@ -1297,28 +1649,40 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={1.27}
             >
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_327.geometry}
                     material={materials.Keyboard_gloss}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_328.geometry}
                     material={materials.Keyboard_rough}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_329.geometry}
                     material={materials.Metal}
                 />
             </group>
             <group position={[0.24, 0.9, -1.03]}>
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_331.geometry}
                     material={materials.Coffee}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_332.geometry}
                     material={materials.material_99}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_333.geometry}
                     material={materials.material_97}
                 />
@@ -1328,22 +1692,32 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 rotation={[-1.76, -0.84, -2.09]}
             >
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_339.geometry}
                     material={materials.Cat_grey}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_340.geometry}
                     material={materials.Keyboard_rough}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_341.geometry}
                     material={materials.Keyboard_glossGLOSS}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_342.geometry}
                     material={materials['Material.005']}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_343.geometry}
                     material={materials['Material.008']}
                 />
@@ -1354,29 +1728,41 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={[-0.01, 0.13, 0.01]}
             >
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_345.geometry}
                     material={materials.Pen_Black}
                 />
                 <mesh
+                    castShadow={true}
+                    receiveShadow={true}
                     geometry={nodes.Object_346.geometry}
                     material={materials.Pen_Wood}
                 />
             </group>
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_38.geometry}
                 material={materials.Keyboard_rough}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_39.geometry}
                 material={materials.Keyboard_gloss}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_52.geometry}
                 material={materials.material_0}
                 position={[0.07, 1.18, -1.67]}
                 scale={[0.03, 0.27, 0.17]}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_54.geometry}
                 material={materials.material_0}
                 position={[0.33, 1.18, -1.67]}
@@ -1384,11 +1770,15 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={[0.03, 0.27, 0.17]}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_63.geometry}
                 material={materials.Keyboard_gloss}
                 position={[-2.08, 1.15, -0.24]}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_65.geometry}
                 material={materials.Keyboard_gloss}
                 position={[-0.26, 0.95, -1.1]}
@@ -1396,6 +1786,8 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={0.46}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_67.geometry}
                 material={materials.Keyboard_gloss}
                 position={[-2.11, 1.16, -1.13]}
@@ -1403,11 +1795,15 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={0.35}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_69.geometry}
                 material={materials.material_0}
                 position={[-0.05, 0, 0]}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_71.geometry}
                 material={materials.Keyboard_gloss}
                 position={[-2.01, 1.09, -1.03]}
@@ -1415,6 +1811,8 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={0.35}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_73.geometry}
                 material={materials.Keyboard_gloss}
                 position={[-2.02, 1.16, -1.13]}
@@ -1422,6 +1820,8 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={0.35}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_75.geometry}
                 material={materials.Keyboard_gloss}
                 position={[-1.92, 1.09, -1.38]}
@@ -1429,6 +1829,8 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={0.35}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_77.geometry}
                 material={materials.Keyboard_gloss}
                 position={[-1.92, 1.06, -1.24]}
@@ -1436,30 +1838,40 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={0.35}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_84.geometry}
                 material={materials.Paper_White}
                 position={[1.21, 0.91, -0.92]}
                 scale={[0.14, 0.19, 0.19]}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_126.geometry}
                 material={materials['Glass.001']}
                 position={[1.18, 0.9, -0.84]}
                 scale={0.8}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_135.geometry}
                 material={materials['Material.008']}
                 position={[-1.08, 0.9, -1.46]}
                 scale={0.08}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_137.geometry}
                 material={materials.Keyboard_rough}
                 position={[0.03, 0.9, -1.38]}
                 scale={[0.6, 0.11, 0.6]}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_145.geometry}
                 material={materials.Keyboard_rough}
                 position={[-0.35, 0.9, -0.91]}
@@ -1467,17 +1879,23 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={[0.46, 0.02, 0.28]}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_158.geometry}
                 material={materials['Material.011']}
                 position={[0.22, 0.35, -1.28]}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_166.geometry}
                 material={materials.Plant_01}
                 position={[-1.11, 1.11, -1.48]}
                 rotation={[1.24, -0.56, 0.26]}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_180.geometry}
                 material={materials['Screen.003']}
                 position={[-1.77, 1.61, -1.35]}
@@ -1485,22 +1903,30 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={0.69}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_187.geometry}
                 material={materials['Material.003']}
                 position={[-1.63, 1.6, -1.39]}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_189.geometry}
                 material={materials['Material.003']}
                 position={[-1.67, 1.23, -1.38]}
                 scale={[1, 0.41, 1]}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_191.geometry}
                 material={materials.Keyboard_gloss}
                 position={[-1.59, 0.51, -1.74]}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_196.geometry}
                 material={materials.Skull}
                 position={[-1.32, 0.89, -1.56]}
@@ -1508,62 +1934,84 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={2.38}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_198.geometry}
                 material={materials['lambert37.001']}
                 position={[-2.09, 0.78, -0.39]}
                 scale={1.23}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_200.geometry}
                 material={materials.Keyboard_gloss}
                 position={[-2.09, 0.78, -0.39]}
                 scale={1.23}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_202.geometry}
                 material={materials.Keyboard_gloss}
                 position={[-0.32, 0.92, -0.85]}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_204.geometry}
                 material={materials.Wall_blue}
                 scale={1.89}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_206.geometry}
                 material={materials.material_0}
                 scale={2.04}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_208.geometry}
                 material={materials.material_0}
                 scale={1.89}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_210.geometry}
                 material={materials.material_0}
                 position={[-2.3, 0.74, -0.39]}
                 scale={[1.89, 1.89, 2.01]}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_212.geometry}
                 material={materials.material_0}
                 position={[-2, 1.53, -0.29]}
                 scale={1.89}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_214.geometry}
                 material={materials['Material.008']}
                 position={[-2, 1.53, -0.29]}
                 scale={1.89}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_216.geometry}
                 material={materials.Wall_white}
                 position={[0.92, 3.51, 0.58]}
                 scale={1.89}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_254.geometry}
                 material={materials.lENTA}
                 position={[-0.99, 2.03, -1.89]}
@@ -1571,6 +2019,8 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={[-0.14, 0.08, 0.08]}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_256.geometry}
                 material={materials.lENTA}
                 position={[-0.99, 1.73, -1.89]}
@@ -1578,6 +2028,8 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={[-0.14, 0.08, 0.08]}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_258.geometry}
                 material={materials.lENTA}
                 position={[-0.59, 1.73, -1.88]}
@@ -1585,6 +2037,8 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={[-0.14, 0.08, 0.08]}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_260.geometry}
                 material={materials.lENTA}
                 position={[-0.59, 2.03, -1.88]}
@@ -1592,6 +2046,8 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={[-0.14, 0.08, 0.08]}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_267.geometry}
                 material={materials.lENTA}
                 position={[-1.59, 2.22, -1.88]}
@@ -1599,6 +2055,8 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={[-0.14, 0.08, 0.08]}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_269.geometry}
                 material={materials.lENTA}
                 position={[-1.62, 1.86, -1.88]}
@@ -1606,6 +2064,8 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={[-0.14, 0.08, 0.08]}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_271.geometry}
                 material={materials.lENTA}
                 position={[-1.16, 1.86, -1.88]}
@@ -1613,6 +2073,8 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={[-0.14, 0.08, 0.08]}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_273.geometry}
                 material={materials.lENTA}
                 position={[-1.2, 2.22, -1.88]}
@@ -1620,6 +2082,8 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={[-0.14, 0.08, 0.08]}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_275.geometry}
                 material={materials.lENTA}
                 position={[-1.05, 2.84, -1.89]}
@@ -1627,6 +2091,8 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={[-0.18, 0.1, 0.1]}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_277.geometry}
                 material={materials.lENTA}
                 position={[-0.42, 2.84, -1.88]}
@@ -1634,6 +2100,8 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={[-0.15, 0.09, 0.09]}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_279.geometry}
                 material={materials.lENTA}
                 position={[-1.06, 2.22, -1.89]}
@@ -1641,6 +2109,8 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={[-0.14, 0.08, 0.08]}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_281.geometry}
                 material={materials.lENTA}
                 position={[-0.42, 2.22, -1.88]}
@@ -1648,6 +2118,8 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={[-0.14, 0.08, 0.08]}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_283.geometry}
                 material={materials.lENTA}
                 position={[0.07, 1.53, -1.88]}
@@ -1655,6 +2127,8 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={[-0.15, 0.1, 0.08]}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_285.geometry}
                 material={materials.lENTA}
                 position={[0.98, 1.53, -1.88]}
@@ -1662,6 +2136,8 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={[-0.15, 0.1, 0.08]}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_287.geometry}
                 material={materials.lENTA}
                 position={[0.68, 2.25, -1.88]}
@@ -1669,6 +2145,8 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={[-0.14, 0.08, 0.08]}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_289.geometry}
                 material={materials.lENTA}
                 position={[-0.26, 2.25, -1.88]}
@@ -1676,6 +2154,8 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={[-0.14, 0.08, 0.08]}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_291.geometry}
                 material={materials.lENTA}
                 position={[1.02, 2.22, -1.88]}
@@ -1683,6 +2163,8 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={[-0.14, 0.08, 0.08]}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_300.geometry}
                 material={materials['Keyboard_rough.001']}
                 position={[-0.11, 0.9, -1.68]}
@@ -1690,17 +2172,23 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
                 scale={[1.31, 1.55, 1.55]}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_335.geometry}
                 material={materials.material_0}
                 position={[-1.09, 0.95, -0.65]}
                 scale={[0.16, 0.03, 0.14]}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_337.geometry}
                 material={materials.material_0}
                 position={[-1.6, 1.41, -0.37]}
             />
             <mesh
+                castShadow={true}
+                receiveShadow={true}
                 geometry={nodes.Object_348.geometry}
                 material={materials['Material.008']}
                 position={[1.15, 1.27, -1.26]}

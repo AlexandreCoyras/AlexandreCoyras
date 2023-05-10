@@ -9,7 +9,10 @@ export default function Title() {
     const contactRef = useRef(null);
 
     function scrollTo() {
-        gsap.to(window, { duration: 2.5, scrollTo: window.innerHeight });
+        const anim = gsap.to(window, {
+            duration: 2.5,
+            scrollTo: window.innerHeight,
+        });
     }
 
     useEffect(() => {
@@ -24,12 +27,6 @@ export default function Title() {
                 delay: 1.5,
             }
         );
-
-        // gsap.to(contactRef.current, {
-        //     duration: 2.5,
-        //     translateX: 0,
-        //     delay:1,
-        // });
     }, []);
 
     return (

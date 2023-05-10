@@ -1,15 +1,17 @@
 import { useFrame, useLoader, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
-import React, { MutableRefObject, useEffect, useState } from 'react';
+import React, { MutableRefObject, useEffect, useRef, useState } from 'react';
 import {
     Html,
     OrbitControls,
     PerspectiveCamera,
     useCursor,
+    useHelper,
 } from '@react-three/drei';
 import ImageMesh from './ImageMesh';
 import UAParser from 'ua-parser-js';
 import Model from './RoomLoad';
+import { BoxHelper, PointLightHelper, SpotLightHelper } from 'three';
 
 export default function Scene3d({
     cvLinkRef,
@@ -22,21 +24,30 @@ export default function Scene3d({
     const [hoveredCV, setHoveredCV] = useState(false);
     const [clickedFirstScreen, setClickedFirstScreen] = useState(false);
     const [hoveredFirstScreen, setHoveredFirstScreen] = useState(false);
-    const [lightIntensity, setLightIntensity] = useState(1);
+    const [lightIntensity, setLightIntensity] = useState(1.2);
     const [mouseX, setMouseX] = useState(0);
     const [mouseY, setMouseY] = useState(0);
     const [isMobile, setIsMobile] = useState(true);
-    const lightPos: any = [-0.3, -0.3, -0.8];
-    const lightPos2: any = [-0.7, -0.3, -0.7];
+    const lightPos: any = [-0.11, -0.16, -0.9];
+    const lightPos2: any = [-0.56, -0.16, -0.94];
     const cvPosition = new THREE.Vector3(-0.575, -0.138, -0.955);
     const firstScreenPos = new THREE.Vector3(-0.104, -0.156, -1.0535);
     const modelPos = new THREE.Vector3(0.15, -0.85, -0.2025);
     const [focusVector] = useState(() => new THREE.Vector3());
     const camera = useThree((state) => state.camera);
-
+    const lightRef1 = useRef<any>(null);
+    const lightRef2 = useRef<any>(null);
+    useHelper(lightRef1, PointLightHelper, 0.1, 'cyan');
+    useHelper(lightRef2, PointLightHelper, 0.1, 'red');
     if (process.env.NODE_ENV === 'development') {
         const leva = require('leva');
-        var { orbitActive } = leva.useControls({ orbitActive: false });
+        var { orbitActive, lightPosH1, lightPosH2, lightIntensityH } =
+            leva.useControls({
+                orbitActive: false,
+                lightPosH1: lightPos,
+                lightPosH2: lightPos2,
+                lightIntensityH: lightIntensity,
+            });
     }
 
     useCursor(hoveredCV);
@@ -165,16 +176,18 @@ export default function Scene3d({
 
     return (
         <>
-            <ambientLight intensity={lightIntensity * 0.02} />
+            <ambientLight intensity={lightIntensity * 0.03} />
             <pointLight
-                position={lightPos}
-                intensity={lightIntensity * 0.15}
+                position={lightPosH1 ?? lightPos}
+                intensity={lightIntensity * 0.3}
                 castShadow={true}
+                ref={process.env.NODE_ENV === 'development' ? lightRef1 : null}
             />
             <pointLight
-                position={lightPos2}
-                intensity={lightIntensity * 0.15}
+                position={lightPosH2 ?? lightPos2}
+                intensity={lightIntensity * 0.0}
                 castShadow={true}
+                ref={process.env.NODE_ENV === 'development' ? lightRef2 : null}
             />
             <ImageMesh
                 src="CV.png"
@@ -208,7 +221,13 @@ export default function Scene3d({
                     />
                 </div>
             </Html>
-            <Model position={modelPos} scale={0.5} />
+            <Model
+                position={modelPos}
+                scale={0.5}
+                onClick={(e) => {
+                    console.log(e);
+                }}
+            />
             <PerspectiveCamera makeDefault />
             {/*<Stats/>*/}
             {orbitActive && <OrbitControls camera={camera} zoomSpeed={3} />}
