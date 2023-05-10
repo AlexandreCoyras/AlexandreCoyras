@@ -2,6 +2,7 @@
 import Effect from '../components/Effect';
 import { lazy, Suspense, useRef, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
+import { PerformanceMonitor } from '@react-three/drei';
 import { BiCode } from 'react-icons/bi';
 import { AiFillGithub } from 'react-icons/ai';
 import { FiExternalLink } from 'react-icons/fi';
@@ -14,6 +15,7 @@ const Scene3d = lazy(() => import('../components/Scene3d'));
 export default function Home() {
     const DepthOfFieldRef = useRef(null);
     const cvLinkRef = useRef(null);
+    const [dpr, setDpr] = useState(1.5);
 
     const Loading = () => {
         return (
@@ -50,12 +52,17 @@ export default function Home() {
         <>
             <Suspense fallback={<Loading />}>
                 <div className={'w-screen h-screen'}>
-                    <Canvas className={'z-0'}>
-                        <Scene3d
-                            cvLinkRef={cvLinkRef}
-                            dofRef={DepthOfFieldRef}
-                        />
-                        <Effect ref={DepthOfFieldRef} />
+                    <Canvas className={'z-0'} dpr={dpr}>
+                        <PerformanceMonitor
+                            onIncline={() => setDpr(2)}
+                            onDecline={() => setDpr(1)}
+                        >
+                            <Scene3d
+                                cvLinkRef={cvLinkRef}
+                                dofRef={DepthOfFieldRef}
+                            />
+                            <Effect ref={DepthOfFieldRef} />
+                        </PerformanceMonitor>
                     </Canvas>
                 </div>
 
