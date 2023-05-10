@@ -197,7 +197,7 @@ export default function Scene3d({
                     onPointerOut={() => setClickedFirstScreen(false)}
                 >
                     <iframe
-                        src={'/pc'}
+                        src={'/projects'}
                         width="1920px"
                         height="1080px"
                         className={'inline-block pointer-events-auto p-3'}
