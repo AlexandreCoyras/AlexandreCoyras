@@ -52,7 +52,11 @@ export default function Home() {
         <>
             <Suspense fallback={<Loading />}>
                 <div className={'w-screen h-screen'}>
-                    <Canvas className={'z-0'} dpr={dpr}>
+                    <Canvas
+                        className={'z-0'}
+                        dpr={dpr}
+                        camera={{ position: 0, fov: 50 }}
+                    >
                         <PerformanceMonitor
                             onIncline={() => setDpr(2)}
                             onDecline={() => setDpr(1)}

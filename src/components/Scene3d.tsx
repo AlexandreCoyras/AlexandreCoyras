@@ -67,7 +67,7 @@ export default function Scene3d({
         // Camera distance from CV screen
         updateZPos(state.camera, Math.min(delta, maxDelta));
         updateLookAt(state.camera, Math.min(delta, maxDelta));
-        console.log(delta);
+        console.log(camera);
     });
 
     const updateLookAt = (
@@ -147,24 +147,33 @@ export default function Scene3d({
         camera.position.z += (0 - camera.position.z) * delta * 2;
     };
 
-    useEffect(() => {
-        addEventListener('scroll', (_) => {
-            const newIntensity =
-                1 + (-window.scrollY * 1.3) / window.innerHeight;
-            setLightIntensity(newIntensity < 0 ? 0 : newIntensity);
-        });
+    function handleMouseMove(e: MouseEvent) {
+        setMouseX((e.clientX / window.innerWidth - 0.5) * 2);
+        setMouseY(-(e.clientY / window.innerHeight - 0.5) * 2);
+    }
 
-        addEventListener('mousemove', (e) => {
-            setMouseX((e.clientX / window.innerWidth - 0.5) * 2);
-            setMouseY(-(e.clientY / window.innerHeight - 0.5) * 2);
-        });
+    function handleScroll(_: Event) {
+        const newIntensity = 1 + (-window.scrollY * 1.3) / window.innerHeight;
+        setLightIntensity(newIntensity < 0 ? 0 : newIntensity);
+    }
+
+    useEffect(() => {
+        addEventListener('scroll', handleScroll);
+
+        addEventListener('mousemove', handleMouseMove);
 
         const parser = new UAParser();
         const deviceType = parser.getDevice().type;
         setIsMobile(deviceType === 'mobile');
+
+        return () => {
+            removeEventListener('scroll', handleScroll);
+            removeEventListener('mousemove', handleMouseMove);
+        };
     }, []);
+
+    // when the user clicks on CV screen
     const clickOnCV = () => {
-        // when the user clicks on CV screen
         setClickedCV(!clickedCV);
         if (!cvLinkRef.current) return;
         cvLinkRef.current.style.opacity = clickedCV ? 0 : 1;
@@ -173,8 +182,7 @@ export default function Scene3d({
 
     return (
         <>
-            <PerspectiveCamera makeDefault />
-            {orbitActive && <OrbitControls camera={camera} zoomSpeed={3} />}
+            {orbitActive && <OrbitControls zoomSpeed={3} />}
             {isDev && <Stats showPanel={0} />}
 
             <ambientLight intensity={lightIntensity * 0.03} />
