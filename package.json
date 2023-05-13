@@ -36,6 +36,7 @@
     "ua-parser-js": "^1.0.35"
   },
   "devDependencies": {
+    "@types/three": "^0.152.0",
     "@types/ua-parser-js": "^0.7.36",
     "prettier": "^2.8.8"
   }
