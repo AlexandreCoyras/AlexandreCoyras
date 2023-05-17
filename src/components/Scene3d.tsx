@@ -1,4 +1,4 @@
-import { useFrame, useLoader, useThree } from '@react-three/fiber';
+import { RootState, useFrame, useLoader, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 import React, { MutableRefObject, useEffect, useRef, useState } from 'react';
 import {
@@ -19,6 +19,7 @@ import {
     PointLightHelper,
     SpotLightHelper,
 } from 'three';
+import { Perf } from 'r3f-perf';
 
 export default function Scene3d({
     cvLinkRef,
@@ -31,8 +32,8 @@ export default function Scene3d({
     const [hoveredCV, setHoveredCV] = useState(false);
     const [clickedFirstScreen, setClickedFirstScreen] = useState(false);
     const [lightIntensity, setLightIntensity] = useState(1);
-    const [mouseX, setMouseX] = useState(0);
-    const [mouseY, setMouseY] = useState(0);
+    // const [mouseX, setMouseX] = useState(0);
+    // const [mouseY, setMouseY] = useState(0);
     const [isMobile, setIsMobile] = useState(true);
     const lightPos: any = [-0.11, -0.16, -0.9];
     const lightPos2: any = [-0.56, -0.16, -0.94];
@@ -42,13 +43,14 @@ export default function Scene3d({
     const camera = useThree((state) => state.camera);
     const lightRef1 = useRef<any>(null);
     const lightRef2 = useRef<any>(null);
-    useHelper(lightRef1, PointLightHelper, 0.1, 'cyan');
-    useHelper(lightRef2, PointLightHelper, 0.1, 'red');
+    // useHelper(lightRef1, PointLightHelper, 0.1, 'cyan');
+    // useHelper(lightRef2, PointLightHelper, 0.1, 'red');
     const [isDev] = useState(process.env.NODE_ENV === 'development');
     if (isDev) {
         const leva = require('leva');
-        var { orbitActive, helperActive, lightPosH1, lightPosH2 } =
+        var { performance, orbitActive, helperActive, lightPosH1, lightPosH2 } =
             leva.useControls({
+                performance: false,
                 orbitActive: false,
                 helperActive: false,
                 lightPosH1: lightPos,
@@ -62,12 +64,11 @@ export default function Scene3d({
 
     useFrame((state, delta) => {
         if (orbitActive) return;
-        updateXYPos(state.camera, Math.min(delta, maxDelta));
+        updateXYPos(state, state.camera, Math.min(delta, maxDelta));
 
         // Camera distance from CV screen
-        updateZPos(state.camera, Math.min(delta, maxDelta));
+        updateZPos(state, state.camera, Math.min(delta, maxDelta));
         updateLookAt(state.camera, Math.min(delta, maxDelta));
-        console.log(camera);
     });
 
     const updateLookAt = (
@@ -96,6 +97,7 @@ export default function Scene3d({
     };
 
     const updateXYPos = (
+        state: RootState,
         camera:
             | (THREE.OrthographicCamera & { manual?: boolean })
             | (THREE.PerspectiveCamera & { manual?: boolean }),
@@ -116,15 +118,20 @@ export default function Scene3d({
             return;
         }
         if (hoveredCV) {
-            camera.position.x += (mouseX / 4 - camera.position.x) * delta * 2;
-            camera.position.y += (mouseY / 4 - camera.position.y) * delta * 2;
+            camera.position.x +=
+                (state.mouse.x / 4 - camera.position.x) * delta * 2;
+            camera.position.y +=
+                (state.mouse.y / 4 - camera.position.y) * delta * 2;
             return;
         }
-        camera.position.x += (mouseX / 4 - camera.position.x) * delta * 2.5;
-        camera.position.y += (mouseY / 4 - camera.position.y) * delta * 2.5;
+        camera.position.x +=
+            (state.mouse.x / 4 - camera.position.x) * delta * 2.5;
+        camera.position.y +=
+            (state.mouse.y / 4 - camera.position.y) * delta * 2.5;
     };
 
     const updateZPos = (
+        state: RootState,
         camera:
             | (THREE.OrthographicCamera & { manual?: boolean })
             | (THREE.PerspectiveCamera & { manual?: boolean }),
@@ -147,10 +154,10 @@ export default function Scene3d({
         camera.position.z += (0 - camera.position.z) * delta * 2;
     };
 
-    function handleMouseMove(e: MouseEvent) {
-        setMouseX((e.clientX / window.innerWidth - 0.5) * 2);
-        setMouseY(-(e.clientY / window.innerHeight - 0.5) * 2);
-    }
+    // function handleMouseMove(e: MouseEvent) {
+    //     setMouseX((e.clientX / window.innerWidth - 0.5) * 2);
+    //     setMouseY(-(e.clientY / window.innerHeight - 0.5) * 2);
+    // }
 
     function handleScroll(_: Event) {
         const newIntensity = 1 + (-window.scrollY * 1.3) / window.innerHeight;
@@ -160,7 +167,7 @@ export default function Scene3d({
     useEffect(() => {
         addEventListener('scroll', handleScroll);
 
-        addEventListener('mousemove', handleMouseMove);
+        // addEventListener('mousemove', handleMouseMove);
 
         const parser = new UAParser();
         const deviceType = parser.getDevice().type;
@@ -168,7 +175,7 @@ export default function Scene3d({
 
         return () => {
             removeEventListener('scroll', handleScroll);
-            removeEventListener('mousemove', handleMouseMove);
+            // removeEventListener('mousemove', handleMouseMove);
         };
     }, []);
 
@@ -179,11 +186,14 @@ export default function Scene3d({
         cvLinkRef.current.style.opacity = clickedCV ? 0 : 1;
         cvLinkRef.current.style.visibility = clickedCV ? 'hidden' : 'visible';
     };
+    console.log('render');
 
     return (
         <>
+            {performance && (
+                <Perf position="bottom-left" style={{ zIndex: 999999999 }} />
+            )}
             {orbitActive && <OrbitControls zoomSpeed={3} />}
-            {isDev && <Stats showPanel={0} />}
 
             <ambientLight intensity={lightIntensity * 0.03} />
             <pointLight

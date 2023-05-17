@@ -1,6 +1,5 @@
 'use client';
-import Effect from '../components/Effect';
-import { lazy, Suspense, useRef, useState } from 'react';
+import React, { lazy, Suspense, useRef, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { PerformanceMonitor } from '@react-three/drei';
 import { BiCode } from 'react-icons/bi';
@@ -10,6 +9,7 @@ import Contact from '../components/Contact';
 import Title from '../components/Title';
 import { useProgress } from '@react-three/drei';
 import Link from 'next/link';
+import { Perf } from 'r3f-perf';
 const Scene3d = lazy(() => import('../components/Scene3d'));
 
 export default function Home() {
@@ -51,11 +51,11 @@ export default function Home() {
     return (
         <>
             <Suspense fallback={<Loading />}>
-                <div className={'w-screen h-screen'}>
+                <div className={'w-screen h-screen relative'}>
                     <Canvas
-                        className={'z-0'}
                         dpr={dpr}
                         camera={{ position: 0, fov: 50 }}
+                        className={'absolute top-0 left-0 z-0'}
                     >
                         <PerformanceMonitor
                             onIncline={() => setDpr(2)}
@@ -65,7 +65,7 @@ export default function Home() {
                                 cvLinkRef={cvLinkRef}
                                 dofRef={DepthOfFieldRef}
                             />
-                            <Effect ref={DepthOfFieldRef} />
+                            {/*<Effect ref={DepthOfFieldRef} />*/}
                         </PerformanceMonitor>
                     </Canvas>
                 </div>
@@ -105,8 +105,10 @@ export default function Home() {
                         <AiFillGithub size={30} />
                     </div>
                 </Link>
-                <Contact />
-                <Title />
+                <div className={'z-10'}>
+                    <Contact />
+                    <Title />
+                </div>
             </Suspense>
         </>
     );
