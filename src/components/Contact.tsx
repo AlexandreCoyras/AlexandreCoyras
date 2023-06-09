@@ -90,33 +90,33 @@ export default function Contact() {
 
     return (
         <>
-            <div className={'h-screen  w-screen relative pop'}>
+            <div className={'pop  relative h-screen w-screen'}>
                 <div className={'flex'}>
-                    <div className={'ml-10 lg:ml-40 mt-28 '}>
+                    <div className={'ml-10 mt-28 lg:ml-40 '}>
                         <div
                             className={
-                                'text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl overflow-hidden'
+                                'overflow-hidden text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl'
                             }
                         >
-                            <span className={'inline-block contact'} style={{}}>
+                            <span className={'contact inline-block'} style={{}}>
                                 CONTACT
                             </span>
                         </div>
                         <div
                             className={
-                                'text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl overflow-hidden'
+                                'overflow-hidden text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl'
                             }
                         >
-                            <span className={'inline-block contact'} style={{}}>
+                            <span className={'contact inline-block'} style={{}}>
                                 ME
                             </span>
                         </div>
                     </div>
                 </div>
-                <div className={'flex justify-center items-center'}>
+                <div className={'flex items-center justify-center'}>
                     <div
                         className={
-                            'text-2xl sm:text-3xl md:text-4xl font-bold translate-x-10 md:translate-x-1/3 lg:translate-x-3/4 mt-32 md:mt-16'
+                            'mt-32 translate-x-10 text-2xl font-bold sm:text-3xl md:mt-16 md:translate-x-1/3 md:text-4xl lg:translate-x-3/4'
                         }
                         ref={wantToRef}
                     >
@@ -125,23 +125,23 @@ export default function Contact() {
                 </div>
                 <div
                     className={
-                        'flex flex-col h-1/2 md:h-96 absolute bottom-0 w-full block-hitbox justify-center'
+                        'block-hitbox absolute bottom-0 flex h-1/2 w-full flex-col justify-center md:h-96'
                     }
                 >
                     <div ref={mailRef}>
                         <div
                             className={
-                                'highlight absolute h-0 w-3 left-0 top-0 bg-teal-400 transition-all duration-500 ease-in-out'
+                                'highlight absolute left-0 top-0 h-0 w-3 bg-teal-400 transition-all duration-500 ease-in-out'
                             }
                         />
-                        <div className={'ml-6 mt-12 mb-12'}>
+                        <div className={'mb-12 ml-6 mt-12'}>
                             <div className={'text-xl sm:text-2xl'}>
                                 Send me a message
                             </div>
                             <Link href={'mailto:alexandrecoyras@gmail.com'}>
                                 <div
                                     className={
-                                        'text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl ml-4 mt-8'
+                                        'ml-4 mt-8 text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl'
                                     }
                                 >
                                     <div>ALEXANDRECOYRAS</div>
@@ -155,7 +155,7 @@ export default function Contact() {
                     </div>
                     <div
                         className={
-                            'hidden lg:flex right-20 block absolute h-auto text-teal-400 '
+                            'absolute right-20 block hidden h-auto text-teal-400 lg:flex '
                         }
                         ref={arrowRef}
                     >

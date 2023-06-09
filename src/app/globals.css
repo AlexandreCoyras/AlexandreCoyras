@@ -1,131 +1,175 @@
-/* You can add global styles to this file, and also import other style files */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @font-face {
-  font-display:swap;
-  font-family:PP Migra;
-  font-style:normal;
-  font-weight:500;
-  src: url(/fonts/PPMigra.ttf)format("truetype");
+    font-display: swap;
+    font-family: PP Migra;
+    font-style: normal;
+    font-weight: 500;
+    src: url(/fonts/PPMigra.ttf) format('truetype');
 }
 
 @font-face {
-  font-display:swap;
-  font-family:PP Pangram Sans;
-  font-style:normal;
-  font-weight:800;
-  src: url(/fonts/PPPangramSans-Extrabold.ttf)format("truetype")
+    font-display: swap;
+    font-family: PP Pangram Sans;
+    font-style: normal;
+    font-weight: 800;
+    src: url(/fonts/PPPangramSans-Extrabold.ttf) format('truetype');
 }
 
 @font-face {
-  font-display:swap;
-  font-family:Poppins;
-  font-style:normal;
-  font-weight:600;
-  src: url(/fonts/Poppins-SemiBold.ttf)format("truetype")
+    font-display: swap;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    src: url(/fonts/Poppins-SemiBold.ttf) format('truetype');
 }
 
 @font-face {
-  font-family:PP Mori;
-  src:url(/fonts/PPMori.woff2) format("woff2");
-  font-weight:400;
-  font-style:normal;
-  font-display:swap;
+    font-family: PP Mori;
+    src: url(/fonts/PPMori.woff2) format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
 }
 
 :root {
-  --max-width: 1100px;
-  --border-radius: 12px;
-  --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
-  'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
-  'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
+    --max-width: 1100px;
+    --border-radius: 12px;
+    --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
+        'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
+        'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
 
-  --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 0, 0, 0;
-  --background-end-rgb: 0, 0, 0;
-  --fontFamily-sans-0:PP Pangram Sans;
-  --fontFamily-sans-2:sans-serif;
-  --fontFamily-serif-0:PP Migra;
-  --fontFamily-serif-2:serif;
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+    --fontFamily-sans-0: PP Pangram Sans;
+    --fontFamily-sans-2: sans-serif;
+    --fontFamily-serif-0: PP Migra;
+    --fontFamily-serif-2: serif;
 
-  --primary-glow: radial-gradient(rgba(1, 65, 255, 0.4), rgba(1, 65, 255, 0));
-  --secondary-glow: linear-gradient(
-          to bottom right,
-          rgba(1, 65, 255, 0),
-          rgba(1, 65, 255, 0),
-          rgba(1, 65, 255, 0.3)
-  );
+    --primary-glow: radial-gradient(rgba(1, 65, 255, 0.4), rgba(1, 65, 255, 0));
+    --secondary-glow: linear-gradient(
+        to bottom right,
+        rgba(1, 65, 255, 0),
+        rgba(1, 65, 255, 0),
+        rgba(1, 65, 255, 0.3)
+    );
 
-  --tile-start-rgb: 2, 13, 46;
-  --tile-end-rgb: 2, 5, 19;
-  --tile-border: conic-gradient(
-          #ffffff80,
-          #ffffff40,
-          #ffffff30,
-          #ffffff20,
-          #ffffff10,
-          #ffffff10,
-          #ffffff80
-  );
+    --tile-start-rgb: 2, 13, 46;
+    --tile-end-rgb: 2, 5, 19;
+    --tile-border: conic-gradient(
+        #ffffff80,
+        #ffffff40,
+        #ffffff30,
+        #ffffff20,
+        #ffffff10,
+        #ffffff10,
+        #ffffff80
+    );
 
-  --callout-rgb: 20, 20, 20;
-  --callout-border-rgb: 108, 108, 108;
-  --card-rgb: 100, 100, 100;
-  --card-border-rgb: 200, 200, 200;
+    --callout-rgb: 20, 20, 20;
+    --callout-border-rgb: 108, 108, 108;
+    --card-rgb: 100, 100, 100;
+    --card-border-rgb: 200, 200, 200;
 }
 
 * {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
 
 html,
 body {
-  max-width: 100vw;
-  overflow-x: hidden;
+    max-width: 100vw;
+    overflow-x: hidden;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-          to bottom,
-          transparent,
-          rgb(var(--background-end-rgb))
-  )
-  rgb(var(--background-start-rgb));
+    color: rgb(var(--foreground-rgb));
+    background: linear-gradient(
+            to bottom,
+            transparent,
+            rgb(var(--background-end-rgb))
+        )
+        rgb(var(--background-start-rgb));
 }
 
 @media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+    html {
+        color-scheme: dark;
+    }
 }
 
 .title {
-  font-family:var(--fontFamily-serif-0),var(--fontFamily-serif-2);
-  font-weight:900;
-  margin-bottom:0;
+    font-family: var(--fontFamily-serif-0), var(--fontFamily-serif-2);
+    font-weight: 900;
+    margin-bottom: 0;
 }
 
 .sub-title {
-  font-family:var(--fontFamily-sans-0),var(--fontFamily-sans-2);
-  font-weight:800;
-  line-height:1.5rem;
-  margin-top:-0.75rem;
-  text-transform:capitalize;
+    font-family: var(--fontFamily-sans-0), var(--fontFamily-sans-2);
+    font-weight: 800;
+    line-height: 1.5rem;
+    margin-top: -0.75rem;
+    text-transform: capitalize;
 }
 
 .mori {
-  font-family: PP Mori, serif;
+    font-family: PP Mori, serif;
 }
 
 .pop {
-  font-family: Poppins, sans-serif;
+    font-family: Poppins, sans-serif;
 }
 
-.block-hitbox:hover .highlight{
-  height:100%
+.block-hitbox:hover .highlight {
+    height: 100%;
+}
+
+@layer base {
+    :root {
+        --background: 224 71% 4%;
+        --foreground: 213 31% 91%;
+
+        --muted: 223 47% 11%;
+        --muted-foreground: 215.4 16.3% 56.9%;
+
+        --popover: 224 71% 4%;
+        --popover-foreground: 215 20.2% 65.1%;
+
+        --card: 224 71% 4%;
+        --card-foreground: 213 31% 91%;
+
+        --border: 216 34% 17%;
+        --input: 216 34% 17%;
+
+        --primary: 210 40% 98%;
+        --primary-foreground: 222.2 47.4% 1.2%;
+
+        --secondary: 222.2 47.4% 11.2%;
+        --secondary-foreground: 210 40% 98%;
+
+        --accent: 216 34% 17%;
+        --accent-foreground: 210 40% 98%;
+
+        --destructive: 0 63% 31%;
+        --destructive-foreground: 210 40% 98%;
+
+        --ring: 216 34% 17%;
+
+        --radius: 0.5rem;
+    }
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+    body {
+        @apply bg-background text-foreground;
+        font-feature-settings: 'rlig' 1, 'calt' 1;
+    }
 }

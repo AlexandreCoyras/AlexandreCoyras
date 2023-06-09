@@ -33,7 +33,7 @@ export default function Title() {
         <>
             <Link
                 className={
-                    'top-4 left-6 md:left-8 title fixed text-2xl md:text-3xl'
+                    'title fixed left-6 top-4 text-2xl md:left-8 md:text-3xl'
                 }
                 ref={titleRef}
                 href={'/'}
@@ -44,7 +44,7 @@ export default function Title() {
                 <br />
                 <span
                     className={
-                        'sub-title text-teal-400 block text-xl md:text-xl'
+                        'sub-title block text-xl text-teal-400 md:text-xl'
                     }
                 >
                     Developer
@@ -54,7 +54,7 @@ export default function Title() {
             <button
                 onClick={scrollTo}
                 className={
-                    'top-5 right-6 md:right-8 fixed text-2xl md:text-3xl hover:text-teal-400 transition-colors duration-300'
+                    'fixed right-6 top-5 text-2xl transition-colors duration-300 hover:text-teal-400 md:right-8 md:text-3xl'
                 }
                 ref={contactRef}
             >

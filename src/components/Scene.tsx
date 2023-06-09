@@ -1,27 +1,26 @@
-import { RootState, useFrame, useLoader, useThree } from '@react-three/fiber';
+import { RootState, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import React, { MutableRefObject, useEffect, useRef, useState } from 'react';
 import {
+    FaceControls,
+    Gltf,
     Html,
     OrbitControls,
-    PerspectiveCamera,
     useCursor,
-    useHelper,
-    Stats,
 } from '@react-three/drei';
 import ImageMesh from './ImageMesh';
 import UAParser from 'ua-parser-js';
-import Model from './RoomLoad';
-import {
-    BoxHelper,
-    DirectionalLight,
-    DirectionalLightHelper,
-    PointLightHelper,
-    SpotLightHelper,
-} from 'three';
 import { Perf } from 'r3f-perf';
+import useSettingsStore from '@/store/settings';
 
-export default function Scene3d({
+// constants
+const lightPos: number[] = [-0.11, -0.16, -0.9];
+const lightPos2: number[] = [-0.56, -0.16, -0.94];
+const cvPosition = new THREE.Vector3(-0.575, -0.138, -0.955);
+const firstScreenPos = new THREE.Vector3(-0.104, -0.156, -1.0535);
+const modelPos = new THREE.Vector3(0.15, -0.85, -0.2025);
+
+export default function Scene({
     cvLinkRef,
     dofRef,
 }: {
@@ -35,14 +34,9 @@ export default function Scene3d({
     // const [mouseX, setMouseX] = useState(0);
     // const [mouseY, setMouseY] = useState(0);
     const [isMobile, setIsMobile] = useState(true);
-    const lightPos: any = [-0.11, -0.16, -0.9];
-    const lightPos2: any = [-0.56, -0.16, -0.94];
-    const cvPosition = new THREE.Vector3(-0.575, -0.138, -0.955);
-    const firstScreenPos = new THREE.Vector3(-0.104, -0.156, -1.0535);
-    const modelPos = new THREE.Vector3(0.15, -0.85, -0.2025);
-    const camera = useThree((state) => state.camera);
     const lightRef1 = useRef<any>(null);
     const lightRef2 = useRef<any>(null);
+    const { faceControl, eyeControl } = useSettingsStore();
     // useHelper(lightRef1, PointLightHelper, 0.1, 'cyan');
     // useHelper(lightRef2, PointLightHelper, 0.1, 'red');
     const [isDev] = useState(process.env.NODE_ENV === 'development');
@@ -50,7 +44,7 @@ export default function Scene3d({
         const leva = require('leva');
         var { performance, orbitActive, helperActive, lightPosH1, lightPosH2 } =
             leva.useControls({
-                performance: false,
+                performance: true,
                 orbitActive: false,
                 helperActive: false,
                 lightPosH1: lightPos,
@@ -63,7 +57,7 @@ export default function Scene3d({
     useCursor(hoveredCV);
 
     useFrame((state, delta) => {
-        if (orbitActive) return;
+        if (orbitActive || faceControl || eyeControl) return;
         updateXYPos(state, state.camera, Math.min(delta, maxDelta));
 
         // Camera distance from CV screen
@@ -119,15 +113,15 @@ export default function Scene3d({
         }
         if (hoveredCV) {
             camera.position.x +=
-                (state.mouse.x / 4 - camera.position.x) * delta * 2;
+                (state.pointer.x / 4 - camera.position.x) * delta * 2;
             camera.position.y +=
-                (state.mouse.y / 4 - camera.position.y) * delta * 2;
+                (state.pointer.y / 4 - camera.position.y) * delta * 2;
             return;
         }
         camera.position.x +=
-            (state.mouse.x / 4 - camera.position.x) * delta * 2.5;
+            (state.pointer.x / 4 - camera.position.x) * delta * 2.5;
         camera.position.y +=
-            (state.mouse.y / 4 - camera.position.y) * delta * 2.5;
+            (state.pointer.y / 4 - camera.position.y) * delta * 2.5;
     };
 
     const updateZPos = (
@@ -159,7 +153,7 @@ export default function Scene3d({
     //     setMouseY(-(e.clientY / window.innerHeight - 0.5) * 2);
     // }
 
-    function handleScroll(_: Event) {
+    function handleScroll() {
         const newIntensity = 1 + (-window.scrollY * 1.3) / window.innerHeight;
         setLightIntensity(newIntensity < 0 ? 0 : newIntensity);
     }
@@ -167,15 +161,12 @@ export default function Scene3d({
     useEffect(() => {
         addEventListener('scroll', handleScroll);
 
-        // addEventListener('mousemove', handleMouseMove);
-
         const parser = new UAParser();
         const deviceType = parser.getDevice().type;
         setIsMobile(deviceType === 'mobile');
 
         return () => {
             removeEventListener('scroll', handleScroll);
-            // removeEventListener('mousemove', handleMouseMove);
         };
     }, []);
 
@@ -194,8 +185,17 @@ export default function Scene3d({
                 <Perf position="bottom-left" style={{ zIndex: 999999999 }} />
             )}
             {orbitActive && <OrbitControls zoomSpeed={3} />}
+            {(faceControl || eyeControl) && (
+                <FaceControls
+                    facemesh={{
+                        position: [0, 0, -0.4],
+                    }}
+                    offsetScalar={200}
+                    eyes={eyeControl}
+                />
+            )}
 
-            <ambientLight intensity={lightIntensity * 0.03} />
+            <ambientLight intensity={lightIntensity * 0.03} castShadow={true} />
             <pointLight
                 position={lightPosH1 ?? lightPos}
                 intensity={lightIntensity * 0.3}
@@ -219,12 +219,11 @@ export default function Scene3d({
                 onPointerOut={() => setHoveredCV(false)}
             />
 
-            <Model
+            {/*<Model position={modelPos} scale={0.5} />*/}
+            <Gltf
+                src={'/3d_models/room-transformed.glb'}
                 position={modelPos}
                 scale={0.5}
-                onClick={(e) => {
-                    console.log(e);
-                }}
             />
 
             <Html
@@ -236,7 +235,7 @@ export default function Scene3d({
             >
                 <div
                     className={
-                        'pointer-events-auto justify-center items-center'
+                        'pointer-events-auto items-center justify-center'
                     }
                     onPointerEnter={() => setClickedFirstScreen(true)}
                     onPointerOut={() => setClickedFirstScreen(false)}
@@ -245,7 +244,7 @@ export default function Scene3d({
                         src={'/projects'}
                         width="1920px"
                         height="1080px"
-                        className={'inline-block pointer-events-auto p-3'}
+                        className={'pointer-events-auto inline-block p-3'}
                     />
                 </div>
             </Html>

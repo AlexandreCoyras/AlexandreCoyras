@@ -9,7 +9,7 @@ export default function PcHome() {
     return (
         <>
             <Carousel
-                className="rounded-xl h-screen"
+                className="h-screen rounded-xl"
                 loop={true}
                 autoplay={!hovered}
                 onMouseEnter={() => setHovered(true)}
@@ -88,7 +88,7 @@ export default function PcHome() {
                         fill
                     />
                     <div className="absolute inset-0 grid h-full w-full items-end bg-black/75">
-                        <div className="w-3/4 pl-12 pb-12 md:w-2/4 md:pl-20 md:pb-20 lg:pl-32 lg:pb-32">
+                        <div className="w-3/4 pb-12 pl-12 md:w-2/4 md:pb-20 md:pl-20 lg:pb-32 lg:pl-32">
                             <Typography
                                 variant="h1"
                                 color="white"
