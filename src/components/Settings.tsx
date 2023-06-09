@@ -15,7 +15,7 @@ type SettingsProps = {
 };
 
 const Settings: FC<SettingsProps> = ({ className }) => {
-    const { faceControl, setFaceControl, eyeControl, setEyeControl } =
+    const { faceControls, setFaceControls, eyeControls, setEyeControls } =
         useSettingsStore();
 
     return (
@@ -24,14 +24,14 @@ const Settings: FC<SettingsProps> = ({ className }) => {
                 <PopoverTrigger asChild>
                     <Button className="h-12 w-12 rounded-full p-0">
                         <Settings2 className="h-5 w-5" />
-                        <span className="sr-only">Setting</span>
+                        <span className="sr-only">Settings</span>
                     </Button>
                 </PopoverTrigger>
                 <PopoverContent className="ml-1 w-80">
                     <div className="grid gap-4">
                         <div className="space-y-2">
                             <h4 className="font-medium leading-none">
-                                Setting
+                                Settings
                             </h4>
                             <p className="text-sm text-muted-foreground">
                                 Set the settings of the page
@@ -41,20 +41,22 @@ const Settings: FC<SettingsProps> = ({ className }) => {
                             <div className="flex items-center space-x-2">
                                 <Switch
                                     id="face-control"
-                                    checked={faceControl}
-                                    onCheckedChange={setFaceControl}
+                                    checked={faceControls}
+                                    onCheckedChange={setFaceControls}
                                 />
                                 <Label htmlFor="face-control">
-                                    Face control
+                                    Face controls
                                 </Label>
                             </div>
                             <div className="flex items-center space-x-2">
                                 <Switch
                                     id="eye-control"
-                                    checked={eyeControl}
-                                    onCheckedChange={setEyeControl}
+                                    checked={eyeControls}
+                                    onCheckedChange={setEyeControls}
                                 />
-                                <Label htmlFor="eye-control">eye control</Label>
+                                <Label htmlFor="eye-control">
+                                    eye controls
+                                </Label>
                             </div>
                         </div>
                     </div>

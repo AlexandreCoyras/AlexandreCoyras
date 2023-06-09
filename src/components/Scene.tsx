@@ -36,7 +36,7 @@ export default function Scene({
     const [isMobile, setIsMobile] = useState(true);
     const lightRef1 = useRef<any>(null);
     const lightRef2 = useRef<any>(null);
-    const { faceControl, eyeControl } = useSettingsStore();
+    const { faceControls, eyeControls } = useSettingsStore();
     // useHelper(lightRef1, PointLightHelper, 0.1, 'cyan');
     // useHelper(lightRef2, PointLightHelper, 0.1, 'red');
     const [isDev] = useState(process.env.NODE_ENV === 'development');
@@ -57,7 +57,7 @@ export default function Scene({
     useCursor(hoveredCV);
 
     useFrame((state, delta) => {
-        if (orbitActive || faceControl || eyeControl) return;
+        if (orbitActive || faceControls || eyeControls) return;
         updateXYPos(state, state.camera, Math.min(delta, maxDelta));
 
         // Camera distance from CV screen
@@ -185,13 +185,13 @@ export default function Scene({
                 <Perf position="bottom-left" style={{ zIndex: 999999999 }} />
             )}
             {orbitActive && <OrbitControls zoomSpeed={3} />}
-            {(faceControl || eyeControl) && (
+            {(faceControls || eyeControls) && (
                 <FaceControls
                     facemesh={{
                         position: [0, 0, -0.4],
                     }}
                     offsetScalar={200}
-                    eyes={eyeControl}
+                    eyes={eyeControls}
                 />
             )}
 

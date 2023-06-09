@@ -1,24 +1,24 @@
 import { create } from 'zustand';
 
 type settingsStore = {
-    faceControl: boolean;
-    setFaceControl: (newFaceControl: boolean) => void;
-    eyeControl: boolean;
-    setEyeControl: (newEyeControl: boolean) => void;
+    faceControls: boolean;
+    setFaceControls: (newFaceControl: boolean) => void;
+    eyeControls: boolean;
+    setEyeControls: (newEyeControl: boolean) => void;
 };
 
 const useSettingsStore = create<settingsStore>()((set) => ({
-    faceControl: false,
-    setFaceControl: (newFaceControl: boolean) =>
+    faceControls: false,
+    setFaceControls: (newFaceControl: boolean) =>
         set((state) => ({
-            faceControl: newFaceControl,
-            eyeControl: newFaceControl ? false : state.eyeControl,
+            faceControls: newFaceControl,
+            eyeControls: newFaceControl ? false : state.eyeControls,
         })),
-    eyeControl: false,
-    setEyeControl: (newEyeControl: boolean) =>
+    eyeControls: false,
+    setEyeControls: (newEyeControl: boolean) =>
         set((state) => ({
-            eyeControl: newEyeControl,
-            faceControl: newEyeControl ? false : state.faceControl,
+            eyeControls: newEyeControl,
+            faceControls: newEyeControl ? false : state.faceControls,
         })),
 }));
 
