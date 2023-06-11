@@ -231,7 +231,7 @@ export default function Scene({
                 transform
                 occlude="blending"
                 position={firstScreenPos}
-                scale={0.0104}
+                scale={0.0106}
             >
                 <div
                     className={
