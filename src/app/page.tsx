@@ -14,20 +14,22 @@ import leva from 'leva';
 import Effect from '@/components/Effect';
 import Settings from '@/components/Settings';
 import { Progress } from '@/components/ui/progress';
+import useSettingsStore from '@/store/settings';
 const Scene3d = lazy(() => import('../components/Scene'));
 
 export default function Home() {
     const DepthOfFieldRef = useRef(null);
     const cvLinkRef = useRef(null);
     const [dpr, setDpr] = useState(1.5);
+    const { shaders, setShaders } = useSettingsStore();
 
-    const [isDev] = useState(process.env.NODE_ENV === 'development');
-    if (isDev) {
-        const leva = require('leva');
-        var { shaders } = leva.useControls({
-            shaders: false,
-        });
-    }
+    // const [isDev] = useState(process.env.NODE_ENV === 'development');
+    // if (isDev) {
+    //     const leva = require('leva');
+    //     var { shaders } = leva.useControls({
+    //         shaders: false,
+    //     });
+    // }
 
     const Loading = () => {
         const { progress } = useProgress();

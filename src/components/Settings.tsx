@@ -15,8 +15,14 @@ type SettingsProps = {
 };
 
 const Settings: FC<SettingsProps> = ({ className }) => {
-    const { faceControls, setFaceControls, eyeControls, setEyeControls } =
-        useSettingsStore();
+    const {
+        faceControls,
+        setFaceControls,
+        eyeControls,
+        setEyeControls,
+        shaders,
+        setShaders,
+    } = useSettingsStore();
 
     return (
         <div className={className}>
@@ -55,8 +61,16 @@ const Settings: FC<SettingsProps> = ({ className }) => {
                                     onCheckedChange={setEyeControls}
                                 />
                                 <Label htmlFor="eye-control">
-                                    eye controls
+                                    Eye controls
                                 </Label>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                                <Switch
+                                    id="shaders"
+                                    checked={shaders}
+                                    onCheckedChange={setShaders}
+                                />
+                                <Label htmlFor="shaders">Shaders</Label>
                             </div>
                         </div>
                     </div>

@@ -5,6 +5,8 @@ type settingsStore = {
     setFaceControls: (newFaceControl: boolean) => void;
     eyeControls: boolean;
     setEyeControls: (newEyeControl: boolean) => void;
+    shaders: boolean;
+    setShaders: (newShaders: boolean) => void;
 };
 
 const useSettingsStore = create<settingsStore>()((set) => ({
@@ -20,6 +22,8 @@ const useSettingsStore = create<settingsStore>()((set) => ({
             eyeControls: newEyeControl,
             faceControls: newEyeControl ? false : state.faceControls,
         })),
+    shaders: true,
+    setShaders: (newShaders: boolean) => set(() => ({ shaders: newShaders })),
 }));
 
 export default useSettingsStore;
