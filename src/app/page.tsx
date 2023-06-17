@@ -1,21 +1,36 @@
 'use client';
 import React, { lazy, Suspense, useRef, useState } from 'react';
-import { Canvas } from '@react-three/fiber';
-import { FaceLandmarker, PerformanceMonitor } from '@react-three/drei';
+import {
+    FaceLandmarker,
+    PerformanceMonitor,
+    useProgress,
+} from '@react-three/drei';
 import { BiCode } from 'react-icons/bi';
 import { AiFillGithub } from 'react-icons/ai';
 import { FiExternalLink } from 'react-icons/fi';
 import Contact from '../components/Contact';
 import Title from '../components/Title';
-import { useProgress } from '@react-three/drei';
 import Link from 'next/link';
-import { Perf } from 'r3f-perf';
-import leva from 'leva';
-import Effect from '@/components/Effect';
 import Settings from '@/components/Settings';
 import { Progress } from '@/components/ui/progress';
 import useSettingsStore from '@/store/settings';
-const Scene3d = lazy(() => import('../components/Scene'));
+import dynamic from 'next/dynamic';
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+} from '@/components/ui/dialog';
+import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/button';
+import { Canvas } from '@react-three/fiber';
+import Scene from '@/components/three/Scene';
+import Effect from '@/components/three/Effect';
+
+const Scene3d = lazy(() => import('../components/three/Scene'));
+const SceneLoad = lazy(() => import('../components/three/SceneLoad'));
 
 export default function Home() {
     const DepthOfFieldRef = useRef(null);
@@ -63,7 +78,7 @@ export default function Home() {
                             onDecline={() => setDpr(1)}
                         >
                             <FaceLandmarker>
-                                <Scene3d
+                                <Scene
                                     cvLinkRef={cvLinkRef}
                                     dofRef={DepthOfFieldRef}
                                 />

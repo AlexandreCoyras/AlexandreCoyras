@@ -1,17 +1,23 @@
-import { RootState, useFrame } from '@react-three/fiber';
+import { extend, RootState, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import React, { MutableRefObject, useEffect, useRef, useState } from 'react';
 import {
+    CameraControls,
     FaceControls,
     Gltf,
     Html,
+    MeshPortalMaterial,
     OrbitControls,
+    PortalMaterialType,
     useCursor,
 } from '@react-three/drei';
 import ImageMesh from './ImageMesh';
 import UAParser from 'ua-parser-js';
 import { Perf } from 'r3f-perf';
 import useSettingsStore from '@/store/settings';
+import { easing, geometry } from 'maath';
+
+extend(geometry);
 
 // constants
 const lightPos: number[] = [-0.11, -0.16, -0.9];
@@ -19,6 +25,8 @@ const lightPos2: number[] = [-0.56, -0.16, -0.94];
 const cvPosition = new THREE.Vector3(-0.575, -0.138, -0.955);
 const firstScreenPos = new THREE.Vector3(-0.104, -0.156, -1.0535);
 const modelPos = new THREE.Vector3(0.15, -0.85, -0.2025);
+
+const GOLDENRATIO = 1.61803398875;
 
 export default function Scene({
     cvLinkRef,
@@ -177,6 +185,46 @@ export default function Scene({
         cvLinkRef.current.style.opacity = clickedCV ? 0 : 1;
         cvLinkRef.current.style.visibility = clickedCV ? 'hidden' : 'visible';
     };
+
+    function Frame({
+        id,
+        width = 1,
+        height = GOLDENRATIO,
+        children,
+        selected,
+        ...props
+    }: any & {
+        id: string;
+        width?: number;
+        height?: number;
+        children: React.ReactNode;
+    }) {
+        const portal = useRef<PortalMaterialType>(null);
+        const [hovered, hover] = useState(false);
+        useCursor(hovered);
+        useFrame((state, dt) => {
+            if (!portal.current?.blend) return;
+            // easing.damp(portal.current, 'blend', selected ? 1 : 0, 0.2, dt);
+        });
+        return (
+            <group {...props}>
+                <mesh
+                    name={id}
+                    position={[0, GOLDENRATIO / 2, 0]}
+                    onPointerOver={(e) => hover(true)}
+                    onPointerOut={() => hover(false)}
+                    onClick={() => setClickedFirstScreen(!clickedFirstScreen)}
+                >
+                    <planeGeometry args={[width, height]} />
+                    <MeshPortalMaterial ref={portal} events={false}>
+                        <color attach="background" />
+                        {children}
+                    </MeshPortalMaterial>
+                </mesh>
+            </group>
+        );
+    }
+
     console.log('render');
 
     return (
@@ -184,7 +232,7 @@ export default function Scene({
             {performance && (
                 <Perf position="bottom-left" style={{ zIndex: 999999999 }} />
             )}
-            {orbitActive && <OrbitControls zoomSpeed={3} />}
+            {orbitActive && <CameraControls />}
             {(faceControls || eyeControls) && (
                 <FaceControls
                     facemesh={{
@@ -226,28 +274,47 @@ export default function Scene({
                 scale={0.5}
             />
 
-            <Html
-                center
-                transform
-                occlude="blending"
-                position={firstScreenPos}
-                scale={0.0106}
+            <Frame
+                id="firstScreen"
+                position={[
+                    firstScreenPos.x,
+                    firstScreenPos.y - 0.807,
+                    firstScreenPos.z,
+                ]}
+                width={0.5}
+                height={(0.5 / 16) * 9}
+                selected={clickedFirstScreen}
             >
-                <div
-                    className={
-                        'pointer-events-auto items-center justify-center'
-                    }
-                    onPointerEnter={() => setClickedFirstScreen(true)}
-                    onPointerOut={() => setClickedFirstScreen(false)}
-                >
-                    <iframe
-                        src={'/projects'}
-                        width="1920px"
-                        height="1080px"
-                        className={'pointer-events-auto inline-block p-3'}
-                    />
-                </div>
-            </Html>
+                <Gltf
+                    src="/3d_models/fiesta_tea-transformed.glb"
+                    // src="/3d_models/fantasy_island-transformed.glb"
+                    rotation={[0, 0, 0]}
+                    position={[0, -2, -5]}
+                />
+            </Frame>
+
+            {/*<Html*/}
+            {/*    center*/}
+            {/*    transform*/}
+            {/*    occlude="blending"*/}
+            {/*    position={firstScreenPos}*/}
+            {/*    scale={0.0106}*/}
+            {/*>*/}
+            {/*    <div*/}
+            {/*        className={*/}
+            {/*            'pointer-events-auto items-center justify-center'*/}
+            {/*        }*/}
+            {/*        onPointerEnter={() => setClickedFirstScreen(true)}*/}
+            {/*        onPointerOut={() => setClickedFirstScreen(false)}*/}
+            {/*    >*/}
+            {/*        <iframe*/}
+            {/*            src={'/projects'}*/}
+            {/*            width="1920px"*/}
+            {/*            height="1080px"*/}
+            {/*            className={'pointer-events-auto inline-block p-3'}*/}
+            {/*        />*/}
+            {/*    </div>*/}
+            {/*</Html>*/}
         </>
     );
 }
