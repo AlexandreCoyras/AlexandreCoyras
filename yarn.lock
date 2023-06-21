@@ -1087,14 +1087,14 @@
     suspend-react "^0.0.8"
     zustand "^3.7.1"
 
-"@react-three/postprocessing@^2.14.9":
-  version "2.14.9"
-  resolved "https://registry.npmjs.org/@react-three/postprocessing/-/postprocessing-2.14.9.tgz"
-  integrity sha512-F40pZFHZ+zylx3tQP/DbTprJ0uUQu1sbv8agwsdvAHGT3qNhXpWiyu2+pUv1ok/c60JEits5uCAxMRRCUA6Q+A==
+"@react-three/postprocessing@^2.14.11":
+  version "2.14.11"
+  resolved "https://registry.npmjs.org/@react-three/postprocessing/-/postprocessing-2.14.11.tgz"
+  integrity sha512-p8Kbm3wlRhkG2NatXFmalNNPwZm//HaWOzt3b5+o99tJZFO2Wdj9A66UWvGtc/S/EBjLGw7L9R/WxmoJSRsRkw==
   dependencies:
-    maath "^0.5.3"
-    n8ao "^1.5.1"
-    postprocessing "^6.31.0"
+    maath "^0.6.0"
+    n8ao "^1.6.6"
+    postprocessing "^6.32.1"
     screen-space-reflections "^2.5.0"
     three-stdlib "^2.23.4"
 
@@ -3636,11 +3636,6 @@ lucide-react@^0.241.0:
   resolved "https://registry.npmjs.org/lucide-react/-/lucide-react-0.241.0.tgz"
   integrity sha512-g22ci6iHuNc2hUwjiFz0D3jQQfQYrZBZesXG6+AX5rOV68Epttkt/nF6dMdz6reKJjtpoNzu+LKeKHGu/qjOgQ==
 
-maath@^0.5.3:
-  version "0.5.3"
-  resolved "https://registry.npmjs.org/maath/-/maath-0.5.3.tgz"
-  integrity sha512-ut63A4zTd9abtpi+sOHW1fPWPtAFrjK0E17eAthx1k93W/T2cWLKV5oaswyotJVDvvW1EXSdokAqhK5KOu0Qdw==
-
 maath@^0.6.0:
   version "0.6.0"
   resolved "https://registry.npmjs.org/maath/-/maath-0.6.0.tgz"
@@ -3888,10 +3883,10 @@ mz@^2.7.0:
     object-assign "^4.0.1"
     thenify-all "^1.0.0"
 
-n8ao@^1.5.1:
-  version "1.5.1"
-  resolved "https://registry.npmjs.org/n8ao/-/n8ao-1.5.1.tgz"
-  integrity sha512-Dn5o6ecmLC1xZm2mby2qdGYgwKcNsC9oKv85TQBKFbDJVzUHGXV2oys14rDl6nhwjH+zZU3YcLJkMcY7qe+jTg==
+n8ao@^1.6.6:
+  version "1.6.6"
+  resolved "https://registry.npmjs.org/n8ao/-/n8ao-1.6.6.tgz"
+  integrity sha512-sOu+wsJzrxd3ZMDQBVbzTt8Z3d8sQvdkZgt5top9ysVbvs1a0lpFGYxGPCxUW+rJfD9Y/QrTYn9IfW7AOqGqvw==
 
 nanoid@^3.3.4, nanoid@^3.3.6:
   version "3.3.6"
@@ -4489,10 +4484,10 @@ postcss@8.4.14:
     picocolors "^1.0.0"
     source-map-js "^1.0.2"
 
-postprocessing@^6.31.0, postprocessing@>=6.28.0, postprocessing@>=6.30.0:
-  version "6.31.0"
-  resolved "https://registry.npmjs.org/postprocessing/-/postprocessing-6.31.0.tgz"
-  integrity sha512-h1g2KDVrTS6QB4AHP55opp8FYzq66jJHh4JIFCptaj283RUX1y/tPkv8FBB2oK4WYrdPgqvElnKrXZwgiLWeHQ==
+postprocessing@^6.32.1, postprocessing@>=6.28.0, postprocessing@>=6.30.0:
+  version "6.32.1"
+  resolved "https://registry.npmjs.org/postprocessing/-/postprocessing-6.32.1.tgz"
+  integrity sha512-GiUv5vN/QCWnPJ3DdYPYn/4V1amps94T/0jFPSUL40KfaLCkfE9yPudzTtJJQjs168QNpwkmnvYF9RcP3HiAWA==
 
 potpack@^1.0.1:
   version "1.0.2"
@@ -5311,7 +5306,7 @@ three-stdlib@^2.23.4, three-stdlib@^2.23.9:
     potpack "^1.0.1"
     zstddec "^0.0.2"
 
-three@^0.152.2, "three@>= 0.138.0", "three@>= 0.138.0 < 0.153.0", "three@>= 0.151.0", three@>=0.125.0, three@>=0.126, three@>=0.126.1, three@>=0.128.0, three@>=0.133, three@>=0.137, three@>=0.141.0, three@>=0.144.0:
+three@^0.152.2, "three@>= 0.138.0", "three@>= 0.138.0 < 0.154.0", "three@>= 0.151.0", three@>=0.125.0, three@>=0.126, three@>=0.126.1, three@>=0.128.0, three@>=0.133, three@>=0.137, three@>=0.141.0, three@>=0.144.0:
   version "0.152.2"
   resolved "https://registry.npmjs.org/three/-/three-0.152.2.tgz"
   integrity sha512-Ff9zIpSfkkqcBcpdiFo2f35vA9ZucO+N8TNacJOqaEE6DrB0eufItVMib8bK8Pcju/ZNT6a7blE1GhTpkdsILw==

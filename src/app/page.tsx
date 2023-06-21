@@ -13,7 +13,7 @@ import Title from '../components/Title';
 import Link from 'next/link';
 import Settings from '@/components/Settings';
 import { Progress } from '@/components/ui/progress';
-import useSettingsStore from '@/store/settings';
+import useSettingsStore from '@/store/settingsStore';
 import dynamic from 'next/dynamic';
 import {
     Dialog,
@@ -37,14 +37,6 @@ export default function Home() {
     const cvLinkRef = useRef(null);
     const [dpr, setDpr] = useState(1.5);
     const { shaders, setShaders } = useSettingsStore();
-
-    // const [isDev] = useState(process.env.NODE_ENV === 'development');
-    // if (isDev) {
-    //     const leva = require('leva');
-    //     var { shaders } = leva.useControls({
-    //         shaders: false,
-    //     });
-    // }
 
     const Loading = () => {
         const { progress } = useProgress();
@@ -74,8 +66,13 @@ export default function Home() {
                         className={'absolute left-0 top-0 z-0'}
                     >
                         <PerformanceMonitor
-                            onIncline={() => setDpr(2)}
-                            onDecline={() => setDpr(1)}
+                            onIncline={() => {
+                                setDpr(2);
+                            }}
+                            onDecline={() => {
+                                setDpr(1);
+                                setShaders(false);
+                            }}
                         >
                             <FaceLandmarker>
                                 <Scene

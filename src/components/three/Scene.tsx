@@ -14,8 +14,10 @@ import {
 import ImageMesh from './ImageMesh';
 import UAParser from 'ua-parser-js';
 import { Perf } from 'r3f-perf';
-import useSettingsStore from '@/store/settings';
+import useSettingsStore from '@/store/settingsStore';
 import { easing, geometry } from 'maath';
+import Controls from '@/components/three/Controls';
+import Frame from '@/components/three/Frame';
 
 extend(geometry);
 
@@ -41,7 +43,7 @@ export default function Scene({
     const [lightIntensity, setLightIntensity] = useState(1);
     // const [mouseX, setMouseX] = useState(0);
     // const [mouseY, setMouseY] = useState(0);
-    const [isMobile, setIsMobile] = useState(true);
+    const [isMobile, setIsMobile] = useState(false);
     const lightRef1 = useRef<any>(null);
     const lightRef2 = useRef<any>(null);
     const { faceControls, eyeControls } = useSettingsStore();
@@ -50,10 +52,9 @@ export default function Scene({
     const [isDev] = useState(process.env.NODE_ENV === 'development');
     if (isDev) {
         const leva = require('leva');
-        var { performance, orbitActive, helperActive, lightPosH1, lightPosH2 } =
+        var { performance, helperActive, lightPosH1, lightPosH2 } =
             leva.useControls({
                 performance: true,
-                orbitActive: false,
                 helperActive: false,
                 lightPosH1: lightPos,
                 lightPosH2: lightPos2,
@@ -63,104 +64,6 @@ export default function Scene({
     const maxDelta = 0.066; // 15 fps
 
     useCursor(hoveredCV);
-
-    useFrame((state, delta) => {
-        if (orbitActive || faceControls || eyeControls) return;
-        updateXYPos(state, state.camera, Math.min(delta, maxDelta));
-
-        // Camera distance from CV screen
-        updateZPos(state, state.camera, Math.min(delta, maxDelta));
-        updateLookAt(state.camera, Math.min(delta, maxDelta));
-    });
-
-    const updateLookAt = (
-        camera:
-            | (THREE.OrthographicCamera & { manual?: boolean })
-            | (THREE.PerspectiveCamera & { manual?: boolean }),
-        delta: number
-    ) => {
-        const tempCam = camera.clone();
-
-        if (clickedCV) {
-            tempCam.lookAt(cvPosition);
-            camera.quaternion.slerp(tempCam.quaternion, delta * 1.3);
-            return;
-        }
-        if (hoveredCV && !clickedFirstScreen) {
-            const posToLook = cvPosition.clone();
-            posToLook.x += 0.3;
-            tempCam.lookAt(posToLook);
-            camera.quaternion.slerp(tempCam.quaternion, delta * 1.3);
-            return;
-        }
-
-        tempCam.lookAt(firstScreenPos);
-        camera.quaternion.slerp(tempCam.quaternion, delta * 4);
-    };
-
-    const updateXYPos = (
-        state: RootState,
-        camera:
-            | (THREE.OrthographicCamera & { manual?: boolean })
-            | (THREE.PerspectiveCamera & { manual?: boolean }),
-        delta: number
-    ) => {
-        // dofRef.current.blur = camera.position.x
-        if (clickedFirstScreen) {
-            camera.position.x +=
-                (firstScreenPos.x + -camera.position.x) * delta * 2;
-            camera.position.y +=
-                (firstScreenPos.y - camera.position.y) * delta * 2;
-            return;
-        }
-        if (clickedCV) {
-            camera.position.x +=
-                (cvPosition.x + 0.14 - camera.position.x) * delta * 2;
-            camera.position.y += (cvPosition.y - camera.position.y) * delta * 2;
-            return;
-        }
-        if (hoveredCV) {
-            camera.position.x +=
-                (state.pointer.x / 4 - camera.position.x) * delta * 2;
-            camera.position.y +=
-                (state.pointer.y / 4 - camera.position.y) * delta * 2;
-            return;
-        }
-        camera.position.x +=
-            (state.pointer.x / 4 - camera.position.x) * delta * 2.5;
-        camera.position.y +=
-            (state.pointer.y / 4 - camera.position.y) * delta * 2.5;
-    };
-
-    const updateZPos = (
-        state: RootState,
-        camera:
-            | (THREE.OrthographicCamera & { manual?: boolean })
-            | (THREE.PerspectiveCamera & { manual?: boolean }),
-        delta: number
-    ) => {
-        if (clickedFirstScreen) {
-            camera.position.z +=
-                (cvPosition.z + 0.23 - camera.position.z) * delta * 2;
-            return;
-        }
-        if (clickedCV) {
-            camera.position.z +=
-                (cvPosition.z + 0.25 - camera.position.z) * delta * 2;
-            return;
-        }
-        if (hoveredCV && !isMobile) {
-            camera.position.z += (-0.2 - camera.position.z) * delta * 2;
-            return;
-        }
-        camera.position.z += (0 - camera.position.z) * delta * 2;
-    };
-
-    // function handleMouseMove(e: MouseEvent) {
-    //     setMouseX((e.clientX / window.innerWidth - 0.5) * 2);
-    //     setMouseY(-(e.clientY / window.innerHeight - 0.5) * 2);
-    // }
-
     function handleScroll() {
         const newIntensity = 1 + (-window.scrollY * 1.3) / window.innerHeight;
         setLightIntensity(newIntensity < 0 ? 0 : newIntensity);
@@ -186,45 +89,6 @@ export default function Scene({
         cvLinkRef.current.style.visibility = clickedCV ? 'hidden' : 'visible';
     };
 
-    function Frame({
-        id,
-        width = 1,
-        height = GOLDENRATIO,
-        children,
-        selected,
-        ...props
-    }: any & {
-        id: string;
-        width?: number;
-        height?: number;
-        children: React.ReactNode;
-    }) {
-        const portal = useRef<PortalMaterialType>(null);
-        const [hovered, hover] = useState(false);
-        useCursor(hovered);
-        useFrame((state, dt) => {
-            if (!portal.current?.blend) return;
-            // easing.damp(portal.current, 'blend', selected ? 1 : 0, 0.2, dt);
-        });
-        return (
-            <group {...props}>
-                <mesh
-                    name={id}
-                    position={[0, GOLDENRATIO / 2, 0]}
-                    onPointerOver={(e) => hover(true)}
-                    onPointerOut={() => hover(false)}
-                    onClick={() => setClickedFirstScreen(!clickedFirstScreen)}
-                >
-                    <planeGeometry args={[width, height]} />
-                    <MeshPortalMaterial ref={portal} events={false}>
-                        <color attach="background" />
-                        {children}
-                    </MeshPortalMaterial>
-                </mesh>
-            </group>
-        );
-    }
-
     console.log('render');
 
     return (
@@ -232,7 +96,14 @@ export default function Scene({
             {performance && (
                 <Perf position="bottom-left" style={{ zIndex: 999999999 }} />
             )}
-            {orbitActive && <CameraControls />}
+            <Controls
+                clickedCV={clickedCV}
+                cvPosition={cvPosition}
+                clickedFirstScreen={clickedFirstScreen}
+                hoveredCV={hoveredCV}
+                firstScreenPos={firstScreenPos}
+                isMobile={isMobile}
+            />
             {(faceControls || eyeControls) && (
                 <FaceControls
                     facemesh={{
@@ -284,6 +155,7 @@ export default function Scene({
                 width={0.5}
                 height={(0.5 / 16) * 9}
                 selected={clickedFirstScreen}
+                setClickedFirstScreen={setClickedFirstScreen}
             >
                 <Gltf
                     src="/3d_models/fiesta_tea-transformed.glb"

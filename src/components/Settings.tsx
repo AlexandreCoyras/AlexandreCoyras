@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Settings2 } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
-import useSettingsStore from '@/store/settings';
+import useSettingsStore from '@/store/settingsStore';
 
 type SettingsProps = {
     className?: string;
