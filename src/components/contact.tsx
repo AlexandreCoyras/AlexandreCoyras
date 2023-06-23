@@ -134,27 +134,31 @@ export default function Contact() {
                 "highlight absolute left-0 top-0 h-0 w-3 bg-teal-400 transition-all duration-500 ease-in-out"
               }
             />
-            <div className={"mb-12 ml-6 mt-12"}>
+            <div className={"mb-12 ml-4 sm:ml-6 mt-12"}>
               <div className={"text-xl sm:text-2xl"}>Send me a message</div>
-              <Link href={"mailto:alexandrecoyras@gmail.com"}>
+              <Link href={"mailto:contact@alexandre-coyras.dev"}>
                 <div
                   className={
-                    "ml-4 mt-8 text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl"
+                    "ml-2 sm:ml-4 mt-8 text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl"
                   }
                 >
-                  <div>ALEXANDRECOYRAS</div>
                   <div className={"flex flex-row"}>
+                    <div>CONTACT</div>
+                  </div>
+                  <div
+                    className={
+                      "flex flex-row text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-[5rem]"
+                    }
+                  >
                     <div className={"text-teal-400"}>@</div>
-                    <div>GMAIL.COM</div>
+                    <div>ALEXANDRE-COYRAS.DEV</div>
                   </div>
                 </div>
               </Link>
             </div>
           </div>
           <div
-            className={
-              "absolute right-20 block hidden h-auto text-teal-400 lg:flex "
-            }
+            className={"absolute right-20 hidden h-auto text-teal-400 lg:flex"}
             ref={arrowRef}
           >
             <FiArrowLeft size={120} />

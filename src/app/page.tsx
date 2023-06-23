@@ -3,11 +3,6 @@
 import React, { lazy, Suspense, useRef, useState } from "react"
 import Link from "next/link"
 import useSettingsStore from "@/store/settingsStore"
-import Contact from "@components/contact"
-import Settings from "@components/settings"
-import Effect from "@components/three/effect"
-import Scene from "@components/three/scene"
-import Title from "@components/title"
 import {
   FaceLandmarker,
   PerformanceMonitor,
@@ -19,9 +14,11 @@ import { BiCode } from "react-icons/bi"
 import { FiExternalLink } from "react-icons/fi"
 
 import { Progress } from "@/components/ui/progress"
-
-const Scene3d = lazy(() => import("@components/three/scene"))
-const SceneLoad = lazy(() => import("@components/three/scene-load"))
+import Contact from "@/components/contact"
+import Settings from "@/components/settings"
+import Effect from "@/components/three/effect"
+import Scene from "@/components/three/scene"
+import Title from "@/components/title"
 
 export default function Home() {
   const DepthOfFieldRef = useRef(null)
