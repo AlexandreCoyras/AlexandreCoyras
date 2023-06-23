@@ -3,20 +3,33 @@ import {
   MeshPortalMaterial,
   PortalMaterialType,
   useCursor,
+  useScroll,
 } from "@react-three/drei"
 import { useFrame } from "@react-three/fiber"
 
 const GOLDENRATIO = 1.61803398875
+
+interface FrameProps {
+  id: string
+  width?: number
+  height?: number
+  setClickedFirstScreen: React.Dispatch<React.SetStateAction<boolean>>
+  children: React.ReactNode
+  setHoveredFirstScreen: React.Dispatch<React.SetStateAction<boolean>>
+  hoveredFirstScreen: boolean
+  [key: string]: any
+}
 
 function Frame({
   id,
   width = 1,
   height = GOLDENRATIO,
   children,
-  selected,
   setClickedFirstScreen,
+  setHoveredFirstScreen,
+  hoveredFirstScreen,
   ...props
-}: any & {
+}: FrameProps & {
   id: string
   width?: number
   height?: number
@@ -24,8 +37,7 @@ function Frame({
   children: React.ReactNode
 }) {
   const portal = useRef<PortalMaterialType>(null)
-  const [hovered, hover] = useState(false)
-  useCursor(hovered)
+  useCursor(hoveredFirstScreen)
   useFrame((state, dt) => {
     if (!portal.current?.blend) return
     // easing.damp(portal.current, 'blend', selected ? 1 : 0, 0.2, dt);
@@ -35,11 +47,11 @@ function Frame({
       <mesh
         name={id}
         position={[0, GOLDENRATIO / 2, 0]}
-        onPointerOver={(e) => hover(true)}
-        onPointerOut={() => hover(false)}
+        onPointerOver={(e) => setHoveredFirstScreen(true)}
+        onPointerOut={() => setHoveredFirstScreen(false)}
         onClick={() =>
           setClickedFirstScreen(
-            (clickedFirstScreen: any) => !clickedFirstScreen
+            (clickedFirstScreen: boolean) => !clickedFirstScreen
           )
         }
       >

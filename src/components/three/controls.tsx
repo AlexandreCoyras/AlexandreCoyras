@@ -1,5 +1,6 @@
-import { FC, useState } from "react"
+import React, { FC, useState } from "react"
 import useSettingsStore from "@/store/settingsStore"
+import { CameraControls, FaceControls } from "@react-three/drei"
 import { RootState, useFrame } from "@react-three/fiber"
 import * as THREE from "three"
 
@@ -9,6 +10,7 @@ type ControlsProps = {
   clickedFirstScreen: boolean
   hoveredCV: boolean
   firstScreenPos: THREE.Vector3
+  hoveredFirstScreen: boolean
   isMobile: boolean
 }
 
@@ -17,6 +19,7 @@ const Controls: FC<ControlsProps> = ({
   clickedFirstScreen,
   cvPosition,
   hoveredCV,
+  hoveredFirstScreen,
   firstScreenPos,
   isMobile,
 }: ControlsProps) => {
@@ -109,10 +112,27 @@ const Controls: FC<ControlsProps> = ({
       camera.position.z += (-0.2 - camera.position.z) * delta * 2
       return
     }
+    if (hoveredFirstScreen && !isMobile) {
+      camera.position.z += (-0.2 - camera.position.z) * delta * 2
+      return
+    }
     camera.position.z += (0 - camera.position.z) * delta * 2
   }
 
-  return <></>
+  return (
+    <>
+      {orbitActive && <CameraControls />}
+      {(faceControls || eyeControls) && !orbitActive && (
+        <FaceControls
+          facemesh={{
+            position: [0, 0, -0.4],
+          }}
+          offsetScalar={200}
+          eyes={eyeControls}
+        />
+      )}
+    </>
+  )
 }
 
 export default Controls
