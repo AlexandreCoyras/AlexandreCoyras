@@ -2,12 +2,10 @@ import React, { FC, useEffect, useState } from "react"
 import { useScroll } from "@react-three/drei"
 import leva from "leva"
 
-type LightsProps = {}
-
 const lightPos: number[] = [-0.11, -0.16, -0.9]
 const lightPos2: number[] = [-0.56, -0.16, -0.94]
 
-const Lights: FC<LightsProps> = () => {
+const Lights: FC = () => {
   const [lightIntensity, setLightIntensity] = useState(1)
   const [isDev] = useState(process.env.NODE_ENV === "development")
   if (isDev) {
