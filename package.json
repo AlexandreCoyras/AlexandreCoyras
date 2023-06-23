@@ -7,10 +7,12 @@
         "build": "next build",
         "start": "next start",
         "lint": "next lint",
+        "format": "prettier --write src/",
         "ts-lint": "tsc --noEmit --incremental --watch"
     },
     "dependencies": {
         "@heroicons/react": "^2.0.17",
+        "@ianvs/prettier-plugin-sort-imports": "^4.0.2",
         "@material-tailwind/react": "^2.0.0",
         "@radix-ui/react-dialog": "^1.0.4",
         "@radix-ui/react-label": "^2.0.2",
@@ -25,11 +27,13 @@
         "@types/node": "20.1.0",
         "@types/react": "18.2.6",
         "@types/react-dom": "18.2.4",
+        "@typescript-eslint/eslint-plugin": "^5.60.0",
         "autoprefixer": "10.4.14",
         "class-variance-authority": "^0.6.0",
         "clsx": "^1.2.1",
         "eslint": "8.40.0",
         "eslint-config-next": "13.4.1",
+        "eslint-plugin-prettier": "^4.2.1",
         "gsap": "^3.11.5",
         "leva": "^0.9.34",
         "lucide-react": "^0.241.0",
@@ -37,7 +41,6 @@
         "npm": "^9.6.6",
         "postcss": "8.4.23",
         "postprocessing": "^6.32.1",
-        "prettier-plugin-tailwindcss": "^0.3.0",
         "react": "18.2.0",
         "react-dom": "18.2.0",
         "react-icons": "^4.8.0",
@@ -52,7 +55,9 @@
     "devDependencies": {
         "@types/three": "^0.152.0",
         "@types/ua-parser-js": "^0.7.36",
+        "eslint-config-prettier": "^8.8.0",
         "prettier": "^2.8.8",
+        "prettier-plugin-tailwindcss": "^0.3.0",
         "r3f-perf": "^7.1.2"
     }
 }
