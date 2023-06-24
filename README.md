@@ -1,6 +1,6 @@
 ## Hi there 👋
 
-### Here is my portfolio: https://alexandre-coyras.vercel.app/
+### Here a link to my portfolio: https://alexandre-coyras.dev/
 
 ```
 To run localy as a dev:
