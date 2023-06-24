@@ -3,12 +3,14 @@
 import React, { lazy, Suspense, useRef, useState } from "react"
 import Link from "next/link"
 import useSettingsStore from "@/store/settingsStore"
+import { cn } from "@lib/utils"
 import {
   FaceLandmarker,
   PerformanceMonitor,
   useProgress,
 } from "@react-three/drei"
 import { Canvas } from "@react-three/fiber"
+import useSceneStore from "@store/sceneStore"
 import { AiFillGithub } from "react-icons/ai"
 import { BiCode } from "react-icons/bi"
 import { FiExternalLink } from "react-icons/fi"
@@ -22,9 +24,9 @@ import Title from "@/components/title"
 
 export default function Home() {
   const DepthOfFieldRef = useRef(null)
-  const cvLinkRef = useRef(null)
   const [dpr, setDpr] = useState(1.5)
   const { shaders, setShaders } = useSettingsStore()
+  const { clickedSecondScreen } = useSceneStore()
 
   const Loading = () => {
     const { progress } = useProgress()
@@ -63,7 +65,7 @@ export default function Home() {
               }}
             >
               <FaceLandmarker>
-                <Scene cvLinkRef={cvLinkRef} dofRef={DepthOfFieldRef} />
+                <Scene />
                 {shaders && <Effect ref={DepthOfFieldRef} />}
               </FaceLandmarker>
             </PerformanceMonitor>
@@ -71,8 +73,11 @@ export default function Home() {
         </div>
 
         <div
-          className={`flex items-center justify-center opacity-0 duration-1000 ease-in-out`}
-          ref={cvLinkRef}
+          className={cn(
+            `flex items-center justify-center opacity-0 duration-1000 ease-in-out`,
+            clickedSecondScreen ? "opacity-100" : "opacity-0",
+            clickedSecondScreen ? "visible" : "invisible"
+          )}
         >
           <Link
             href="/AlexandreCoyrasCV.pdf"

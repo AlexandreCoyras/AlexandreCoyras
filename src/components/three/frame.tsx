@@ -13,10 +13,11 @@ interface FrameProps {
   id: string
   width?: number
   height?: number
-  setClickedFirstScreen: React.Dispatch<React.SetStateAction<boolean>>
+  setClickedFirstScreen: (clickedFirstScreen: boolean) => void
   children: React.ReactNode
-  setHoveredFirstScreen: React.Dispatch<React.SetStateAction<boolean>>
+  setHoveredFirstScreen: (hoveredFirstScreen: boolean) => void
   hoveredFirstScreen: boolean
+  clickedFirstScreen: boolean
   [key: string]: any
 }
 
@@ -28,6 +29,7 @@ function Frame({
   setClickedFirstScreen,
   setHoveredFirstScreen,
   hoveredFirstScreen,
+  clickedFirstScreen,
   ...props
 }: FrameProps & {
   id: string
@@ -49,11 +51,7 @@ function Frame({
         position={[0, GOLDENRATIO / 2, 0]}
         onPointerOver={(e) => setHoveredFirstScreen(true)}
         onPointerOut={() => setHoveredFirstScreen(false)}
-        onClick={() =>
-          setClickedFirstScreen(
-            (clickedFirstScreen: boolean) => !clickedFirstScreen
-          )
-        }
+        onClick={() => setClickedFirstScreen(!clickedFirstScreen)}
       >
         <planeGeometry args={[width, height]} />
         <MeshPortalMaterial ref={portal} events={false}>

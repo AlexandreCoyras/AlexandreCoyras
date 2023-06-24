@@ -1,30 +1,30 @@
-import React, { FC, useState } from "react"
+import React, { FC, useEffect, useState } from "react"
 import useSettingsStore from "@/store/settingsStore"
 import { CameraControls, FaceControls } from "@react-three/drei"
 import { RootState, useFrame } from "@react-three/fiber"
+import useSceneStore from "@store/sceneStore"
+import * as easing from "maath/easing"
 import * as THREE from "three"
+import UAParser from "ua-parser-js"
 
 type ControlsProps = {
-  clickedCV: boolean
   cvPosition: THREE.Vector3
-  clickedFirstScreen: boolean
-  hoveredCV: boolean
   firstScreenPos: THREE.Vector3
-  hoveredFirstScreen: boolean
-  isMobile: boolean
 }
 
 const Controls: FC<ControlsProps> = ({
-  clickedCV,
-  clickedFirstScreen,
   cvPosition,
-  hoveredCV,
-  hoveredFirstScreen,
   firstScreenPos,
-  isMobile,
 }: ControlsProps) => {
   const { faceControls, eyeControls } = useSettingsStore()
   const [isDev] = useState(process.env.NODE_ENV === "development")
+  const [isMobile, setIsMobile] = useState(false)
+  const {
+    clickedFirstScreen,
+    clickedSecondScreen,
+    hoveredFirstScreen,
+    hoveredSecondScreen,
+  } = useSceneStore()
   const maxDelta = 0.066 // 15 fps
   if (isDev) {
     const leva = require("leva")
@@ -32,12 +32,17 @@ const Controls: FC<ControlsProps> = ({
       orbitActive: false,
     })
   }
+
+  useEffect(() => {
+    const parser = new UAParser()
+    const deviceType = parser.getDevice().type
+    setIsMobile(deviceType === "mobile")
+  }, [])
+
   useFrame((state, delta) => {
     if (orbitActive || faceControls || eyeControls) return
-    updateXYPos(state, state.camera, Math.min(delta, maxDelta))
 
-    // Camera distance from CV screen
-    updateZPos(state, state.camera, Math.min(delta, maxDelta))
+    updatePosition(state, state.camera, Math.min(delta, maxDelta))
     updateLookAt(state.camera, Math.min(delta, maxDelta))
   })
 
@@ -49,74 +54,111 @@ const Controls: FC<ControlsProps> = ({
   ) => {
     const tempCam = camera.clone()
 
-    if (clickedCV) {
+    if (clickedSecondScreen) {
       tempCam.lookAt(cvPosition)
-      camera.quaternion.slerp(tempCam.quaternion, delta * 1.3)
+      easing.dampQ(
+        camera.quaternion,
+        tempCam.quaternion,
+        0.4,
+        delta,
+        Infinity,
+        undefined,
+        0.0001
+      )
       return
     }
-    if (hoveredCV && !clickedFirstScreen) {
+    if (hoveredSecondScreen && !clickedFirstScreen) {
       const posToLook = cvPosition.clone()
       posToLook.x += 0.3
       tempCam.lookAt(posToLook)
-      camera.quaternion.slerp(tempCam.quaternion, delta * 1.3)
+      easing.dampQ(
+        camera.quaternion,
+        tempCam.quaternion,
+        0.5,
+        delta,
+        Infinity,
+        undefined,
+        0.0001
+      )
       return
     }
 
     tempCam.lookAt(firstScreenPos)
-    camera.quaternion.slerp(tempCam.quaternion, delta * 4)
+    easing.dampQ(
+      camera.quaternion,
+      tempCam.quaternion,
+      0.25,
+      delta,
+      Infinity,
+      undefined,
+      0.0001
+    )
   }
 
-  const updateXYPos = (
+  const updatePosition = (
     state: RootState,
     camera:
       | (THREE.OrthographicCamera & { manual?: boolean })
       | (THREE.PerspectiveCamera & { manual?: boolean }),
     delta: number
   ) => {
-    // dofRef.current.blur = camera.position.x
+    if (clickedSecondScreen) {
+      easing.damp3(
+        camera.position,
+        [cvPosition.x + 0.14, cvPosition.y, cvPosition.z + 0.25],
+        0.6,
+        delta,
+        Infinity,
+        undefined,
+        0.0001
+      )
+      return
+    }
     if (clickedFirstScreen) {
-      camera.position.x += (firstScreenPos.x + -camera.position.x) * delta * 2
-      camera.position.y += (firstScreenPos.y - camera.position.y) * delta * 2
+      easing.damp3(
+        camera.position,
+        [firstScreenPos.x, firstScreenPos.y, cvPosition.z + 0.23],
+        0.6,
+        delta,
+        Infinity,
+        undefined,
+        0.0001
+      )
       return
     }
-    if (clickedCV) {
-      camera.position.x += (cvPosition.x + 0.14 - camera.position.x) * delta * 2
-      camera.position.y += (cvPosition.y - camera.position.y) * delta * 2
-      return
-    }
-    if (hoveredCV) {
-      camera.position.x += (state.pointer.x / 4 - camera.position.x) * delta * 2
-      camera.position.y += (state.pointer.y / 4 - camera.position.y) * delta * 2
-      return
-    }
-    camera.position.x += (state.pointer.x / 4 - camera.position.x) * delta * 2.5
-    camera.position.y += (state.pointer.y / 4 - camera.position.y) * delta * 2.5
-  }
-
-  const updateZPos = (
-    state: RootState,
-    camera:
-      | (THREE.OrthographicCamera & { manual?: boolean })
-      | (THREE.PerspectiveCamera & { manual?: boolean }),
-    delta: number
-  ) => {
-    if (clickedFirstScreen) {
-      camera.position.z += (cvPosition.z + 0.23 - camera.position.z) * delta * 2
-      return
-    }
-    if (clickedCV) {
-      camera.position.z += (cvPosition.z + 0.25 - camera.position.z) * delta * 2
-      return
-    }
-    if (hoveredCV && !isMobile) {
-      camera.position.z += (-0.2 - camera.position.z) * delta * 2
+    if (hoveredSecondScreen && !isMobile) {
+      easing.damp3(
+        camera.position,
+        [state.pointer.x / 4, state.pointer.y / 4, -0.2],
+        0.6,
+        delta,
+        Infinity,
+        undefined,
+        0.0001
+      )
       return
     }
     if (hoveredFirstScreen && !isMobile) {
-      camera.position.z += (-0.2 - camera.position.z) * delta * 2
+      easing.damp3(
+        camera.position,
+        [state.pointer.x / 4, state.pointer.y / 4, -0.2],
+        0.6,
+        delta,
+        Infinity,
+        undefined,
+        0.0001
+      )
       return
     }
-    camera.position.z += (0 - camera.position.z) * delta * 2
+    easing.damp3(
+      camera.position,
+      [state.pointer.x / 4, state.pointer.y / 4, 0],
+      0.45,
+      delta,
+      Infinity,
+      undefined,
+      0.0001
+    )
   }
 
   return (
@@ -125,7 +167,7 @@ const Controls: FC<ControlsProps> = ({
       {(faceControls || eyeControls) && !orbitActive && (
         <FaceControls
           facemesh={{
-            position: [0, 0, -0.4],
+            position: [0, 0, -0.6],
           }}
           offsetScalar={200}
           eyes={eyeControls}

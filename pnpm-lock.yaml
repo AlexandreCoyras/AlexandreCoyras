@@ -83,6 +83,9 @@ dependencies:
   lucide-react:
     specifier: ^0.241.0
     version: 0.241.0(react@18.2.0)
+  maath:
+    specifier: ^0.7.0
+    version: 0.7.0(@types/three@0.152.1)(three@0.152.2)
   next:
     specifier: ^13.4.5
     version: 13.4.7(@babel/core@7.22.5)(react-dom@18.2.0)(react@18.2.0)
@@ -3362,6 +3365,16 @@ packages:
     dependencies:
       '@types/three': 0.152.1
       three: 0.152.2
+
+  /maath@0.7.0(@types/three@0.152.1)(three@0.152.2):
+    resolution: {integrity: sha512-JQ1JZrQLDgJ59snCk2AcSb/jdGwNgGQXlLcfZChN8lmpMR7g3bpMM3ugcqGfU1ROwjVvX5CvcVJHc8TkxljG8Q==}
+    peerDependencies:
+      '@types/three': '>=0.144.0'
+      three: '>=0.144.0'
+    dependencies:
+      '@types/three': 0.152.1
+      three: 0.152.2
+    dev: false
 
   /material-ripple-effects@2.0.1:
     resolution: {integrity: sha512-hHlUkZAuXbP94lu02VgrPidbZ3hBtgXBtjlwR8APNqOIgDZMV8MCIcsclL8FmGJQHvnORyvoQgC965vPsiyXLQ==}
