@@ -17,15 +17,9 @@ import { Label } from "@/components/ui/label"
 
 type SceneLoadProps = {
   shaders?: boolean
-  cvLinkRef: React.MutableRefObject<null>
-  DepthOfFieldRef: React.MutableRefObject<null>
 }
 
-const SceneLoad: FC<SceneLoadProps> = ({
-  DepthOfFieldRef,
-  cvLinkRef,
-  shaders,
-}: SceneLoadProps) => {
+const SceneLoad: FC<SceneLoadProps> = ({ shaders }: SceneLoadProps) => {
   const [dpr, setDpr] = useState(1.5)
   return (
     <>
@@ -60,8 +54,8 @@ const SceneLoad: FC<SceneLoadProps> = ({
           onDecline={() => setDpr(1)}
         >
           <FaceLandmarker>
-            <Scene cvLinkRef={cvLinkRef} dofRef={DepthOfFieldRef} />
-            {shaders && <Effect ref={DepthOfFieldRef} />}
+            <Scene />
+            {shaders && <Effect />}
           </FaceLandmarker>
         </PerformanceMonitor>
       </Canvas>

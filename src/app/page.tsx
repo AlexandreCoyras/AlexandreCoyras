@@ -23,7 +23,6 @@ import Scene from "@/components/three/scene"
 import Title from "@/components/title"
 
 export default function Home() {
-  const DepthOfFieldRef = useRef(null)
   const [dpr, setDpr] = useState(1.5)
   const { shaders, setShaders } = useSettingsStore()
   const { clickedSecondScreen } = useSceneStore()
@@ -66,7 +65,7 @@ export default function Home() {
             >
               <FaceLandmarker>
                 <Scene />
-                {shaders && <Effect ref={DepthOfFieldRef} />}
+                {shaders && <Effect />}
               </FaceLandmarker>
             </PerformanceMonitor>
           </Canvas>

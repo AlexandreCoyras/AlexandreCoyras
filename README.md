@@ -3,11 +3,11 @@
 ### Here is my portfolio: https://alexandre-coyras.vercel.app/
 
 ```
-dev:
+To run localy as a dev:
 
-yarn install
+pnpm install
 
-yarn run dev
+pnpm run dev
 ```
 
 
