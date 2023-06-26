@@ -3,6 +3,7 @@ import useSettingsStore from "@/store/settingsStore"
 import Controls from "@components/three/controls"
 import Frame from "@components/three/frame"
 import Lights from "@components/three/lights"
+import ScreenScene from "@components/three/screen-scene"
 import { FaceControls, Gltf, useCursor, useScroll } from "@react-three/drei"
 import { extend } from "@react-three/fiber"
 import useSceneStore from "@store/sceneStore"
@@ -43,17 +44,13 @@ export default function Scene() {
   useCursor(hoveredSecondScreen)
 
   // when the user clicks on CV screen
-  const clickOnCV = () => {
-    if (clickedFirstScreen) return
-    setClickedSecondScreen(!clickedSecondScreen)
-  }
 
   console.log("render")
 
   return (
     <>
       {performance && (
-        <Perf position="bottom-left" style={{ zIndex: 999999999 }} />
+        <Perf position="bottom-left" style={{ zIndex: 99999999999 }} />
       )}
       <Controls cvPosition={cvPosition} firstScreenPos={firstScreenPos} />
       <Lights />
@@ -63,62 +60,18 @@ export default function Scene() {
         height={4.1 / 16}
         position={cvPosition}
         rotation={[0, 0.5, 0]}
-        onClick={() => clickOnCV()}
+        onClick={() =>
+          !clickedFirstScreen && setClickedSecondScreen(!clickedSecondScreen)
+        }
         onPointerOver={() => setHoveredSecondScreen(true)}
         onPointerOut={() => setHoveredSecondScreen(false)}
       />
-
       <Gltf
         src={"/3d_models/room-transformed.glb"}
         position={modelPos}
         scale={0.5}
       />
-
-      <Frame
-        id="firstScreen"
-        position={[
-          firstScreenPos.x,
-          firstScreenPos.y - 0.807,
-          firstScreenPos.z,
-        ]}
-        width={0.5}
-        height={(0.5 / 16) * 9}
-        selected={clickedFirstScreen}
-        setClickedFirstScreen={setClickedFirstScreen}
-        setHoveredFirstScreen={setHoveredFirstScreen}
-        hoveredFirstScreen={hoveredFirstScreen}
-        clickedFirstScreen={clickedFirstScreen}
-      >
-        <Gltf
-          src="/3d_models/fiesta_tea-transformed.glb"
-          // src="/3d_models/fantasy_island-transformed.glb"
-          rotation={[0, 0, 0]}
-          position={[0, -2, -5]}
-        />
-      </Frame>
-
-      {/*<Html*/}
-      {/*    center*/}
-      {/*    transform*/}
-      {/*    occlude="blending"*/}
-      {/*    position={firstScreenPos}*/}
-      {/*    scale={0.0106}*/}
-      {/*>*/}
-      {/*    <div*/}
-      {/*        className={*/}
-      {/*            'pointer-events-auto items-center justify-center'*/}
-      {/*        }*/}
-      {/*        onPointerEnter={() => setClickedFirstScreen(true)}*/}
-      {/*        onPointerOut={() => setClickedFirstScreen(false)}*/}
-      {/*    >*/}
-      {/*        <iframe*/}
-      {/*            src={'/projects'}*/}
-      {/*            width="1920px"*/}
-      {/*            height="1080px"*/}
-      {/*            className={'pointer-events-auto inline-block p-3'}*/}
-      {/*        />*/}
-      {/*    </div>*/}
-      {/*</Html>*/}
+      <ScreenScene firstScreenPos={firstScreenPos} />
     </>
   )
 }

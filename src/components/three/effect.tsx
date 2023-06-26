@@ -4,7 +4,7 @@ import { EffectComposer, Vignette } from "@react-three/postprocessing"
 const Effects = forwardRef((props, ref: ForwardedRef<any>) => {
   return (
     <>
-      <EffectComposer multisampling={0}>
+      <EffectComposer>
         {/*    /!*<DepthOfField ref={ref} bokehScale={4} focalLength={0.1} />*!/*/}
         <Vignette />
       </EffectComposer>

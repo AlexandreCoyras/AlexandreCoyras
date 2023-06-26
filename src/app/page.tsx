@@ -65,8 +65,8 @@ export default function Home() {
             >
               <FaceLandmarker>
                 <Scene />
-                {shaders && <Effect />}
               </FaceLandmarker>
+              {/*{shaders && <Effect />}*/}
             </PerformanceMonitor>
           </Canvas>
         </div>

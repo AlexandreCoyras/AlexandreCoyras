@@ -1,60 +1,66 @@
-import React, { useRef, useState } from "react"
+import React, { useEffect, useRef } from "react"
 import {
   MeshPortalMaterial,
   PortalMaterialType,
   useCursor,
-  useScroll,
 } from "@react-three/drei"
 import { useFrame } from "@react-three/fiber"
-
-const GOLDENRATIO = 1.61803398875
+import { useControls } from "leva"
+import { easing } from "maath"
+import * as THREE from "three"
 
 interface FrameProps {
   id: string
-  width?: number
-  height?: number
-  setClickedFirstScreen: (clickedFirstScreen: boolean) => void
+  width: number
+  height: number
+  setClicked: (clickedFirstScreen: boolean) => void
   children: React.ReactNode
-  setHoveredFirstScreen: (hoveredFirstScreen: boolean) => void
-  hoveredFirstScreen: boolean
-  clickedFirstScreen: boolean
+  setHover: (hoveredFirstScreen: boolean) => void
+  hovered: boolean
+  clicked: boolean
   [key: string]: any
 }
 
 function Frame({
   id,
   width = 1,
-  height = GOLDENRATIO,
+  height,
   children,
-  setClickedFirstScreen,
-  setHoveredFirstScreen,
-  hoveredFirstScreen,
-  clickedFirstScreen,
+  setClicked,
+  setHover,
+  hovered,
+  clicked,
   ...props
 }: FrameProps & {
   id: string
   width?: number
   height?: number
-  setClickedFirstScreen: (clickedFirstScreen: boolean) => void
+  setClicked: (clickedFirstScreen: boolean) => void
   children: React.ReactNode
 }) {
   const portal = useRef<PortalMaterialType>(null)
-  useCursor(hoveredFirstScreen)
-  useFrame((state, dt) => {
-    if (!portal.current?.blend) return
-    // easing.damp(portal.current, 'blend', selected ? 1 : 0, 0.2, dt);
+  useCursor(hovered)
+  const { clickedLeva } = useControls({
+    clickedLeva: clicked,
+  })
+  useEffect(() => {
+    setClicked(clickedLeva)
+  }, [clickedLeva, setClicked])
+  useFrame((_, delta) => {
+    if (!portal.current) return
+    easing.damp(portal.current, "blend", clicked ? 1 : 0, 0.5, delta)
   })
   return (
     <group {...props}>
       <mesh
         name={id}
-        position={[0, GOLDENRATIO / 2, 0]}
-        onPointerOver={(e) => setHoveredFirstScreen(true)}
-        onPointerOut={() => setHoveredFirstScreen(false)}
-        onClick={() => setClickedFirstScreen(!clickedFirstScreen)}
+        position={[0, height / 2, 0]}
+        onPointerOver={() => setHover(true)}
+        onPointerOut={() => setHover(false)}
+        onClick={() => setClicked(!clicked)}
       >
         <planeGeometry args={[width, height]} />
-        <MeshPortalMaterial ref={portal} events={false}>
+        <MeshPortalMaterial ref={portal} side={THREE.DoubleSide}>
           <color attach="background" />
           {children}
         </MeshPortalMaterial>
