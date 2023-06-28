@@ -66,7 +66,7 @@ export const functions: {
   },
 ]
 
-async function get_top_stories(limit: number = 10) {
+async function get_top_stories(limit = 10) {
   const response = await fetch(
     "https://hacker-news.firebaseio.com/v0/topstories.json"
   )

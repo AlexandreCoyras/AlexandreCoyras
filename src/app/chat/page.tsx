@@ -106,11 +106,11 @@ const Page: FC = () => {
         <div className="border-accent sm:mx-0 mx-5 mt-20 max-w-screen-md rounded-md border sm:w-full">
           <div className="flex flex-col space-y-4 p-7 sm:p-10">
             <h1 className="text-lg font-semibold text-foreground">
-              Welcome to Alex's Chatbot!
+              Welcome to Alex&apos;s Chatbot!
             </h1>
             <p className="text-secondary-foreground">
-              This is a chatbot made with OpenAI's GPT-3.5 API. It can answer
-              most questions you may have about me
+              This is a chatbot made with OpenAI&apos;s GPT-3.5 API. It can
+              answer most questions you may have about me
             </p>
           </div>
           <div className="flex flex-col space-y-4 border-t border-gray-800 bg-background p-7 sm:p-10">
