@@ -160,7 +160,7 @@ const Page: FC = () => {
               "absolute inset-y-0 right-3 my-auto flex h-8 w-8 items-center justify-center rounded-md transition-all",
               disabled
                 ? "cursor-not-allowed bg-background"
-                : "bg-green-500 hover:bg-green-600"
+                : "bg-foreground/80 hover:bg-foreground"
             )}
             disabled={disabled}
           >
