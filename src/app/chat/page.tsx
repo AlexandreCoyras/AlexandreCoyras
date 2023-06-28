@@ -84,6 +84,7 @@ const Page: FC = () => {
                     className={"w-full"}
                     width={32}
                     height={32}
+                    priority
                   />
                 )}
               </div>
