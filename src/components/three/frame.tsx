@@ -40,12 +40,6 @@ function Frame({
 }) {
   const portal = useRef<PortalMaterialType>(null)
   useCursor(hovered)
-  const { clickedLeva } = useControls({
-    clickedLeva: clicked,
-  })
-  useEffect(() => {
-    setClicked(clickedLeva)
-  }, [clickedLeva, setClicked])
   useFrame((_, delta) => {
     if (!portal.current) return
     easing.damp(portal.current, "blend", clicked ? 1 : 0, 0.5, delta)

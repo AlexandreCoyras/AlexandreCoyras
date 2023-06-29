@@ -2,6 +2,7 @@
 
 import React, { FC, useRef } from "react"
 import Image from "next/image"
+import Link from "next/link"
 import { cn } from "@lib/utils"
 import { useChat } from "ai/react"
 import { Bot, User } from "lucide-react"
@@ -160,7 +161,7 @@ const Page: FC = () => {
               "absolute inset-y-0 right-3 my-auto flex h-8 w-8 items-center justify-center rounded-md transition-all",
               disabled
                 ? "cursor-not-allowed bg-background"
-                : "bg-foreground/80 hover:bg-foreground"
+                : "bg-foreground/80  hover:bg-foreground"
             )}
             disabled={disabled}
           >
@@ -178,15 +179,24 @@ const Page: FC = () => {
         </form>
         <p className="text-center text-xs text-gray-400">
           Built with{" "}
-          <a
+          <Link
             href="https://sdk.vercel.ai/docs"
             target="_blank"
             rel="noopener noreferrer"
             className="transition-colors hover:text-foreground"
           >
             Vercel AI SDK
-          </a>
-          .
+          </Link>{" "}
+          and thanks to{" "}
+          <Link
+            href="https://github.com/steven-tey"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="transition-colors hover:text-foreground"
+          >
+            Steven Tey
+          </Link>{" "}
+          open source project.
         </p>
       </div>
     </main>
