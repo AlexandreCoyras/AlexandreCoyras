@@ -1,10 +1,17 @@
-import React from "react"
+import React, { useRef } from "react"
 import useSettingsStore from "@/store/settingsStore"
 import Controls from "@components/three/controls"
 import Frame from "@components/three/frame"
 import Lights from "@components/three/lights"
+import Room from "@components/three/room"
 import ScreenScene from "@components/three/screen-scene"
-import { FaceControls, Gltf, useCursor, useScroll } from "@react-three/drei"
+import {
+  FaceControls,
+  Gltf,
+  Stage,
+  useCursor,
+  useScroll,
+} from "@react-three/drei"
 import { extend } from "@react-three/fiber"
 import useSceneStore from "@store/sceneStore"
 import { geometry } from "maath"
@@ -66,11 +73,7 @@ export default function Scene() {
         onPointerOver={() => setHoveredSecondScreen(true)}
         onPointerOut={() => setHoveredSecondScreen(false)}
       />
-      <Gltf
-        src={"/3d_models/room-transformed.glb"}
-        position={modelPos}
-        scale={0.5}
-      />
+      <Room position={modelPos} scale={0.5} />
       <ScreenScene firstScreenPos={firstScreenPos} />
     </>
   )

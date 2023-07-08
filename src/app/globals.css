@@ -58,6 +58,29 @@ body {
   overflow-x: hidden;
 }
 
+/*::-webkit-scrollbar {*/
+/*  width: 12px;*/
+/*}*/
+
+/*::-webkit-scrollbar-track {*/
+/*  background-color: transparent;*/
+/*}*/
+
+/*::-webkit-scrollbar-thumb {*/
+/*  background-color: #d6dee1;*/
+/*  border-radius: 20px;*/
+/*  background-clip: content-box;*/
+/*}*/
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
 .title {
   font-family: var(--fontFamily-serif-0), var(--fontFamily-serif-2);
   font-weight: 900;

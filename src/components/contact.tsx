@@ -98,18 +98,14 @@ export default function Contact() {
                 "overflow-hidden text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl"
               }
             >
-              <span className={"contact inline-block"} style={{}}>
-                CONTACT
-              </span>
+              <span className={"contact inline-block"}>CONTACT</span>
             </div>
             <div
               className={
                 "overflow-hidden text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl"
               }
             >
-              <span className={"contact inline-block"} style={{}}>
-                ME
-              </span>
+              <span className={"contact inline-block"}>ME</span>
             </div>
           </div>
         </div>

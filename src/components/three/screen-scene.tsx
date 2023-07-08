@@ -1,6 +1,6 @@
 import React, { FC } from "react"
 import Frame from "@components/three/frame"
-import { Gltf } from "@react-three/drei"
+import { Gltf, useGLTF } from "@react-three/drei"
 import useSceneStore from "@store/sceneStore"
 import * as THREE from "three"
 
@@ -15,6 +15,8 @@ const ScreenScene: FC<ScreenProps> = ({ firstScreenPos }) => {
     setClickedFirstScreen,
     setHoveredFirstScreen,
   } = useSceneStore()
+
+  const { scene } = useGLTF("/3d_models/fiesta_tea-transformed.glb")
 
   return (
     <>
@@ -33,15 +35,18 @@ const ScreenScene: FC<ScreenProps> = ({ firstScreenPos }) => {
         hovered={hoveredFirstScreen}
         clicked={clickedFirstScreen}
       >
-        <Gltf
-          src="/3d_models/fiesta_tea-transformed.glb"
-          // src="/3d_models/fantasy_island-transformed.glb"
-          rotation={[0, 0, 0]}
-          position={[0, -2, -5]}
-        />
+        {/*<Gltf*/}
+        {/*  src="/3d_models/fiesta_tea-transformed.glb"*/}
+        {/*  // src="/3d_models/fantasy_island-transformed.glb"*/}
+        {/*  rotation={[0, 0, 0]}*/}
+        {/*  position={[0, -2, -5]}*/}
+        {/*/>*/}
+        <primitive object={scene} rotation={[0, 0, 0]} position={[0, -2, -5]} />
       </Frame>
     </>
   )
 }
+
+useGLTF.preload("/3d_models/fiesta_tea-transformed.glb")
 
 export default ScreenScene
