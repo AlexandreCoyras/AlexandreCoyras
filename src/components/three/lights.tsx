@@ -1,20 +1,13 @@
 import React, { FC, useEffect, useState } from "react"
 import { useScroll } from "@react-three/drei"
-import leva from "leva"
-
-const lightPos: number[] = [-0.11, -0.16, -0.9]
-const lightPos2: number[] = [-0.56, -0.16, -0.94]
+import leva, { useControls } from "leva"
 
 const Lights: FC = () => {
   const [lightIntensity, setLightIntensity] = useState(1)
-  const [isDev] = useState(process.env.NODE_ENV === "development")
-  if (isDev) {
-    const leva = require("leva")
-    var { lightPosH1, lightPosH2 } = leva.useControls({
-      lightPosH1: lightPos,
-      lightPosH2: lightPos2,
-    })
-  }
+  const { lightPosH1, lightPosH2 } = useControls({
+    lightPosH1: [-0.11, -0.16, -0.9],
+    lightPosH2: [-0.56, -0.16, -0.94],
+  })
 
   function handleScroll() {
     const newIntensity = 1 + (-window.scrollY * 1.3) / window.innerHeight
@@ -31,12 +24,12 @@ const Lights: FC = () => {
     <>
       <ambientLight intensity={lightIntensity * 0.03} castShadow={true} />
       <pointLight
-        position={lightPosH1 ?? lightPos}
+        position={lightPosH1}
         intensity={lightIntensity * 0.3}
         castShadow={true}
       />
       <pointLight
-        position={lightPosH2 ?? lightPos2}
+        position={lightPosH2}
         intensity={lightIntensity * 0.05}
         castShadow={true}
       />

@@ -3,6 +3,7 @@ import useSettingsStore from "@/store/settingsStore"
 import { CameraControls, FaceControls } from "@react-three/drei"
 import { RootState, useFrame, useThree } from "@react-three/fiber"
 import useSceneStore from "@store/sceneStore"
+import { useControls } from "leva"
 import * as easing from "maath/easing"
 import * as THREE from "three"
 import UAParser from "ua-parser-js"
@@ -17,7 +18,6 @@ const Controls: FC<ControlsProps> = ({
   firstScreenPos,
 }: ControlsProps) => {
   const { faceControls, eyeControls } = useSettingsStore()
-  const [isDev] = useState(process.env.NODE_ENV === "development")
   const [isMobile, setIsMobile] = useState(false)
   const {
     clickedFirstScreen,
@@ -25,14 +25,11 @@ const Controls: FC<ControlsProps> = ({
     hoveredFirstScreen,
     hoveredSecondScreen,
   } = useSceneStore()
-  const { controls, scene } = useThree()
+  const { scene } = useThree()
   const maxDelta = 0.066 // 15 fps
-  if (isDev) {
-    const leva = require("leva")
-    var { orbitActive } = leva.useControls({
-      orbitActive: false,
-    })
-  }
+  const { orbitActive } = useControls({
+    orbitActive: false,
+  })
 
   useEffect(() => {
     const parser = new UAParser()

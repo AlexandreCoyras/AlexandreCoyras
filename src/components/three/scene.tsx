@@ -14,6 +14,7 @@ import {
 } from "@react-three/drei"
 import { extend } from "@react-three/fiber"
 import useSceneStore from "@store/sceneStore"
+import { useControls } from "leva"
 import { geometry } from "maath"
 import { Perf } from "r3f-perf"
 import * as THREE from "three"
@@ -41,13 +42,9 @@ export default function Scene() {
     setHoveredFirstScreen,
     setHoveredSecondScreen,
   } = useSceneStore()
-  const isDev = process.env.NODE_ENV === "development"
-  if (isDev) {
-    const leva = require("leva")
-    var { performance } = leva.useControls({
-      performance: true,
-    })
-  }
+  const { performance } = useControls({
+    performance: false,
+  })
   useCursor(hoveredSecondScreen)
 
   // when the user clicks on CV screen

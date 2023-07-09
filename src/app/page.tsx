@@ -12,6 +12,7 @@ import {
 } from "@react-three/drei"
 import { Canvas } from "@react-three/fiber"
 import useSceneStore from "@store/sceneStore"
+import { Leva } from "leva"
 import { AiFillGithub } from "react-icons/ai"
 import { BiCode } from "react-icons/bi"
 import { FiExternalLink } from "react-icons/fi"
@@ -28,11 +29,13 @@ export default function Home() {
   const { shaders, setShaders } = useSettingsStore()
   const { clickedSecondScreen } = useSceneStore()
   const [isLoading, setLoading] = useState(true)
+  const isDev = process.env.NODE_ENV === "development"
 
   return (
     <>
       <div className={"relative w-full h-full"}>
         <Loading isLoading={isLoading} setLoading={setLoading} />
+        <Leva hidden={!isDev} />
         <Suspense fallback={null}>
           {!isLoading && (
             <>
