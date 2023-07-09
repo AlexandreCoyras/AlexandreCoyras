@@ -63,7 +63,7 @@ export default function Home() {
               </div>
               <div
                 className={cn(
-                  `flex items-center justify-center opacity-0 duration-1000 ease-in-out`,
+                  `flex items-center absolute z-30 justify-center duration-1000 ease-in-out left-1/2 transform -translate-x-1/2`,
                   clickedSecondScreen ? "opacity-100" : "opacity-0",
                   clickedSecondScreen ? "visible" : "invisible"
                 )}
@@ -74,7 +74,7 @@ export default function Home() {
                   rel="noopener noreferrer"
                   className={"flex items-center justify-center"}
                 >
-                  <div className="button-fade-in absolute bottom-16 z-30 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border-black bg-white text-black transition-colors duration-200 ease-in-out hover:bg-black hover:text-white">
+                  <div className="button-fade-in absolute bottom-16 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border-black bg-white text-black transition-colors duration-200 ease-in-out hover:bg-black hover:text-white">
                     <FiExternalLink size={25} />
                   </div>
                 </Link>
