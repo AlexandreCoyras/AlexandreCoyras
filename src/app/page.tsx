@@ -12,6 +12,7 @@ import {
 } from "@react-three/drei"
 import { Canvas } from "@react-three/fiber"
 import useSceneStore from "@store/sceneStore"
+import { AnimatePresence } from "framer-motion"
 import { Leva } from "leva"
 import { AiFillGithub } from "react-icons/ai"
 import { BiCode } from "react-icons/bi"
@@ -33,8 +34,8 @@ export default function Home() {
 
   return (
     <>
+      <Loading isLoading={isLoading} setLoading={setLoading} />
       <div className={"relative w-full h-full"}>
-        <Loading isLoading={isLoading} setLoading={setLoading} />
         <Leva hidden={!isDev} />
         <Suspense fallback={null}>
           {!isLoading && (
