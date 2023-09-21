@@ -42,7 +42,12 @@ export async function POST(req: Request) {
   }
 
   const { messages } = await req.json()
-  messages[0].content = prePront + messages[0].content
+  messages.unshift({
+    role: "system",
+    content: prePront,
+  })
+
+  console.log(messages)
 
   // check if the conversation requires a function call to be made
   const initialResponse = await openai.createChatCompletion({
