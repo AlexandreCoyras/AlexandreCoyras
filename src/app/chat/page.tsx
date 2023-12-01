@@ -144,7 +144,6 @@ const Page: FC = () => {
             rows={1}
             autoFocus
             placeholder="Send a message"
-            defaultValue={""}
             onChange={(e) => setInput(e.target.value)}
             value={input}
             onKeyDown={(e) => {

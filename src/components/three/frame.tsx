@@ -18,6 +18,7 @@ interface FrameProps {
   setHover: (hoveredFirstScreen: boolean) => void
   hovered: boolean
   clicked: boolean
+  blend?: boolean
   [key: string]: any
 }
 
@@ -30,6 +31,7 @@ function Frame({
   setHover,
   hovered,
   clicked,
+  blend = true,
   ...props
 }: FrameProps & {
   id: string
@@ -41,7 +43,7 @@ function Frame({
   const portal = useRef<PortalMaterialType>(null)
   useCursor(hovered)
   useFrame((_, delta) => {
-    if (!portal.current) return
+    if (!portal.current || !blend) return
     easing.damp(portal.current, "blend", clicked ? 1 : 0, 0.5, delta)
   })
   return (
@@ -54,7 +56,7 @@ function Frame({
         onClick={() => setClicked(!clicked)}
       >
         <planeGeometry args={[width, height]} />
-        <MeshPortalMaterial ref={portal} side={THREE.DoubleSide}>
+        <MeshPortalMaterial ref={portal} side={THREE.FrontSide}>
           <color attach="background" />
           {children}
         </MeshPortalMaterial>

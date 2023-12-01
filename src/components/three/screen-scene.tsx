@@ -1,4 +1,5 @@
 import React, { FC } from "react"
+import ChatRoom from "@components/three/chat/chat-room"
 import Frame from "@components/three/frame"
 import { Gltf, useGLTF } from "@react-three/drei"
 import useSceneStore from "@store/sceneStore"
@@ -16,8 +17,6 @@ const ScreenScene: FC<ScreenProps> = ({ firstScreenPos }) => {
     setHoveredFirstScreen,
   } = useSceneStore()
 
-  const { scene } = useGLTF("/3d_models/fiesta_tea-transformed.glb")
-
   return (
     <>
       <Frame
@@ -34,14 +33,10 @@ const ScreenScene: FC<ScreenProps> = ({ firstScreenPos }) => {
         setHover={setHoveredFirstScreen}
         hovered={hoveredFirstScreen}
         clicked={clickedFirstScreen}
+        blend={false}
       >
-        {/*<Gltf*/}
-        {/*  src="/3d_models/fiesta_tea-transformed.glb"*/}
-        {/*  // src="/3d_models/fantasy_island-transformed.glb"*/}
-        {/*  rotation={[0, 0, 0]}*/}
-        {/*  position={[0, -2, -5]}*/}
-        {/*/>*/}
-        <primitive object={scene} rotation={[0, 0, 0]} position={[0, -2, -5]} />
+        <ChatRoom position={[0, -2, -5]} />
+        <ambientLight intensity={1} castShadow={true} />
       </Frame>
     </>
   )

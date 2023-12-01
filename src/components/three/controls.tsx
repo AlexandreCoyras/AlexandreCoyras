@@ -126,7 +126,7 @@ const Controls: FC<ControlsProps> = ({
     if (clickedFirstScreen) {
       easing.damp3(
         camera.position,
-        [firstScreenPos.x, firstScreenPos.y, cvPosition.z + 0.23],
+        [firstScreenPos.x, firstScreenPos.y, cvPosition.z + 0.25],
         0.6,
         delta,
         Infinity,
