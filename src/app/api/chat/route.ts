@@ -5,10 +5,11 @@ import { NextApiResponse } from "next"
 import { Ratelimit } from "@upstash/ratelimit"
 import { kv } from "@vercel/kv"
 import { OpenAIStream, StreamingTextResponse } from "ai"
-import ElevenLabs from "elevenlabs-node"
 import { Configuration, OpenAIApi } from "openai-edge"
 
 import prePront from "./pre-prompt"
+
+const ElevenLabs = require("elevenlabs-node")
 
 const Mp32Wav = require("mp3-to-wav")
 
@@ -78,24 +79,59 @@ export async function POST(req: Request, res: NextApiResponse<ResponseData>) {
 
   const chunks = initialResponseMessage.content.split(" ")
 
-  const filePathMp3 = path.join(process.cwd(), "voices", "audio.mp3")
-  const filePathWav = path.join(process.cwd(), "voices", "audio.wav")
+  const numberRand = Math.floor(Math.random() * 10)
+  const filePathMp3 = path.join(
+    process.cwd(),
+    "audios",
+    `message_${numberRand}.mp3`
+  )
+  const filePathWav = path.join(
+    process.cwd(),
+    "audios",
+    `message_${numberRand}.wav`
+  )
+  const filePathLipSync = path.join(
+    process.cwd(),
+    "audios",
+    `message_${numberRand}.json`
+  )
 
-  voice
-    .textToSpeech({
-      // Required Parameters
-      fileName: filePathMp3,
-      textInput: initialResponseMessage.content,
+  await voice.textToSpeech({
+    // Required Parameters
+    fileName: filePathMp3,
+    textInput: initialResponseMessage.content,
 
-      // Optional Parameters
-      modelId: "eleven_multilingual_v2",
-      voiceId: voiceID,
-    })
-    .then((res) => {
-      console.log(res)
-    })
+    // Optional Parameters
+    modelId: "eleven_multilingual_v2",
+  })
 
-  // await new Mp32Wav(filePathMp3).exec()
+  const lipSyncMessage = async () => {
+    const time = new Date().getTime()
+    await execCommand(
+      `ffmpeg -y -i ${filePathMp3} ${filePathWav}`
+      // -y to overwrite the file
+    )
+    console.log(`Conversion done in ${new Date().getTime() - time}ms`)
+
+    const rhubarbPath =
+      process.platform === "win32"
+        ? path.join(
+            // depending on the OS, the path is different
+            process.cwd(),
+            "bin",
+            "rhubarb-windows",
+            "rhubarb.exe"
+          )
+        : path.join(process.cwd(), "bin", "rhubarb-linux", "rhubarb")
+
+    await execCommand(
+      `${rhubarbPath} -f json -o ${filePathLipSync} ${filePathWav} -r phonetic`
+    )
+    // -r phonetic is faster but less accurate
+    console.log(`Lip sync done in ${new Date().getTime() - time}ms`)
+  }
+
+  await lipSyncMessage()
 
   // check if the file wav exists
   if (!fs.existsSync(filePathWav)) {
@@ -129,4 +165,13 @@ export async function POST(req: Request, res: NextApiResponse<ResponseData>) {
   //   message: initialResponseMessage.content,
   //   audio: await audioFileToBase64(filePathMp3),
   // })
+}
+
+const execCommand = (command: string) => {
+  return new Promise((resolve, reject) => {
+    exec(command, (error: any, stdout: any) => {
+      if (error) reject(error)
+      resolve(stdout)
+    })
+  })
 }
