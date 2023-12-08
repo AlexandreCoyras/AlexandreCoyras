@@ -1,16 +1,17 @@
 "use client"
 
-import React, { FC, useRef } from "react"
+import React, { FC, useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { cn } from "@lib/utils"
-import { useChat } from "ai/react"
 import { Bot, User } from "lucide-react"
 import ReactMarkdown from "react-markdown"
 import Textarea from "react-textarea-autosize"
 import remarkGfm from "remark-gfm"
 import { toast } from "sonner"
 
+import { ChatResponseData } from "@/types/api"
+import useChat from "@/hooks/use-chat"
 import {
   GithubIcon,
   LoadingCircle,
@@ -28,25 +29,64 @@ const Page: FC = () => {
   const formRef = useRef<HTMLFormElement>(null)
   const inputRef = useRef<HTMLTextAreaElement>(null)
 
-  const { messages, input, setInput, handleSubmit, isLoading } = useChat({
-    onResponse: (response) => {
-      if (response.status === 429) {
-        toast.error("You have reached your request limit for the day.")
-        // va.track("Rate limited")
-        return
-      } else {
-        // va.track("Chat initiated")
-      }
-    },
-    onError: (error) => {
-      // va.track("Chat errored", {
-      //   input,
-      //   error: error.message,
-      // })
-    },
-  })
+  // const { messages, input, setInput, handleSubmit, isLoading } = useChat({
+  //   onResponse: (response) => {
+  //     if (response.status === 429) {
+  //       toast.error("You have reached your request limit for the day.")
+  //       // va.track("Rate limited")
+  //       return
+  //     } else {
+  //       // va.track("Chat initiated")
+  //     }
+  //   },
+  //   onError: (error) => {
+  //     // va.track("Chat errored", {
+  //     //   input,
+  //     //   error: error.message,
+  //     // })
+  //   },
+  // })
 
-  const disabled = isLoading || input.length === 0
+  const [input, setInput] = useState("")
+
+  const [datas, setDatas] = useState<Array<any>>([])
+
+  const { data, isPending, mutate } = useChat()
+
+  const [visibleIndex, setVisibleIndex] = useState(0)
+
+  useEffect(() => {
+    if (data) {
+      // play base64 mp3 audio in data.audio
+      const audio = new Audio("data:audio/mp3;base64," + data.audio)
+      audio.play()
+
+      setDatas((datas) => [...datas, data.message])
+      setVisibleIndex(0)
+      const interval = setInterval(() => {
+        if (!data) return
+        const words = data.message.content.split(" ")
+        setVisibleIndex((index) =>
+          data.message.role === "assistant" && index < words.length
+            ? index + 1
+            : index
+        )
+      }, 80)
+      return () => clearInterval(interval)
+    }
+  }, [data])
+
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    // va.track("Chat submitted", { input })
+    const messages = [...datas, { content: input, role: "user" }]
+    mutate(messages)
+    setDatas(messages)
+    setInput("")
+    // inputRef.current?.focus()
+  }
+
+  const disabled = isPending || input.length === 0
   return (
     <main className="flex flex-col items-center justify-between pb-40">
       <div className="absolute top-5 hidden w-full justify-end px-5 sm:flex">
@@ -58,25 +98,25 @@ const Page: FC = () => {
           <GithubIcon />
         </a>
       </div>
-      {messages.length > 0 ? (
-        messages.map((message, i) => (
+      {datas.length > 0 ? (
+        datas.map((dat, i) => (
           <div
             key={i}
             className={cn(
               "flex w-full items-center justify-center border-b border-gray-200 py-8",
-              message.role === "user" ? "bg-background" : "bg-gray-900"
+              dat.role === "user" ? "bg-background" : "bg-gray-900"
             )}
           >
             <div className="flex w-full max-w-screen-md items-start space-x-4 px-5 sm:px-0">
               <div
                 className={cn(
                   "text-background",
-                  message.role === "assistant"
+                  dat.role === "assistant"
                     ? "bg-foreground"
                     : "bg-foreground p-1 px-1.5"
                 )}
               >
-                {message.role === "user" ? (
+                {dat.role === "user" ? (
                   <User width={20} />
                 ) : (
                   <Image
@@ -99,7 +139,9 @@ const Page: FC = () => {
                   ),
                 }}
               >
-                {message.content}
+                {i === datas.length - 1 && dat.role === "assistant"
+                  ? dat.content.split(" ").slice(0, visibleIndex).join(" ")
+                  : dat.content}
               </ReactMarkdown>
             </div>
           </div>
@@ -164,7 +206,7 @@ const Page: FC = () => {
             )}
             disabled={disabled}
           >
-            {isLoading ? (
+            {isPending ? (
               <LoadingCircle />
             ) : (
               <SendIcon

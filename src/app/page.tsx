@@ -3,7 +3,7 @@
 import React, { Suspense, useState } from "react"
 import Link from "next/link"
 import useSettingsStore from "@/store/settingsStore"
-import Loading from "@components/Loading"
+import Loading from "@components/loading"
 import { cn } from "@lib/utils"
 import { FaceLandmarker, PerformanceMonitor } from "@react-three/drei"
 import { Canvas } from "@react-three/fiber"

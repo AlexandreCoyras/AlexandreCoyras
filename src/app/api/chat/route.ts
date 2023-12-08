@@ -2,16 +2,16 @@ import fs from "fs"
 import path from "path"
 import util from "util"
 import { NextApiResponse } from "next"
+import { NextResponse } from "next/server"
 import { Ratelimit } from "@upstash/ratelimit"
 import { kv } from "@vercel/kv"
-import { OpenAIStream, StreamingTextResponse } from "ai"
 import { Configuration, OpenAIApi } from "openai-edge"
+
+import { ChatResponseData } from "@/types/api"
 
 import prePront from "./pre-prompt"
 
 const ElevenLabs = require("elevenlabs-node")
-
-const Mp32Wav = require("mp3-to-wav")
 
 const exec = util.promisify(require("child_process").exec)
 
@@ -21,19 +21,16 @@ const config = new Configuration({
 const openai = new OpenAIApi(config)
 const elevenLabsApiKey = process.env.ELEVEN_LABS_API_KEY!
 const voiceID = "epyqkhUWYjoOPDho1jZk" // Markus
+
 const voice = new ElevenLabs({
   apiKey: elevenLabsApiKey,
   voiceId: voiceID,
 })
 
-type ResponseData = {
-  message: string
-  audio: string
-}
-
-// export const runtime = "edge"
-
-export async function POST(req: Request, res: NextApiResponse<ResponseData>) {
+export async function POST(
+  req: Request,
+  res: NextApiResponse<ChatResponseData>
+) {
   if (
     process.env.NODE_ENV !== "development" &&
     process.env.KV_REST_API_URL &&
@@ -77,8 +74,6 @@ export async function POST(req: Request, res: NextApiResponse<ResponseData>) {
   const initialResponseJson = await initialResponse.json()
   const initialResponseMessage = initialResponseJson?.choices?.[0]?.message
 
-  const chunks = initialResponseMessage.content.split(" ")
-
   const numberRand = Math.floor(Math.random() * 10)
   const filePathMp3 = path.join(
     process.cwd(),
@@ -96,13 +91,22 @@ export async function POST(req: Request, res: NextApiResponse<ResponseData>) {
     `message_${numberRand}.json`
   )
 
+  const voices = await voice.getVoices()
+  console.log(voices)
+  // await voice.textToSpeech({
+  //   // Required Parameters
+  //   fileName: filePathMp3,
+  //   textInput: initialResponseMessage.content,
+  //
+  //   // Optional Parameters
+  //   modelId: "eleven_multilingual_v2",
+  // })
+
   await voice.textToSpeech({
-    // Required Parameters
     fileName: filePathMp3,
     textInput: initialResponseMessage.content,
-
-    // Optional Parameters
     modelId: "eleven_multilingual_v2",
+    apiKey: elevenLabsApiKey,
   })
 
   const lipSyncMessage = async () => {
@@ -138,33 +142,24 @@ export async function POST(req: Request, res: NextApiResponse<ResponseData>) {
     console.error("File wav not found")
     return
   }
-  const stream = new ReadableStream({
-    async start(controller) {
-      for (const chunk of chunks) {
-        const bytes = new TextEncoder().encode(chunk + " ")
-        controller.enqueue(bytes)
-        await new Promise((r) =>
-          setTimeout(
-            r,
-            // get a random number between 10ms and 30ms to simulate a random delay
-            Math.floor(Math.random() * 20 + 10)
-          )
-        )
-      }
-      controller.close()
-    },
-  })
-  return new StreamingTextResponse(stream)
 
-  // const audioFileToBase64 = async (filepath: string) => {
-  //   const data = fs.readFileSync(filepath)
-  //   return data.toString("base64")
-  // }
-  //
-  // res.status(200).json({
-  //   message: initialResponseMessage.content,
-  //   audio: await audioFileToBase64(filePathMp3),
-  // })
+  const audioBase64 = await audioFileToBase64(filePathMp3)
+  const lipSyncBase64 = await audioFileToBase64(filePathLipSync)
+
+  removeFile(filePathMp3)
+  removeFile(filePathWav)
+  removeFile(filePathLipSync)
+
+  return NextResponse.json<ChatResponseData>(
+    {
+      message: initialResponseMessage,
+      audio: audioBase64,
+      lipSync: lipSyncBase64,
+    },
+    {
+      status: 200,
+    }
+  )
 }
 
 const execCommand = (command: string) => {
@@ -174,4 +169,18 @@ const execCommand = (command: string) => {
       resolve(stdout)
     })
   })
+}
+
+function removeFile(filepath: string) {
+  fs.unlink(filepath, (err) => {
+    if (err) {
+      console.error(err)
+      return
+    }
+  })
+}
+
+async function audioFileToBase64(filepath: string) {
+  const data = fs.readFileSync(filepath)
+  return data.toString("base64")
 }
