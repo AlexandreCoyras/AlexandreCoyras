@@ -1,17 +1,18 @@
 import { FC, useEffect, useRef, useState } from "react"
 import { Gltf, useAnimations, useGLTF } from "@react-three/drei"
 import { useFrame } from "@react-three/fiber"
+import useSceneStore from "@store/sceneStore"
 import { Group } from "three"
 import * as THREE from "three"
 
-const animationNames = [
-  "idle",
-  "talking",
-  "shrug",
-  "head_no",
-  "head_yes",
-  "waving",
-]
+const animationNames = {
+  idle: "idle",
+  talking: "talking",
+  shrug: "shrug",
+  head_no: "head_no",
+  head_yes: "head_yes",
+  waving: "waving",
+}
 
 const corresponding = {
   A: "viseme_PP",
@@ -32,23 +33,30 @@ const Avatar: FC<any> = (props) => {
   const headRef = useRef<any>()
   const { actions, mixer } = useAnimations(animations, group) as any
   const [animation, setAnimation] = useState(
-    animations.find((a) => a.name === "waving") ? "waving" : animations[0].name // Check if Idle animation exists otherwise use first animation
+    animations.find((a) => a.name === animationNames.idle)
+      ? animationNames.idle
+      : animations[0].name // Check if Idle animation exists otherwise use first animation
   )
 
   useEffect(() => {
-    console.log("animation", animation)
     actions[animation]
       ?.reset()
       .fadeIn(mixer.stats.actions.inUse === 0 ? 0 : 0.5)
       ?.play()
-    console.log("actions", actions)
     return () => {
       actions[animation]?.fadeOut(0.5)
     }
   }, [actions, animation])
 
+  useSceneStore.subscribe((state) => {
+    if (state.hoveredFirstScreen && !state.clickedFirstScreen) {
+      setAnimation(animationNames.waving)
+    } else {
+      setAnimation(animationNames.idle)
+    }
+  })
+
   useFrame((state, delta) => {
-    console.log(headRef.current)
     const objTemp = new THREE.Object3D()
     objTemp.position.set(
       headRef.current?.position.x,

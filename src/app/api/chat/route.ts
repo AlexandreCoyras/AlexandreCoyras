@@ -5,7 +5,8 @@ import { NextApiResponse } from "next"
 import { NextResponse } from "next/server"
 import { Ratelimit } from "@upstash/ratelimit"
 import { kv } from "@vercel/kv"
-import { Configuration, OpenAIApi } from "openai-edge"
+// import { Configuration, OpenAIApi } from "openai-edge"
+import OpenAI from "openai"
 
 import { ChatResponseData } from "@/types/api"
 
@@ -14,33 +15,24 @@ import prePront from "./pre-prompt"
 const ElevenLabs = require("elevenlabs-node")
 
 const exec = util.promisify(require("child_process").exec)
-
-const config = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
-})
-const openai = new OpenAIApi(config)
+const openai = new OpenAI()
 const elevenLabsApiKey = process.env.ELEVEN_LABS_API_KEY!
 const voiceID = "epyqkhUWYjoOPDho1jZk" // Markus
 
-const voice = new ElevenLabs({
-  apiKey: elevenLabsApiKey,
-  voiceId: voiceID,
-})
+// const voice = new ElevenLabs({
+//   apiKey: elevenLabsApiKey,
+//   voiceId: voiceID,
+// })
 
-export async function POST(
-  req: Request,
-  res: NextApiResponse<ChatResponseData>
-) {
-  if (
-    process.env.NODE_ENV !== "development" &&
-    process.env.KV_REST_API_URL &&
-    process.env.KV_REST_API_TOKEN
-  ) {
+export async function POST(req: Request) {
+  console.log(process.env.NODE_ENV)
+  if (process.env.NODE_ENV !== "development") {
     const ip = req.headers.get("x-forwarded-for")
+    // only in production
     const ratelimit = new Ratelimit({
       redis: kv,
       limiter: Ratelimit.slidingWindow(
-        200, // 50
+        50, // 50
         "1 d"
       ),
     })
@@ -67,11 +59,12 @@ export async function POST(
   })
 
   // check if the conversation requires a function call to be made
-  const initialResponse = await openai.createChatCompletion({
+  const initialResponse = await openai.chat.completions.create({
     model: "gpt-3.5-turbo-0613",
     messages,
   })
-  const initialResponseJson = await initialResponse.json()
+  // const initialResponseJson = await initialResponse.json()
+  const initialResponseJson = initialResponse
   const initialResponseMessage = initialResponseJson?.choices?.[0]?.message
 
   const numberRand = Math.floor(Math.random() * 10)
@@ -91,23 +84,21 @@ export async function POST(
     `message_${numberRand}.json`
   )
 
-  const voices = await voice.getVoices()
-  console.log(voices)
   // await voice.textToSpeech({
-  //   // Required Parameters
   //   fileName: filePathMp3,
   //   textInput: initialResponseMessage.content,
-  //
-  //   // Optional Parameters
   //   modelId: "eleven_multilingual_v2",
+  //   apiKey: elevenLabsApiKey,
   // })
-
-  await voice.textToSpeech({
-    fileName: filePathMp3,
-    textInput: initialResponseMessage.content,
-    modelId: "eleven_multilingual_v2",
-    apiKey: elevenLabsApiKey,
-  })
+  await ElevenLabs.textToSpeech(
+    elevenLabsApiKey,
+    voiceID,
+    filePathMp3,
+    initialResponseMessage.content,
+    1,
+    1,
+    "eleven_multilingual_v2"
+  )
 
   const lipSyncMessage = async () => {
     const time = new Date().getTime()

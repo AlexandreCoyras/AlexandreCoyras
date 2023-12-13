@@ -1,4 +1,5 @@
 import React, { FC } from "react"
+import ChatOverlay from "@components/chat/chat-overlay"
 import ChatRoom from "@components/three/chat/chat-room"
 import Frame from "@components/three/frame"
 import { Gltf, useGLTF } from "@react-three/drei"
@@ -36,8 +37,15 @@ const ScreenScene: FC<ScreenProps> = ({ firstScreenPos }) => {
         blend={false}
       >
         <ChatRoom position={[0, -2, -5]} />
-        <ambientLight intensity={1} castShadow={true} />
       </Frame>
+
+      <ChatOverlay
+        position={[
+          firstScreenPos.x,
+          firstScreenPos.y + 0.003,
+          firstScreenPos.z + 0.001,
+        ]}
+      />
     </>
   )
 }
