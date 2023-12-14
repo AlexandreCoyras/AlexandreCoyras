@@ -1,0 +1,3 @@
+{
+    "installCommand": "yum install libc-bin-2.29 libc6-2.29 && npm install"
+}
