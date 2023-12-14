@@ -1,28 +1,39 @@
+import fs from "fs"
+import path from "path"
+import util from "util"
+import { NextApiResponse } from "next"
+import { NextResponse } from "next/server"
 import { Ratelimit } from "@upstash/ratelimit"
 import { kv } from "@vercel/kv"
-import { OpenAIStream, StreamingTextResponse } from "ai"
-import { Configuration, OpenAIApi } from "openai-edge"
+import OpenAI from "openai"
+
+import { ChatResponseData } from "@/types/api"
 
 import prePront from "./pre-prompt"
 
-// Create an OpenAI API client (that's edge friendly!)
-const config = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
-})
-const openai = new OpenAIApi(config)
+const ElevenLabs = require("elevenlabs-node")
 
-export const runtime = "edge"
+const exec = util.promisify(require("child_process").exec)
+const openai = new OpenAI()
+const elevenLabsApiKey = process.env.ELEVEN_LABS_API_KEY!
+const voiceID = "epyqkhUWYjoOPDho1jZk" // Markus
+
+// const voice = new ElevenLabs({
+//   apiKey: elevenLabsApiKey,
+//   voiceId: voiceID,
+// })
 
 export async function POST(req: Request) {
-  if (
-    process.env.NODE_ENV !== "development" &&
-    process.env.KV_REST_API_URL &&
-    process.env.KV_REST_API_TOKEN
-  ) {
+  console.log(process.env.NODE_ENV)
+  if (process.env.NODE_ENV !== "development") {
     const ip = req.headers.get("x-forwarded-for")
+    // only in production
     const ratelimit = new Ratelimit({
       redis: kv,
-      limiter: Ratelimit.slidingWindow(50, "1 d"),
+      limiter: Ratelimit.slidingWindow(
+        50, // 50
+        "1 d"
+      ),
     })
 
     const { success, limit, reset, remaining } = await ratelimit.limit(
@@ -40,41 +51,166 @@ export async function POST(req: Request) {
       })
     }
   }
-
   const { messages } = await req.json()
   messages.unshift({
     role: "system",
     content: prePront,
   })
 
-  console.log(messages)
-
   // check if the conversation requires a function call to be made
-  const initialResponse = await openai.createChatCompletion({
+  const initialResponse = await openai.chat.completions.create({
     model: "gpt-3.5-turbo-0613",
     messages,
   })
-  const initialResponseJson = await initialResponse.json()
+  // const initialResponseJson = await initialResponse.json()
+  const initialResponseJson = initialResponse
   const initialResponseMessage = initialResponseJson?.choices?.[0]?.message
 
-  // if there's no function call, just return the initial response
-  // but first, we gotta convert initialResponse into a stream with ReadableStream
-  const chunks = initialResponseMessage.content.split(" ")
-  const stream = new ReadableStream({
-    async start(controller) {
-      for (const chunk of chunks) {
-        const bytes = new TextEncoder().encode(chunk + " ")
-        controller.enqueue(bytes)
-        await new Promise((r) =>
-          setTimeout(
-            r,
-            // get a random number between 10ms and 30ms to simulate a random delay
-            Math.floor(Math.random() * 20 + 10)
-          )
-        )
+  const tempFilePath = process.platform === "win32" ? process.cwd() : "/tmp"
+  const numberRand = Math.floor(Math.random() * 10)
+
+  // if tempFilePath + /audios doesn't exist, create it
+  if (!fs.existsSync(path.join(tempFilePath, "audios"))) {
+    fs.mkdirSync(path.join(tempFilePath, "audios"))
+  }
+  const filePathMp3 = path.join(
+    tempFilePath,
+    "audios",
+    `message_${numberRand}.mp3`
+  )
+  const filePathWav = path.join(
+    tempFilePath,
+    "audios",
+    `message_${numberRand}.wav`
+  )
+  const filePathLipSync = path.join(
+    tempFilePath,
+    "audios",
+    `message_${numberRand}.json`
+  )
+
+  // await voice.textToSpeech({
+  //   fileName: filePathMp3,
+  //   textInput: initialResponseMessage.content,
+  //   modelId: "eleven_multilingual_v2",
+  //   apiKey: elevenLabsApiKey,
+  // })
+  await ElevenLabs.textToSpeech(
+    elevenLabsApiKey,
+    voiceID,
+    filePathMp3,
+    initialResponseMessage.content,
+    1,
+    1,
+    "eleven_multilingual_v2"
+  )
+
+  // only on vercel
+  if (process.env.VERCEL) {
+    const audioBase64 = await audioFileToBase64(filePathMp3)
+
+    removeFile(filePathMp3)
+    return NextResponse.json<ChatResponseData>(
+      {
+        message: initialResponseMessage,
+        audio: audioBase64,
+        lipSync: undefined,
+      },
+      {
+        status: 200,
       }
-      controller.close()
+    )
+  }
+
+  const ffmpegPath =
+    process.platform === "win32"
+      ? path.join(
+          // depending on the OS, the path is different
+          process.cwd(),
+          "bin",
+          "ffmpeg-windows",
+          "bin",
+          "ffmpeg.exe"
+        )
+      : path.join(process.cwd(), "bin", "ffmpeg-linux", "ffmpeg")
+
+  const lipSyncMessage = async () => {
+    const time = new Date().getTime()
+    await execCommand(
+      `${ffmpegPath} -y -i ${filePathMp3} ${filePathWav}`
+      // -y to overwrite the file
+    )
+    console.log(`Conversion done in ${new Date().getTime() - time}ms`)
+
+    const rhubarbPath =
+      process.platform === "win32"
+        ? path.join(
+            // depending on the OS, the path is different
+            process.cwd(),
+            "bin",
+            "rhubarb-windows",
+            "rhubarb.exe"
+          )
+        : path.join(process.cwd(), "bin", "rhubarb-linux", "rhubarb")
+
+    await execCommand(
+      `${rhubarbPath} -f json -o ${filePathLipSync} ${filePathWav} -r phonetic`
+    )
+    // -r phonetic is faster but less accurate
+    console.log(`Lip sync done in ${new Date().getTime() - time}ms`)
+  }
+
+  await lipSyncMessage()
+
+  // check if the file wav exists
+  if (!fs.existsSync(filePathWav)) {
+    console.error("File wav not found")
+    return
+  }
+
+  const audioBase64 = await audioFileToBase64(filePathMp3)
+  const lipSyncJson = await readJsonTranscript(filePathLipSync)
+
+  removeFile(filePathMp3)
+  removeFile(filePathWav)
+  removeFile(filePathLipSync)
+
+  return NextResponse.json<ChatResponseData>(
+    {
+      message: initialResponseMessage,
+      audio: audioBase64,
+      lipSync: lipSyncJson,
     },
+    {
+      status: 200,
+    }
+  )
+}
+
+const execCommand = (command: string) => {
+  return new Promise((resolve, reject) => {
+    exec(command, (error: any, stdout: any) => {
+      if (error) reject(error)
+      resolve(stdout)
+    })
   })
-  return new StreamingTextResponse(stream)
+}
+
+function removeFile(filepath: string) {
+  fs.unlink(filepath, (err) => {
+    if (err) {
+      console.error(err)
+      return
+    }
+  })
+}
+
+async function audioFileToBase64(filepath: string) {
+  const data = fs.readFileSync(filepath)
+  return data.toString("base64")
+}
+
+async function readJsonTranscript(file: string) {
+  const data = fs.readFileSync(file, "utf8")
+  return JSON.parse(data)
 }

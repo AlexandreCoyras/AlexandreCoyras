@@ -1,27 +1,20 @@
 "use client"
 
-import React, { lazy, Suspense, useRef, useState } from "react"
+import React, { Suspense, useState } from "react"
 import Link from "next/link"
 import useSettingsStore from "@/store/settingsStore"
-import Loading from "@components/Loading"
+import Loading from "@components/loading"
 import { cn } from "@lib/utils"
-import {
-  FaceLandmarker,
-  PerformanceMonitor,
-  useProgress,
-} from "@react-three/drei"
+import { FaceLandmarker, PerformanceMonitor } from "@react-three/drei"
 import { Canvas } from "@react-three/fiber"
 import useSceneStore from "@store/sceneStore"
-import { AnimatePresence } from "framer-motion"
 import { Leva } from "leva"
 import { AiFillGithub } from "react-icons/ai"
 import { BiCode } from "react-icons/bi"
 import { FiExternalLink } from "react-icons/fi"
 
-import { Progress } from "@/components/ui/progress"
 import Contact from "@/components/contact"
 import Settings from "@/components/settings"
-import Effect from "@/components/three/effect"
 import Scene from "@/components/three/scene"
 import Title from "@/components/title"
 
