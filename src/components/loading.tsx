@@ -1,3 +1,5 @@
+"use client"
+
 import { FC, useEffect } from "react"
 import { Progress } from "@components/ui/progress"
 import { Loader, useProgress } from "@react-three/drei"

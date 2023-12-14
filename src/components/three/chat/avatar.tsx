@@ -1,20 +1,12 @@
 import { FC, useEffect, useRef, useState } from "react"
+import useChatStore from "@/store/chatStore"
 import { Gltf, useAnimations, useGLTF } from "@react-three/drei"
 import { useFrame } from "@react-three/fiber"
 import useSceneStore from "@store/sceneStore"
 import { Group } from "three"
 import * as THREE from "three"
 
-const animationNames = {
-  idle: "idle",
-  talking: "talking",
-  shrug: "shrug",
-  head_no: "head_no",
-  head_yes: "head_yes",
-  waving: "waving",
-}
-
-const corresponding = {
+const corresponding: any = {
   A: "viseme_PP",
   B: "viseme_kk",
   C: "viseme_I",
@@ -27,16 +19,59 @@ const corresponding = {
 }
 
 const Avatar: FC<any> = (props) => {
-  const { nodes, materials } = useGLTF("/3d_models/alexandre_morph.glb") as any
+  const { nodes, materials, scene } = useGLTF(
+    "/3d_models/alexandre_morph.glb"
+  ) as any
   const { animations } = useGLTF("/3d_models/animations.glb")
   const group = useRef<Group>()
   const headRef = useRef<any>()
   const { actions, mixer } = useAnimations(animations, group) as any
-  const [animation, setAnimation] = useState(
-    animations.find((a) => a.name === animationNames.idle)
-      ? animationNames.idle
-      : animations[0].name // Check if Idle animation exists otherwise use first animation
-  )
+
+  const { animation, setAnimation, audio, lipsync } = useChatStore()
+
+  const lerpMorphTarget = (target: any, value: number, speed = 0.1) => {
+    scene.traverse((child: any) => {
+      if (child.isSkinnedMesh && child.morphTargetDictionary) {
+        const index = child.morphTargetDictionary[target]
+        if (
+          index === undefined ||
+          child.morphTargetInfluences[index] === undefined
+        ) {
+          return
+        }
+        child.morphTargetInfluences[index] = THREE.MathUtils.lerp(
+          child.morphTargetInfluences[index],
+          value,
+          speed
+        )
+      }
+    })
+  }
+
+  useFrame(() => {
+    const appliedMorphTargets: string[] = []
+    if (lipsync && audio) {
+      const currentAudioTime = audio.currentTime
+      for (let i = 0; i < lipsync.mouthCues.length; i++) {
+        const mouthCue = lipsync.mouthCues[i]
+        if (
+          currentAudioTime >= mouthCue.start &&
+          currentAudioTime <= mouthCue.end
+        ) {
+          appliedMorphTargets.push(corresponding[mouthCue.value])
+          lerpMorphTarget(corresponding[mouthCue.value], 1, 0.2)
+          break
+        }
+      }
+    }
+
+    Object.values(corresponding).forEach((value) => {
+      if (appliedMorphTargets.includes(value)) {
+        return
+      }
+      lerpMorphTarget(value, 0, 0.1)
+    })
+  })
 
   useEffect(() => {
     actions[animation]
@@ -50,9 +85,9 @@ const Avatar: FC<any> = (props) => {
 
   useSceneStore.subscribe((state) => {
     if (state.hoveredFirstScreen && !state.clickedFirstScreen) {
-      setAnimation(animationNames.waving)
+      setAnimation("waving")
     } else {
-      setAnimation(animationNames.idle)
+      setAnimation("idle")
     }
   })
 

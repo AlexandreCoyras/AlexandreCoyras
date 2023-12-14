@@ -135,7 +135,7 @@ export async function POST(req: Request) {
   }
 
   const audioBase64 = await audioFileToBase64(filePathMp3)
-  const lipSyncBase64 = await audioFileToBase64(filePathLipSync)
+  const lipSyncJson = await readJsonTranscript(filePathLipSync)
 
   removeFile(filePathMp3)
   removeFile(filePathWav)
@@ -145,7 +145,7 @@ export async function POST(req: Request) {
     {
       message: initialResponseMessage,
       audio: audioBase64,
-      lipSync: lipSyncBase64,
+      lipSync: lipSyncJson,
     },
     {
       status: 200,
@@ -174,4 +174,9 @@ function removeFile(filepath: string) {
 async function audioFileToBase64(filepath: string) {
   const data = fs.readFileSync(filepath)
   return data.toString("base64")
+}
+
+async function readJsonTranscript(file: string) {
+  const data = fs.readFileSync(file, "utf8")
+  return JSON.parse(data)
 }

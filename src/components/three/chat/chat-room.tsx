@@ -1,13 +1,18 @@
 "use client"
 
-import React, { FC } from "react"
-import Avatar from "@components/three/chat/Avatar"
+import React, { FC, Suspense } from "react"
+import Avatar from "@components/three/chat/avatar"
+import { Environment } from "@react-three/drei"
 
 const ChatRoom: FC<any> = (props) => {
   return (
     <>
-      <Avatar scale={0.1} position={[0, -0.1, 0]} />
-      <ambientLight intensity={1} castShadow={true} />
+      <Suspense>
+        <Avatar scale={0.1} position={[0, -0.105, 0]} />
+      </Suspense>
+      {/*<ambientLight intensity={0.9} castShadow={true} />*/}
+
+      <Environment preset={"warehouse"} />
     </>
   )
 }
