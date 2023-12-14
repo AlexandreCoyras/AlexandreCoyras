@@ -1,6 +1,4 @@
 /** @type {import("next").NextConfig} */
-const nextConfig = {
-  target: "serverless", // add this line
-}
+const nextConfig = {}
 
 module.exports = nextConfig
