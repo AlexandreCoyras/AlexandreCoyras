@@ -1,3 +1,3 @@
 {
-    "installCommand": "yum install glibc && npm install"
+    "installCommand": "yum install centos-release-scl && yum-config-manager --enable rhel-server-rhscl-7-rpms && yum install devtoolset-9 scl enable devtoolset-9 bash && npm install"
 }
