@@ -66,19 +66,20 @@ export async function POST(req: Request) {
   const initialResponseJson = initialResponse
   const initialResponseMessage = initialResponseJson?.choices?.[0]?.message
 
+  const tempFilePath = process.platform === "win32" ? process.cwd() : "/tmp"
   const numberRand = Math.floor(Math.random() * 10)
   const filePathMp3 = path.join(
-    process.cwd(),
+    tempFilePath,
     "audios",
     `message_${numberRand}.mp3`
   )
   const filePathWav = path.join(
-    process.cwd(),
+    tempFilePath,
     "audios",
     `message_${numberRand}.wav`
   )
   const filePathLipSync = path.join(
-    process.cwd(),
+    tempFilePath,
     "audios",
     `message_${numberRand}.json`
   )
