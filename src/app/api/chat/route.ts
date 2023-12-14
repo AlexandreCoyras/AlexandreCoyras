@@ -12,6 +12,8 @@ import { ChatResponseData } from "@/types/api"
 
 import prePront from "./pre-prompt"
 
+const pathToFfmpeg = require("ffmpeg-static")
+
 const ElevenLabs = require("elevenlabs-node")
 
 const exec = util.promisify(require("child_process").exec)
@@ -103,7 +105,7 @@ export async function POST(req: Request) {
   const lipSyncMessage = async () => {
     const time = new Date().getTime()
     await execCommand(
-      `ffmpeg -y -i ${filePathMp3} ${filePathWav}`
+      `${pathToFfmpeg} -y -i ${filePathMp3} ${filePathWav}`
       // -y to overwrite the file
     )
     console.log(`Conversion done in ${new Date().getTime() - time}ms`)
