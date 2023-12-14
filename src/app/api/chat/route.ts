@@ -5,14 +5,11 @@ import { NextApiResponse } from "next"
 import { NextResponse } from "next/server"
 import { Ratelimit } from "@upstash/ratelimit"
 import { kv } from "@vercel/kv"
-// import { Configuration, OpenAIApi } from "openai-edge"
 import OpenAI from "openai"
 
 import { ChatResponseData } from "@/types/api"
 
 import prePront from "./pre-prompt"
-
-const pathToFfmpeg = require("ffmpeg-static")
 
 const ElevenLabs = require("elevenlabs-node")
 
@@ -102,10 +99,22 @@ export async function POST(req: Request) {
     "eleven_multilingual_v2"
   )
 
+  const ffmpegPath =
+    process.platform === "win32"
+      ? path.join(
+          // depending on the OS, the path is different
+          process.cwd(),
+          "bin",
+          "ffmpeg-windows",
+          "bin",
+          "ffmpeg.exe"
+        )
+      : path.join(process.cwd(), "bin", "ffmpeg-linux", "ffmpeg")
+
   const lipSyncMessage = async () => {
     const time = new Date().getTime()
     await execCommand(
-      `${pathToFfmpeg} -y -i ${filePathMp3} ${filePathWav}`
+      `${ffmpegPath} -y -i ${filePathMp3} ${filePathWav}`
       // -y to overwrite the file
     )
     console.log(`Conversion done in ${new Date().getTime() - time}ms`)
