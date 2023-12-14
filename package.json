@@ -5,7 +5,6 @@
     "scripts": {
         "dev": "next dev --turbo",
         "build": "next build",
-        "vercel-build": "yum install -y ffmpeg && npm build",
         "start": "next start",
         "lint": "next lint",
         "format": "prettier --write src/",
