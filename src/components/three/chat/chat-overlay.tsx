@@ -37,7 +37,7 @@ const Dots = (props: any) => {
   )
 }
 
-const ChatOverlay: FC = (props: any) => {
+const ChatOverlay = (props: any) => {
   const formRef = useRef<HTMLFormElement>(null)
   const inputRef = useRef<HTMLTextAreaElement>(null)
   const [input, setInput] = useState("")

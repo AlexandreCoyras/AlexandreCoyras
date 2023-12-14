@@ -4,7 +4,7 @@ import React, { FC, Suspense } from "react"
 import Avatar from "@components/three/chat/avatar"
 import { Environment } from "@react-three/drei"
 
-const ChatRoom: FC<any> = (props) => {
+const ChatRoom = (props: any) => {
   return (
     <>
       <Suspense>

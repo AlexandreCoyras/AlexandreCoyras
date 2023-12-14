@@ -65,7 +65,7 @@ const Avatar: FC<any> = (props) => {
       }
     }
 
-    Object.values(corresponding).forEach((value) => {
+    Object.values(corresponding).forEach((value: any) => {
       if (appliedMorphTargets.includes(value)) {
         return
       }
