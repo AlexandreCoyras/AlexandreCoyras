@@ -105,6 +105,23 @@ export async function POST(req: Request) {
     "eleven_multilingual_v2"
   )
 
+  // only on vercel
+  if (process.env.VERCEL) {
+    const audioBase64 = await audioFileToBase64(filePathMp3)
+
+    removeFile(filePathMp3)
+    return NextResponse.json<ChatResponseData>(
+      {
+        message: initialResponseMessage,
+        audio: audioBase64,
+        lipSync: undefined,
+      },
+      {
+        status: 200,
+      }
+    )
+  }
+
   const ffmpegPath =
     process.platform === "win32"
       ? path.join(
