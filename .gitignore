@@ -42,3 +42,5 @@ next-env.d.ts
 audios/*.json
 audios/*.mp3
 audios/*.wav
+
+bin/ffmpeg-windows
