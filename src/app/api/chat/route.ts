@@ -68,6 +68,11 @@ export async function POST(req: Request) {
 
   const tempFilePath = process.platform === "win32" ? process.cwd() : "/tmp"
   const numberRand = Math.floor(Math.random() * 10)
+
+  // if tempFilePath + /audios doesn't exist, create it
+  if (!fs.existsSync(path.join(tempFilePath, "audios"))) {
+    fs.mkdirSync(path.join(tempFilePath, "audios"))
+  }
   const filePathMp3 = path.join(
     tempFilePath,
     "audios",
