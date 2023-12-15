@@ -1,6 +1,5 @@
 import React, { FC, useEffect, useState } from "react"
-import { useScroll } from "@react-three/drei"
-import leva, { useControls } from "leva"
+import { useControls } from "leva"
 
 const Lights: FC = () => {
   const [lightIntensity, setLightIntensity] = useState(1)

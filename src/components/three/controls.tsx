@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from "react"
 import useSettingsStore from "@/store/settingsStore"
-import { CameraControls, FaceControls } from "@react-three/drei"
-import { RootState, useFrame, useThree } from "@react-three/fiber"
+import { CameraControls, FaceControls, useCursor } from "@react-three/drei"
+import { RootState, useFrame } from "@react-three/fiber"
 import useSceneStore from "@store/sceneStore"
 import { useControls } from "leva"
 import * as easing from "maath/easing"
@@ -25,32 +25,20 @@ const Controls: FC<ControlsProps> = ({
     hoveredFirstScreen,
     hoveredSecondScreen,
   } = useSceneStore()
-  const { scene } = useThree()
   const maxDelta = 0.066 // 15 fps
   const { orbitActive } = useControls({
     orbitActive: false,
   })
+  useCursor(hoveredFirstScreen || hoveredSecondScreen)
 
   useEffect(() => {
     const parser = new UAParser()
     const deviceType = parser.getDevice().type
     setIsMobile(deviceType === "mobile")
   }, [])
-  useEffect(() => {
-    // const active = scene.getObjectByName("firstScreen")
-    // const pos = new THREE.Vector3(0, 0, 2)
-    // const focus = new THREE.Vector3(0, 0, 0)
-    // if (active) {
-    //   active?.parent?.localToWorld(pos.set(0, 0.5, 0.25))
-    //   active?.parent?.localToWorld(focus.set(0, 0, -2))
-    // }
-    // controls?.setLookAt?.(...pos.toArray(), ...focus.toArray(), true)
-  })
 
   useFrame((state, delta) => {
     if (orbitActive || faceControls || eyeControls) return
-    const active = scene.getObjectByName("firstScreen")
-
     updatePosition(state, state.camera, Math.min(delta, maxDelta))
     updateLookAt(state.camera, Math.min(delta, maxDelta))
   })

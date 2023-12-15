@@ -2,7 +2,7 @@ import React, { FC } from "react"
 import ChatOverlay from "@components/three/chat/chat-overlay"
 import ChatRoom from "@components/three/chat/chat-room"
 import Frame from "@components/three/frame"
-import { Gltf, useGLTF } from "@react-three/drei"
+import { useGLTF } from "@react-three/drei"
 import useSceneStore from "@store/sceneStore"
 import * as THREE from "three"
 

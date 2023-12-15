@@ -1,6 +1,6 @@
 "use client"
 
-import React, { FC, Suspense } from "react"
+import React, { Suspense } from "react"
 import Avatar from "@components/three/chat/avatar"
 import { Environment } from "@react-three/drei"
 

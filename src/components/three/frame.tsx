@@ -1,11 +1,6 @@
-import React, { useEffect, useRef } from "react"
-import {
-  MeshPortalMaterial,
-  PortalMaterialType,
-  useCursor,
-} from "@react-three/drei"
+import React, { useRef } from "react"
+import { MeshPortalMaterial, PortalMaterialType } from "@react-three/drei"
 import { useFrame } from "@react-three/fiber"
-import { useControls } from "leva"
 import { easing } from "maath"
 import * as THREE from "three"
 
@@ -41,7 +36,6 @@ function Frame({
   children: React.ReactNode
 }) {
   const portal = useRef<PortalMaterialType>(null)
-  useCursor(hovered)
   useFrame((_, delta) => {
     if (!portal.current || !blend) return
     easing.damp(portal.current, "blend", clicked ? 1 : 0, 0.5, delta)

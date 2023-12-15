@@ -1,7 +1,6 @@
 import fs from "fs"
 import path from "path"
 import util from "util"
-import { NextApiResponse } from "next"
 import { NextResponse } from "next/server"
 import { Ratelimit } from "@upstash/ratelimit"
 import { kv } from "@vercel/kv"

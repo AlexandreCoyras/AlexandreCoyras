@@ -4,20 +4,13 @@ import React, { FC, useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { cn } from "@lib/utils"
-import { Bot, User } from "lucide-react"
+import { User } from "lucide-react"
 import ReactMarkdown from "react-markdown"
 import Textarea from "react-textarea-autosize"
 import remarkGfm from "remark-gfm"
-import { toast } from "sonner"
 
-import { ChatResponseData } from "@/types/api"
 import useChat from "@/hooks/use-chat"
-import {
-  GithubIcon,
-  LoadingCircle,
-  SendIcon,
-  VercelIcon,
-} from "@/components/chat/icons"
+import { GithubIcon, LoadingCircle, SendIcon } from "@/components/chat/icons"
 
 const examples = [
   "What technologies do you use?",

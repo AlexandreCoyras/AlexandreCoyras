@@ -1,4 +1,4 @@
-import React, { FC, Suspense, useEffect, useRef, useState } from "react"
+import React, { Suspense, useEffect, useRef, useState } from "react"
 import { LoadingCircle, SendIcon } from "@components/chat/icons"
 import SpeechBubble from "@components/three/chat/speech-bubble"
 import { cn } from "@lib/utils"
@@ -7,7 +7,6 @@ import useChatStore from "@store/chatStore"
 import useSceneStore from "@store/sceneStore"
 import { track } from "@vercel/analytics/react"
 import Textarea from "react-textarea-autosize"
-import { DoubleSide } from "three"
 
 import useChat from "@/hooks/use-chat"
 

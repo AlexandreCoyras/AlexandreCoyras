@@ -47,12 +47,11 @@ export default function Home() {
                       setDpr(1)
                       setShaders(false)
                     }}
-                  >
-                    <FaceLandmarker>
-                      <Scene />
-                    </FaceLandmarker>
-                    {/*{shaders && <Effect />}*/}
-                  </PerformanceMonitor>
+                  />
+                  <FaceLandmarker>
+                    <Scene />
+                  </FaceLandmarker>
+                  {/*{shaders && <Effect />}*/}
                 </Canvas>
               </div>
               <div

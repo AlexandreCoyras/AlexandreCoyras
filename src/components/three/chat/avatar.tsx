@@ -1,10 +1,10 @@
-import { FC, useEffect, useRef, useState } from "react"
+import { FC, useEffect, useRef } from "react"
 import useChatStore from "@/store/chatStore"
-import { Gltf, useAnimations, useGLTF } from "@react-three/drei"
+import { useAnimations, useGLTF } from "@react-three/drei"
 import { useFrame } from "@react-three/fiber"
 import useSceneStore from "@store/sceneStore"
-import { Group } from "three"
 import * as THREE from "three"
+import { Group } from "three"
 
 const corresponding: any = {
   A: "viseme_PP",

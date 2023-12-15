@@ -1,24 +1,14 @@
-import React, { useRef } from "react"
-import useSettingsStore from "@/store/settingsStore"
+import React from "react"
 import Controls from "@components/three/controls"
-import Frame from "@components/three/frame"
 import Lights from "@components/three/lights"
 import Room from "@components/three/room"
 import ScreenScene from "@components/three/screen-scene"
-import {
-  FaceControls,
-  Gltf,
-  Stage,
-  useCursor,
-  useScroll,
-} from "@react-three/drei"
 import { extend } from "@react-three/fiber"
 import useSceneStore from "@store/sceneStore"
 import { useControls } from "leva"
 import { geometry } from "maath"
 import { Perf } from "r3f-perf"
 import * as THREE from "three"
-import UAParser from "ua-parser-js"
 
 import ImageMesh from "./image-mesh"
 
@@ -31,25 +21,34 @@ const modelPos = new THREE.Vector3(0.15, -0.85, -0.2025)
 
 const GOLDENRATIO = 1.61803398875
 
-export default function Scene() {
+const FirstScreen = () => {
   const {
     clickedFirstScreen,
     clickedSecondScreen,
-    hoveredFirstScreen,
-    hoveredSecondScreen,
-    setClickedFirstScreen,
     setClickedSecondScreen,
-    setHoveredFirstScreen,
     setHoveredSecondScreen,
   } = useSceneStore()
+
+  return (
+    <ImageMesh
+      src="CV.png"
+      width={4.1 / 9}
+      height={4.1 / 16}
+      position={cvPosition}
+      rotation={[0, 0.5, 0]}
+      onClick={() =>
+        !clickedFirstScreen && setClickedSecondScreen(!clickedSecondScreen)
+      }
+      onPointerOver={() => setHoveredSecondScreen(true)}
+      onPointerOut={() => setHoveredSecondScreen(false)}
+    />
+  )
+}
+
+export default function Scene() {
   const { performance } = useControls({
     performance: false,
   })
-  useCursor(hoveredSecondScreen)
-
-  // when the user clicks on CV screen
-
-  console.log("render")
 
   return (
     <>
@@ -58,18 +57,7 @@ export default function Scene() {
       )}
       <Controls cvPosition={cvPosition} firstScreenPos={firstScreenPos} />
       <Lights />
-      <ImageMesh
-        src="CV.png"
-        width={4.1 / 9}
-        height={4.1 / 16}
-        position={cvPosition}
-        rotation={[0, 0.5, 0]}
-        onClick={() =>
-          !clickedFirstScreen && setClickedSecondScreen(!clickedSecondScreen)
-        }
-        onPointerOver={() => setHoveredSecondScreen(true)}
-        onPointerOut={() => setHoveredSecondScreen(false)}
-      />
+      <FirstScreen />
       <Room position={modelPos} scale={0.5} />
       <ScreenScene firstScreenPos={firstScreenPos} />
     </>
