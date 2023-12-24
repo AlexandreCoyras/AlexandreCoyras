@@ -7,20 +7,21 @@ import { ReactQueryStreamedHydration } from "@tanstack/react-query-next-experime
 import posthog from "posthog-js"
 import { PostHogProvider } from "posthog-js/react"
 
-if (typeof window !== "undefined" && process.env.NEXT_PUBLIC_POSTHOG_KEY) {
-  posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+if (typeof window !== "undefined") {
+  posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!, {
     api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+    capture_pageview: false, // Disable automatic pageview capture, as we capture manually
   })
 }
 
-function usePostHogPageview() {
+export function PostHogPageview(): JSX.Element {
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  // Track pageviews
+
   useEffect(() => {
     if (pathname) {
       let url = window.origin + pathname
-      if (searchParams.toString()) {
+      if (searchParams && searchParams.toString()) {
         url = url + `?${searchParams.toString()}`
       }
       posthog.capture("$pageview", {
@@ -28,10 +29,11 @@ function usePostHogPageview() {
       })
     }
   }, [pathname, searchParams])
+
+  return <></>
 }
 
 export function Providers(props: { children: React.ReactNode }) {
-  usePostHogPageview()
   const [queryClient] = React.useState(
     () =>
       new QueryClient({
