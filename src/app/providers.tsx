@@ -1,11 +1,37 @@
 "use client"
 
-import React from "react"
-import Script from "next/script"
+import React, { Suspense, useEffect } from "react"
+import { usePathname, useSearchParams } from "next/navigation"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { ReactQueryStreamedHydration } from "@tanstack/react-query-next-experimental"
+import posthog from "posthog-js"
+import { PostHogProvider } from "posthog-js/react"
+
+if (typeof window !== "undefined" && process.env.NEXT_PUBLIC_POSTHOG_KEY) {
+  posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+  })
+}
+
+function usePostHogPageview() {
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+  // Track pageviews
+  useEffect(() => {
+    if (pathname) {
+      let url = window.origin + pathname
+      if (searchParams.toString()) {
+        url = url + `?${searchParams.toString()}`
+      }
+      posthog.capture("$pageview", {
+        $current_url: url,
+      })
+    }
+  }, [pathname, searchParams])
+}
 
 export function Providers(props: { children: React.ReactNode }) {
+  usePostHogPageview()
   const [queryClient] = React.useState(
     () =>
       new QueryClient({
@@ -20,20 +46,7 @@ export function Providers(props: { children: React.ReactNode }) {
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryStreamedHydration>
-        <Script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-PH4P38V8Z0"
-        ></Script>
-        <Script id="google-analytics">
-          {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          gtag('config', 'G-PH4P38V8Z0');
-          `}
-        </Script>
-        {props.children}
+        <PostHogProvider client={posthog}>{props.children}</PostHogProvider>
       </ReactQueryStreamedHydration>
     </QueryClientProvider>
   )
