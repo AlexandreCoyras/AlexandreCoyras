@@ -48,7 +48,12 @@ export function Providers(props: { children: React.ReactNode }) {
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryStreamedHydration>
-        <PostHogProvider client={posthog}>{props.children}</PostHogProvider>
+        {/* only on production */}
+        {process.env.NODE_ENV === "production" && (
+          <PostHogProvider client={posthog}>{props.children}</PostHogProvider>
+        )}
+        {/* only on development */}
+        {process.env.NODE_ENV !== "production" && props.children}
       </ReactQueryStreamedHydration>
     </QueryClientProvider>
   )

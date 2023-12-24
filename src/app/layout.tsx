@@ -24,9 +24,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <Suspense>
-        <PostHogPageview />
-      </Suspense>
+      {process.env.NODE_ENV === "production" && (
+        <Suspense>
+          <PostHogPageview />
+        </Suspense>
+      )}
       <Providers>
         <body className={cn(poppins.className)}>{children}</body>
       </Providers>
