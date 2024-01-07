@@ -20,9 +20,9 @@ const corresponding: any = {
 
 const Avatar: FC<any> = (props) => {
   const { nodes, materials, scene } = useGLTF(
-    "/3d_models/alexandre_morph.glb"
+    "/3d_models/alexandre_morph_compressed.glb"
   ) as any
-  const { animations } = useGLTF("/3d_models/animations.glb")
+  const { animations } = useGLTF("/3d_models/animations_compressed.glb")
   const group = useRef<Group>()
   const headRef = useRef<any>()
   const { actions, mixer } = useAnimations(animations, group) as any
@@ -174,6 +174,6 @@ const Avatar: FC<any> = (props) => {
   )
 }
 
-useGLTF.preload("/3d_models/alexandre_morph.glb")
-useGLTF.preload("/3d_models/animations.glb")
+useGLTF.preload("/3d_models/alexandre_morph_compressed.glb")
+useGLTF.preload("/3d_models/animations_compressed.glb")
 export default Avatar
