@@ -1,9 +1,9 @@
 ## Hi there 👋
 
-### Here a link to my portfolio: https://alexandre-coyras.dev/
+### Here is a link to my portfolio: https://alexandre-coyras.dev/
 
 ```
-To run localy as a dev:
+To run localy:
 
 pnpm install
 
