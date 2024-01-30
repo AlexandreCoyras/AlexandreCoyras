@@ -35,24 +35,24 @@ export default function Home() {
               <div className={"relative h-screen w-screen"}>
                 <SceneCanvas />
               </div>
-              <div
-                className={cn(
-                  `flex items-center absolute z-30 justify-center duration-1000 ease-in-out left-1/2 transform -translate-x-1/2`,
-                  clickedSecondScreen ? "opacity-100" : "opacity-0",
-                  clickedSecondScreen ? "visible" : "invisible"
-                )}
-              >
-                <Link
-                  href="/AlexandreCoyrasCV.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={"flex items-center justify-center"}
-                >
-                  <div className="button-fade-in absolute bottom-16 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border-black bg-white text-black transition-colors duration-200 ease-in-out hover:bg-black hover:text-white">
-                    <FiExternalLink size={25} />
-                  </div>
-                </Link>
-              </div>
+              {/*<div*/}
+              {/*  className={cn(*/}
+              {/*    `flex items-center absolute z-30 justify-center duration-1000 ease-in-out left-1/2 transform -translate-x-1/2`,*/}
+              {/*    clickedSecondScreen ? "opacity-100" : "opacity-0",*/}
+              {/*    clickedSecondScreen ? "visible" : "invisible"*/}
+              {/*  )}*/}
+              {/*>*/}
+              {/*  <Link*/}
+              {/*    href="/AlexandreCoyrasCV.pdf"*/}
+              {/*    target="_blank"*/}
+              {/*    rel="noopener noreferrer"*/}
+              {/*    className={"flex items-center justify-center"}*/}
+              {/*  >*/}
+              {/*    <div className="button-fade-in absolute bottom-16 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border-black bg-white text-black transition-colors duration-200 ease-in-out hover:bg-black hover:text-white">*/}
+              {/*      <FiExternalLink size={25} />*/}
+              {/*    </div>*/}
+              {/*  </Link>*/}
+              {/*</div>*/}
 
               <Settings className={"fixed bottom-10 left-6 z-30"} />
 

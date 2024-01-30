@@ -30,10 +30,20 @@ const FirstScreen = () => {
   } = useSceneStore()
 
   return (
-    <ImageMesh
-      src="CV.png"
-      width={4.1 / 9}
-      height={4.1 / 16}
+    // <ImageMesh
+    //   src="CV.png"
+    //   width={4.1 / 9}
+    //   height={4.1 / 16}
+    //   position={cvPosition}
+    //   rotation={[0, 0.5, 0]}
+    //   onClick={() =>
+    //     !clickedFirstScreen && setClickedSecondScreen(!clickedSecondScreen)
+    //   }
+    //   onPointerOver={() => setHoveredSecondScreen(true)}
+    //   onPointerOut={() => setHoveredSecondScreen(false)}
+    // />
+    //   Balck screen
+    <mesh
       position={cvPosition}
       rotation={[0, 0.5, 0]}
       onClick={() =>
@@ -41,7 +51,10 @@ const FirstScreen = () => {
       }
       onPointerOver={() => setHoveredSecondScreen(true)}
       onPointerOut={() => setHoveredSecondScreen(false)}
-    />
+    >
+      <planeGeometry args={[4.1 / 9, 4.1 / 16]} />
+      <meshBasicMaterial color={"black"} />
+    </mesh>
   )
 }
 
