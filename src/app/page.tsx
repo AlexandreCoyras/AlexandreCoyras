@@ -76,7 +76,9 @@ export default function Home() {
                 </div>
               </Link>
               <div className={"z-10"}>
-                <Contact />
+                <Suspense fallback={null}>
+                  <Contact />
+                </Suspense>
                 <Title />
               </div>
             </>
