@@ -19,7 +19,7 @@ const SpeechBubble: FC<SpeechBubbleProps> = ({ text }) => {
   return (
     <>
       <div>
-        <div className="min-w-[30rem] max-w-3xl mx-auto bg-[#FFFEEE] p-8 rounded-lg shadow-2xl text-[2rem] text-center text-gray-700">
+        <div className="min-w-[30rem] max-w-3xl mx-auto bg-[#FFFEEE] p-8 rounded-lg shadow-2xl text-[2rem] text-center text-gray-700 pop">
           <div className={"relative z-10"}>
             {words.slice(0, visibleIndex).join(" ")}
           </div>

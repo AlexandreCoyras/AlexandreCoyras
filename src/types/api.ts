@@ -1,5 +1,5 @@
 export type ChatResponseData = {
   message: any
-  audio: string
+  audio: string | undefined
   lipSync: string | undefined
 }

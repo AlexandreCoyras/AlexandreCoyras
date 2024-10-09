@@ -90,7 +90,7 @@ export default function Contact() {
 
   return (
     <>
-      <div className={"pop  relative h-screen w-screen"}>
+      <div className={"pop relative h-screen w-screen"}>
         <div className={"flex"}>
           <div className={"ml-10 mt-28 lg:ml-40 "}>
             <div

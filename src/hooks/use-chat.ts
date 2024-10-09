@@ -7,8 +7,13 @@ export default function useChat() {
   return useMutation({
     mutationKey: ["chat"],
     mutationFn: async (messages: any[]) => {
-      const { data } = await axios.post("/api/chat", { messages })
-      return data as ChatResponseData
+      // const { data } = await axios.post("/api/chat", { messages })
+      // return data as ChatResponseData
+      return {
+        message: {
+          content: "Sorry, this feature is in development, come back later!",
+        },
+      } as ChatResponseData
     },
   })
 }

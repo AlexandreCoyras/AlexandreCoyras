@@ -4,6 +4,8 @@ import { Suspense } from "react"
 import { Poppins } from "next/font/google"
 import { cn } from "@lib/utils"
 import { Analytics } from "@vercel/analytics/react"
+import { GeistMono } from "geist/font/mono"
+import { GeistSans } from "geist/font/sans"
 
 import { PostHogPageview, Providers } from "@/app/providers"
 
@@ -30,7 +32,15 @@ export default function RootLayout({
         </Suspense>
       )}
       <Providers>
-        <body className={cn(poppins.className)}>{children}</body>
+        <body
+          className={cn(
+            GeistMono.className,
+            GeistSans.variable,
+            GeistMono.variable
+          )}
+        >
+          {children}
+        </body>
       </Providers>
       <Analytics />
     </html>
