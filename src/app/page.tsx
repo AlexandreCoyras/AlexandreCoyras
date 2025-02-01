@@ -4,7 +4,6 @@ import React, { Suspense, useState } from "react"
 import Link from "next/link"
 import Loading from "@components/loading"
 import SceneCanvas from "@components/three/scene-canvas"
-
 import { Leva } from "leva"
 import { AiFillGithub } from "react-icons/ai"
 import { BiCode } from "react-icons/bi"

@@ -109,7 +109,7 @@ export async function POST(req: Request) {
     const audioBase64 = await audioFileToBase64(filePathMp3)
 
     removeFile(filePathMp3)
-    return NextResponse.json<ChatResponseData>(
+    return NextResponse.json(
       {
         message: initialResponseMessage,
         audio: audioBase64,
@@ -174,7 +174,7 @@ export async function POST(req: Request) {
   removeFile(filePathWav)
   removeFile(filePathLipSync)
 
-  return NextResponse.json<ChatResponseData>(
+  return NextResponse.json(
     {
       message: initialResponseMessage,
       audio: audioBase64,
