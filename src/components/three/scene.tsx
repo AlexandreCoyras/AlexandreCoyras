@@ -29,7 +29,6 @@ const FirstScreen = () => {
     setHoveredSecondScreen,
   } = useSceneStore()
 
-
   return (
     // <ImageMesh
     //   src="CV.png"
@@ -65,7 +64,7 @@ export default function Scene() {
   })
 
   const camera = useThree((state) => state.camera)
-  
+
   useEffect(() => {
     camera.lookAt(firstScreenPos)
   }, [])
