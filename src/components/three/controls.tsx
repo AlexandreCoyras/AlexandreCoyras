@@ -161,7 +161,7 @@ const Controls: FC<ControlsProps> = ({
   return (
     <>
       {orbitActive && <CameraControls />}
-      {(faceControls || eyeControls) && !orbitActive && (
+      {/* {(faceControls || eyeControls) && !orbitActive && (
         <FaceControls
           facemesh={{
             position: [0, 0, -0.6],
@@ -169,7 +169,7 @@ const Controls: FC<ControlsProps> = ({
           offsetScalar={200}
           eyes={eyeControls}
         />
-      )}
+      )} */}
     </>
   )
 }

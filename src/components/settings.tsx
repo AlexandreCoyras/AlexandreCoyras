@@ -43,22 +43,22 @@ const Settings: FC<SettingsProps> = ({ className }) => {
               </p>
             </div>
             <div className="grid gap-2">
-              <div className="flex items-center space-x-2">
+              {/* <div className="flex items-center space-x-2">
                 <Switch
                   id="face-control"
                   checked={faceControls}
                   onCheckedChange={setFaceControls}
                 />
                 <Label htmlFor="face-control">Face controls</Label>
-              </div>
-              <div className="flex items-center space-x-2">
+              </div> */}
+              {/* <div className="flex items-center space-x-2">
                 <Switch
                   id="eye-control"
                   checked={eyeControls}
                   onCheckedChange={setEyeControls}
                 />
                 <Label htmlFor="eye-control">Eye controls</Label>
-              </div>
+              </div> */}
               <div className="flex items-center space-x-2">
                 <Switch
                   id="shaders"

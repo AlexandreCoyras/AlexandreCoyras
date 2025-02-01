@@ -2,21 +2,15 @@
 
 import React, { Suspense, useState } from "react"
 import Link from "next/link"
-import useSettingsStore from "@/store/settingsStore"
 import Loading from "@components/loading"
 import SceneCanvas from "@components/three/scene-canvas"
-import { cn } from "@lib/utils"
-import { FaceLandmarker, Loader, PerformanceMonitor } from "@react-three/drei"
-import { Canvas } from "@react-three/fiber"
-import useSceneStore from "@store/sceneStore"
+
 import { Leva } from "leva"
 import { AiFillGithub } from "react-icons/ai"
 import { BiCode } from "react-icons/bi"
-import { FiExternalLink } from "react-icons/fi"
 
 import Contact from "@/components/contact"
 import Settings from "@/components/settings"
-import Scene from "@/components/three/scene"
 import Title from "@/components/title"
 
 export default function Home() {

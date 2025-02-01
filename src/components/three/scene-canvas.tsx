@@ -1,12 +1,12 @@
 import React, { FC, useState } from "react"
 import Scene from "@components/three/scene"
-import { FaceLandmarker, PerformanceMonitor } from "@react-three/drei"
+import { PerformanceMonitor } from "@react-three/drei"
 import { Canvas } from "@react-three/fiber"
 import useSettingsStore from "@store/settingsStore"
 
 const SceneCanvas: FC = () => {
   const [dpr, setDpr] = useState(1.5)
-  const { shaders, setShaders } = useSettingsStore()
+  const { shaders, setShaders, faceControls } = useSettingsStore()
   return (
     <>
       <Canvas
@@ -23,9 +23,7 @@ const SceneCanvas: FC = () => {
             setShaders(false)
           }}
         />
-        <FaceLandmarker>
-          <Scene />
-        </FaceLandmarker>
+        <Scene />
         {/*{shaders && <Effect />}*/}
       </Canvas>
     </>
