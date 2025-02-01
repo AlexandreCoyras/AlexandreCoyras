@@ -28,7 +28,7 @@ const Loading: FC<LoadingProps> = ({ isLoading, setLoading }) => {
               initial={{ opacity: 1 }}
               exit={{
                 opacity: 0,
-                transition: { duration: 1.5, delay: 0.2, ease: "easeIn" },
+                transition: { duration: 1.7, ease: "easeIn" },
               }}
               key={"loading"}
             >
@@ -37,7 +37,7 @@ const Loading: FC<LoadingProps> = ({ isLoading, setLoading }) => {
                 initial={{ opacity: 1 }}
                 exit={{
                   opacity: 0,
-                  transition: { duration: 0.5, delay: 0.2 },
+                  transition: { duration: 0.5 },
                 }}
               >
                 <div className={"text-center text-xl font-semibold"}>

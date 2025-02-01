@@ -1,9 +1,9 @@
-import React from "react"
+import React, { useEffect } from "react"
 import Controls from "@components/three/controls"
 import Lights from "@components/three/lights"
 import Room from "@components/three/room"
 import ScreenScene from "@components/three/screen-scene"
-import { extend } from "@react-three/fiber"
+import { extend, useThree } from "@react-three/fiber"
 import useSceneStore from "@store/sceneStore"
 import { useControls } from "leva"
 import { geometry } from "maath"
@@ -28,6 +28,7 @@ const FirstScreen = () => {
     setClickedSecondScreen,
     setHoveredSecondScreen,
   } = useSceneStore()
+
 
   return (
     // <ImageMesh
@@ -62,6 +63,12 @@ export default function Scene() {
   const { performance } = useControls({
     performance: false,
   })
+
+  const camera = useThree((state) => state.camera)
+  
+  useEffect(() => {
+    camera.lookAt(firstScreenPos)
+  }, [])
 
   return (
     <>
