@@ -110,7 +110,7 @@ const ChatOverlay = (props: any) => {
                 <form
                   ref={formRef}
                   onSubmit={handleSubmit}
-                  className="relative w-full max-w-screen-md rounded-xl border border-gray-200 bg-background px-4 pb-2 pt-3 shadow-lg sm:pb-3 sm:pt-4"
+                  className="z-10 relative w-full max-w-screen-md rounded-xl  bg-background px-4 pb-2 pt-3 shadow-lg sm:pb-3 sm:pt-4"
                 >
                   <Textarea
                     ref={inputRef}

@@ -2,6 +2,7 @@ import React, { FC } from "react"
 import ChatOverlay from "@components/three/chat/chat-overlay"
 import ChatRoom from "@components/three/chat/chat-room"
 import Frame from "@components/three/frame"
+import { Backdrop } from "@react-three/drei"
 import useSceneStore from "@store/sceneStore"
 import * as THREE from "three"
 
@@ -35,7 +36,7 @@ const ScreenScene: FC<ScreenProps> = ({ firstScreenPos }) => {
         clicked={clickedFirstScreen}
         blend={false}
       >
-        <ChatRoom position={[0, -2, -5]} />
+        <ChatRoom />
       </Frame>
 
       <ChatOverlay

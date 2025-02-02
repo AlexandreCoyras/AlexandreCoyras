@@ -2,18 +2,18 @@
 
 import React, { Suspense } from "react"
 import Avatar from "@components/three/chat/avatar"
-import { Environment } from "@react-three/drei"
+import { Backdrop, Environment } from "@react-three/drei"
 
 const ChatRoom = (props: any) => {
   return (
     <>
       <Suspense>
-        <Avatar scale={0.1} position={[0, -0.105, 0]} />
+        <Avatar scale={0.115} position={[0, -0.11, -0.05]} />
       </Suspense>
-      <ambientLight intensity={0.5} castShadow={true} />
+      <ambientLight intensity={1} castShadow={true} />
       <directionalLight
-        position={[50, 100, 0]}
-        intensity={1.2}
+        position={[10, 40, 0]}
+        intensity={4}
         castShadow={true}
       />
       {/* <Environment preset={"warehouse"} /> */}
