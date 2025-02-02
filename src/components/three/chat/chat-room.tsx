@@ -8,7 +8,7 @@ const ChatRoom = (props: any) => {
   return (
     <>
       <Suspense>
-        <Avatar scale={0.115} position={[0, -0.11, -0.05]} />
+        <Avatar scale={0.105} position={[0, -0.12, -0.05]} />
       </Suspense>
       <ambientLight intensity={1} castShadow={true} />
       <directionalLight
