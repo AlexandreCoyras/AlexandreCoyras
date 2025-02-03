@@ -4,6 +4,8 @@ import { PerformanceMonitor } from "@react-three/drei"
 import { Canvas } from "@react-three/fiber"
 import useSettingsStore from "@store/settingsStore"
 
+import Effect from "./effect"
+
 const SceneCanvas: FC = () => {
   const [dpr, setDpr] = useState(1.5)
   const { shaders, setShaders, faceControls } = useSettingsStore()
@@ -24,7 +26,7 @@ const SceneCanvas: FC = () => {
           }}
         />
         <Scene />
-        {/*{shaders && <Effect />}*/}
+        {/* {shaders && <Effect />} */}
       </Canvas>
     </>
   )
