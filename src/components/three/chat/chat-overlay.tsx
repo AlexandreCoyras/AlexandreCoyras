@@ -96,6 +96,10 @@ const ChatOverlay = (props: any) => {
         transform
         scale={0.01}
         pointerEvents={clickedFirstScreen ? "auto" : "none"}
+        style={{
+          width: "100%",
+          height: "100%",
+        }}
         {...props}
       >
         <>
