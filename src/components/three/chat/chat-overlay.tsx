@@ -92,7 +92,6 @@ const ChatOverlay = (props: any) => {
       <Suspense>
         <Dots loading={isPending} position={dotsPosition} />
       </Suspense>
-      <Suspense fallback={null}>
         <Html
           transform
           scale={0.01}
@@ -164,7 +163,6 @@ const ChatOverlay = (props: any) => {
             </div>
           </>
         </Html>
-      </Suspense>
     </>
   )
 }

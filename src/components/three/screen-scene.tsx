@@ -1,4 +1,4 @@
-import React, { FC } from "react"
+import React, { FC, Suspense } from "react"
 import ChatOverlay from "@components/three/chat/chat-overlay"
 import ChatRoom from "@components/three/chat/chat-room"
 import Frame from "@components/three/frame"
@@ -39,6 +39,7 @@ const ScreenScene: FC<ScreenProps> = ({ firstScreenPos }) => {
         <ChatRoom />
       </Frame>
 
+      <Suspense fallback={null}>
       <ChatOverlay
         position={[
           firstScreenPos.x,
@@ -46,6 +47,7 @@ const ScreenScene: FC<ScreenProps> = ({ firstScreenPos }) => {
           firstScreenPos.z + 0.001,
         ]}
       />
+      </Suspense>
     </>
   )
 }
