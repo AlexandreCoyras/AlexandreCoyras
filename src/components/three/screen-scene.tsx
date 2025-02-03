@@ -40,13 +40,13 @@ const ScreenScene: FC<ScreenProps> = ({ firstScreenPos }) => {
       </Frame>
 
       <Suspense fallback={null}>
-      <ChatOverlay
-        position={[
-          firstScreenPos.x,
-          firstScreenPos.y + 0.003,
-          firstScreenPos.z + 0.001,
-        ]}
-      />
+        <ChatOverlay
+          position={[
+            firstScreenPos.x,
+            firstScreenPos.y + 0.003,
+            firstScreenPos.z + 0.001,
+          ]}
+        />
       </Suspense>
     </>
   )
