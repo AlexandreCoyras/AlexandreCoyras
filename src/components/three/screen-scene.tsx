@@ -1,10 +1,18 @@
 import React, { FC, Suspense } from "react"
-import ChatOverlay from "@components/three/chat/chat-overlay"
+import dynamic from "next/dynamic"
 import ChatRoom from "@components/three/chat/chat-room"
 import Frame from "@components/three/frame"
 import { Backdrop } from "@react-three/drei"
 import useSceneStore from "@store/sceneStore"
 import * as THREE from "three"
+
+// import
+const ChatOverlay = dynamic(
+  () => import("@components/three/chat/chat-overlay"),
+  {
+    ssr: false,
+  }
+)
 
 interface ScreenProps {
   firstScreenPos: THREE.Vector3

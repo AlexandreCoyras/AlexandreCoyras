@@ -1,3 +1,5 @@
+"use client"
+
 import React, { Suspense, useEffect, useRef, useState } from "react"
 import { LoadingCircle, SendIcon } from "@components/chat/icons"
 import SpeechBubble from "@components/three/chat/speech-bubble"
