@@ -44,7 +44,7 @@ const ScreenScene: FC<ScreenProps> = ({ firstScreenPos }) => {
           position={[
             firstScreenPos.x,
             firstScreenPos.y + 0.003,
-            firstScreenPos.z + 0.001,
+            firstScreenPos.z + 0.003,
           ]}
         />
       </Suspense>
